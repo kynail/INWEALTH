@@ -167,8 +167,8 @@ class _DashboardPageState extends State<DashboardPage> {
                       // padding: const EdgeInsets.all(8),
                       itemCount: _purposes.length,
                       itemBuilder: (BuildContext context, int index) {
-                        print("test: " + _purposes[index]);
-                        print("hum: " + _purposes[1]);
+                        // print("test: " + _purposes[index]);
+                        // print("hum: " + _purposes[1]);
                         return Cardhome(project: _purposes[index]);
                       },
                       scrollDirection: Axis.horizontal,

@@ -4,5 +4,6 @@ import 'package:inwealth/model/profile.dart';
 
 class ProfilController extends GetxController {
   String? residenceFiscall;
+  String? maritalstatus;
   final resFisController = TextEditingController();
 }
