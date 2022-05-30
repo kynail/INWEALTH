@@ -92,7 +92,7 @@ class _DashboardPageState extends State<DashboardPage> {
             Image(
               image: AssetImage(profileController.residenceFiscall == "France"
                   ? "assets/images/france.png"
-                  : "assets/royaume-uni.png"),
+                  : profileController.residenceFiscall == "United Kingdom" ? "assets/royaume-uni.png" : "assets/images/switzerland.png"),
               height: 40,
               width: 40,
             ),
