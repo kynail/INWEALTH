@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:inwealth/controller/storeBinding.dart';
 import 'package:inwealth/utils/translations.dart';
 import 'package:inwealth/utils/localization_delegate.dart';
 import 'package:inwealth/model/list.dart';
 import 'package:inwealth/view/dashboard_page.dart';
+import 'package:inwealth/view/onboard_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,8 +19,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return GetMaterialApp(
+      title: 'INWEALTH',
+      initialBinding: StoreBinding(),
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -81,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
           primaryColor: CupertinoColors.systemOrange),
       routes: <String, WidgetBuilder>{
         '/': (BuildContext context) {
-          return const DashboardPage();
+          return OnboardPage();
         },
         '/next': (BuildContext context) {
           return const CupertinoPageScaffold(

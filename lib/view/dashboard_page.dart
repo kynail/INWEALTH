@@ -3,6 +3,7 @@ import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:inwealth/model/list.dart';
 import 'package:share_plus/share_plus.dart';
 import 'dart:collection';
@@ -11,6 +12,8 @@ import 'package:badges/badges.dart';
 import 'package:dio/dio.dart';
 import 'dart:math';
 import '../../model/profile.dart';
+import '../controller/profil_controller.dart';
+import '../controller/store_controller.dart';
 import '../utils/translations.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -19,6 +22,8 @@ class DashboardPage extends StatefulWidget {
   @override
   _DashboardPageState createState() => _DashboardPageState();
 }
+
+final storeController = Get.find<StoreController>();
 
 class _DashboardPageState extends State<DashboardPage> {
   String Project = "";
@@ -32,7 +37,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Color gold2 = Color(0xFFBAAB90);
   Color gold3 = Color(0xFF97876A);
 
-  ScrollController _dashboardController = new ScrollController();
+  // ScrollController _dashboardController = new ScrollController();
 
   void getUserCountry(Profile profile) async {
     int? profil;
@@ -48,28 +53,33 @@ class _DashboardPageState extends State<DashboardPage> {
     }
   }
 
-  Future<String> getProjet(Profile profile) async {
-    Response reponse;
-    var dio = Dio();
+  // Future<String> getProjet(Profile profile) async {
+  //   Response reponse;
+  //   var dio = Dio();
 
-    reponse =
-        await dio.get('http://51.158.107.134:3000/inwealth/parcours/getAll/');
-    // print(reponse.data[1]['typeParcours']);
-    return reponse.data[1]['typeParcours'];
-  }
+  //   reponse =
+  //       await dio.get('http://51.158.107.134:3000/inwealth/parcours/getAll/');
+  //   // print(reponse.data[1]['typeParcours']);
+  //   return reponse.data[1]['typeParcours'];
+  // }
+
+  final profileController = Get.put(ProfilController());
+
 
   getprojet2() {}
 
   @override
   Widget build(BuildContext context) {
     List<String> _purposes = [
-      AppLocalizations.of(context)?.translate('realEstate', 1) ?? " ",
-      AppLocalizations.of(context)?.translate('restructuring', 1) ?? " ",
-      AppLocalizations.of(context)?.translate('selling_biz', 1) ?? " ",
+      AppLocalizations.of(context)?.translate('local_realEstate', 0) ?? "Purchasing real estate",
+      AppLocalizations.of(context)?.translate('restructuring', 0) ?? "Restructuring the compagny",
+      AppLocalizations.of(context)?.translate('selling_biz', 0) ?? "Selling your business",
+      // AppLocalizations.of(context)?.translate('selling_biz', 0) ?? "humk ",
+
     ];
 
     var rng = new Random();
-    String project;
+    // String project;
 
     return Scaffold(
       appBar: AppBar(
@@ -78,9 +88,9 @@ class _DashboardPageState extends State<DashboardPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Image(
-              image: AssetImage(rng.nextInt(10) >= 5
+              image: AssetImage(profileController.residenceFiscall == "France"
                   ? "assets/images/france.png"
-                  : "assets/images/switzerland.png"),
+                  : "assets/royaume-uni.png"),
               height: 40,
               width: 40,
             ),
@@ -134,7 +144,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       padding: EdgeInsets.only(left: 10),
                       child: Text(
                         AppLocalizations.of(context)?.translate('projet', 0) ??
-                            " ",
+                            "Project",
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             fontSize: 28,
@@ -155,30 +165,11 @@ class _DashboardPageState extends State<DashboardPage> {
                       // padding: const EdgeInsets.all(8),
                       itemCount: _purposes.length,
                       itemBuilder: (BuildContext context, int index) {
+                        print("test: " + _purposes[index]);
+                        print("hum: " + _purposes[1]);
                         return Cardhome(project: _purposes[index]);
                       },
                       scrollDirection: Axis.horizontal,
-                      // children: <Widget>[
-                      //   SizedBox(
-                      //     height: 5,
-                      //     width: 10,
-                      //   ),
-                      //   Cardhome(project: Project),
-                      //   SizedBox(
-                      //     height: 5,
-                      //     width: 1,
-                      //   ),
-                      //   Cardhome(
-                      //     project: Project,
-                      //   ),
-                      //   SizedBox(
-                      //     height: 5,
-                      //     width: 1,
-                      //   ),
-                      //   Cardhome(
-                      //     project: Project,
-                      //   ),
-                      // ],
                     ),
                   ),
 
@@ -189,7 +180,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       child: Text(
                         AppLocalizations.of(context)
                                 ?.translate('iSolution', 0) ??
-                            " ",
+                            "International Solutions",
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontSize: 25,
@@ -199,11 +190,6 @@ class _DashboardPageState extends State<DashboardPage> {
                       ),
                     ),
                   ),
-
-                  // SizedBox(
-                  //   height: 5,
-                  // ),
-
                   Container(
                     height: 240,
                     margin: EdgeInsets.symmetric(vertical: 1.0),
@@ -288,10 +274,21 @@ class _DashboardPageState extends State<DashboardPage> {
 
 class Cardhome extends StatelessWidget {
   final String project;
-  const Cardhome({
+  Cardhome({
     required this.project,
     Key? key,
   }) : super(key: key);
+
+  GlobalKey<FlipCardState> cardkey = GlobalKey<FlipCardState>();
+  bool cardIsFlipped = false;
+
+  void updateCardIsFlipped() => cardIsFlipped = !cardIsFlipped;
+
+  Future<void> turnCard() async {
+    if (cardIsFlipped) {
+      cardkey.currentState?.toggleCard();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -301,6 +298,7 @@ class Cardhome extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(15),
           child: FlipCard(
+            key: cardkey,
             fill: Fill.fillBack,
             flipOnTouch: false,
             controller: controller,
@@ -336,11 +334,13 @@ class Cardhome extends StatelessWidget {
                         height: 150,
                         width: 150,
                         child: Center(
+                          // child: Obx( () =>
                           child: Text(
                             project,
                             textAlign: TextAlign.center,
                             style: TextStyle(color: Colors.white),
                           ),
+                          // ),
                         ),
                       ),
                     ),
@@ -348,7 +348,7 @@ class Cardhome extends StatelessWidget {
                       bottom: -8,
                       right: -5,
                       child: TextButton(
-                        onPressed: () => controller.toggleCard(),
+                        onPressed: () => cardkey.currentState?.toggleCard(),
                         style: ButtonStyle(),
                         // padding: EdgeInsets.all(10.0),
                         child: Column(
@@ -358,17 +358,6 @@ class Cardhome extends StatelessWidget {
                         ),
                       ),
                     )
-                    // InkWell(
-                    //   onTap: () => controller.toggleCard(),
-                    //   child: Align(
-                    //     alignment: Alignment.topRight,
-                    //     child: Badge(
-                    //       badgeContent: Text('7'),
-                    //       badgeColor: Color(0xFF7F7A93),
-                    //       // child: Icon(Icons.settings),
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
@@ -387,7 +376,7 @@ class Cardhome extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                         image: DecorationImage(
                             colorFilter: ColorFilter.mode(
-                                Color(0xFF7F7A93).withOpacity(1.0),
+                                Color(0xFFD5C6AC).withOpacity(1.0),
                                 BlendMode.srcATop),
                             image: AssetImage('assets/test.png'),
                             fit: BoxFit.cover),
@@ -408,6 +397,20 @@ class Cardhome extends StatelessWidget {
                         ),
                       ),
                     ),
+                    Positioned(
+                      bottom: -8,
+                      right: -5,
+                      child: TextButton(
+                        onPressed: () => cardkey.currentState?.toggleCard(),
+                        style: ButtonStyle(),
+                        // padding: EdgeInsets.all(10.0),
+                        child: Column(
+                          children: [
+                            Icon(Icons.info_rounded, color: Colors.white)
+                          ],
+                        ),
+                      ),
+                    )
                     // Align(
                     //   alignment: Alignment.topRight,
                     //   child: Badge(

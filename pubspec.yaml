@@ -43,6 +43,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   get: ^4.6.5
   get_storage: ^2.0.3
+  dropdown_button2: ^1.5.2
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +73,10 @@ flutter:
     - json/profile/
     - json/label/
     - json/projets/
+    - json/projets/resident_uk/
+    - json/projets/resident_fr/
+    - json/projets/resident_ch/
+
     - json/pistes_reflexion/
 
   # To add assets to your application, add an assets section, like this:

@@ -20,15 +20,25 @@ class AppLocalizations {
 
   late Map<String, String> _localizedStrings;
   late Map<String, String> _localizedStringsLabel;
+  late Map<String, String> _localizedStringsProjet;
+  late Map<String, String> _localizedStringsPiste;
+
 
   Future<bool> load() async {
     // Load the language JSON file from the "lang" folder
-    String jsonString =
-    await rootBundle.loadString('json/profile/profile_${locale.languageCode}.json');
+    String jsonString = await rootBundle.loadString('json/profile/profile_${locale.languageCode}.json');
     String jsonStringLabel = await rootBundle.loadString('json/label/label_${locale.languageCode}.json');
+    String jsonStringProjet = await rootBundle.loadString('json/projets/resident_uk/langue_${locale.languageCode}.json');
+    String jsonStringPiste = await rootBundle.loadString('json/label/label_${locale.languageCode}.json');
+    // String jsonStringLabel = await rootBundle.loadString('json/label/label_${locale.languageCode}.json');
+    // String jsonStringLabel = await rootBundle.loadString('json/label/label_${locale.languageCode}.json');
+
 
     Map<String, dynamic> jsonMap = json.decode(jsonString);
     Map<String, dynamic> jsonMapLabel = json.decode(jsonStringLabel);
+    Map<String, dynamic> jsonMapProjet = json.decode(jsonStringProjet);
+    Map<String, dynamic> jsonMapPiste = json.decode(jsonStringPiste);
+
 
     _localizedStrings = jsonMap.map((key, value) {
       return MapEntry(key, value.toString());
@@ -37,6 +47,15 @@ class AppLocalizations {
     _localizedStringsLabel = jsonMapLabel.map((key, value) {
       return MapEntry(key, value.toString());
     });
+
+    _localizedStringsProjet = jsonMapProjet.map((key, value) {
+      return MapEntry(key, value.toString());
+    });
+
+    _localizedStringsPiste = jsonMapPiste.map((key, value) {
+      return MapEntry(key, value.toString());
+    });
+
     return true;
   }
 
@@ -44,9 +63,14 @@ class AppLocalizations {
   String? translate(String key, int i) {
     if (i == 1) {
       return _localizedStrings[key];
-    } else {
+    } else if (i == 0) {
       return _localizedStringsLabel[key];
+    } else if (i == 2) {
+      return _localizedStringsProjet[key];
+    } else if (i == 3) {
+      return _localizedStringsProjet[key];
     }
+    return "no found";
   }
 }
 
