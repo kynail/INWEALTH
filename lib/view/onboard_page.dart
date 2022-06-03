@@ -4,8 +4,11 @@ import 'package:get/get.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:inwealth/utils/translations.dart';
 import 'package:inwealth/view/dashboard_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../controller/store_controller.dart';
 import '../controller/profil_controller.dart';
+import '../utils/data/security_data_provider.dart';
+import '../utils/data/user_token_transfert.dart';
 
 class OnboardPage extends StatefulWidget {
   OnboardPage({Key? key}) : super(key: key);
@@ -14,8 +17,13 @@ class OnboardPage extends StatefulWidget {
   State<OnboardPage> createState() => _OnboardPageState();
 }
 
-final storeController = Get.find<StoreController>();
+// final storeController = Get.find<StoreController>();
 final profileController = Get.put(ProfilController());
+SharedPreferences? prefs;
+
+Future<void> saveUserToken() async {
+  prefs = await SharedPreferences.getInstance();
+}
 
 class _OnboardPageState extends State<OnboardPage> {
   @override
@@ -33,7 +41,27 @@ class _OnboardPageState extends State<OnboardPage> {
       AppLocalizations.of(context)?.translate('local_realEstate', 0) ?? " ",
     ];
     String? selectedValue;
+    SecurityDataProvider test = SecurityDataProvider();
 
+    profileController.userToken == null
+        ? test.authentifyUser().then((value) {
+            // print("hummmm : " + profileController.userToken!.id.toString());
+            profileController.userToken = value;
+          })
+        : null;
+
+    saveUserToken().then(((value) {
+      if (profileController.userToken != null) {
+        prefs!.setString('userID', profileController.userToken!.id);
+        prefs!.setString('residenceFiscal', profileController.residenceFiscall);
+      }
+      // print(prefs!.getString('userID'));
+    }));
+
+    // prefs!.setString('userID', profileController.userToken!.id);
+    // print(prefs!.getString('userID'));
+
+    // test.authentifyUser();
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Color(0xFF665840),
@@ -73,7 +101,9 @@ class _OnboardPageState extends State<OnboardPage> {
                     ),
                     Expanded(
                       child: Text(
-                        profileController.residenceFiscall ?? "Select item",
+                        profileController.residenceFiscall != null
+                            ? profileController.residenceFiscall
+                            : "Select item",
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -103,6 +133,9 @@ class _OnboardPageState extends State<OnboardPage> {
                   setState(() {
                     selectedValue = value as String;
                     profileController.residenceFiscall = selectedValue!;
+
+                    print("huuuuuuuuuuuuuuum : " +
+                        profileController.residenceFiscall);
                   });
                 },
                 icon: const Icon(
@@ -143,7 +176,25 @@ class _OnboardPageState extends State<OnboardPage> {
             ),
             TextButton(
               // ignore: prefer_const_constructors
-              onPressed: () => Get.to(DashboardPage()),
+              onPressed: () {
+                // profileController.userToken == null
+                //     ? test.authentifyUser().then((value) {
+                //         profileController.userToken = value;
+                //       })
+                //     : null;
+
+                // saveUserToken().then(((value) {
+                //   prefs!.setString('userID', profileController.userToken!.id);
+                //   print(prefs!.getString('userID'));
+                // }));
+
+                // prefs!.setString('userID', profileController.userToken!.id);
+                print(prefs!.getString('userID'));
+
+                print("teeeeeeeest");
+                print(profileController.userToken?.id);
+                Get.to(DashboardPage());
+              },
               child: Text("Next", style: TextStyle(color: Color(0xFF524D69))),
             ),
           ],

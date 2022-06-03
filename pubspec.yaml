@@ -44,6 +44,20 @@ dependencies:
   get: ^4.6.5
   get_storage: ^2.0.3
   dropdown_button2: ^1.5.2
+  syncfusion_flutter_calendar: ^20.1.58
+  date_format: ^2.0.6
+  ical: ^0.2.2
+  mailer: ^5.1.1
+  flutter_sms: ^2.3.2
+  advance_pdf_viewer: ^2.0.1
+  flutter_pdfview: ^1.2.1
+  syncfusion_flutter_pdfviewer: ^20.1.58-beta
+  shared_preferences: ^2.0.15
+  permission_handler: ^9.2.0
+  flutter_native_splash: ^2.2.2
+
+dependency_overrides:
+  path_provider: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +83,8 @@ flutter:
   assets:
     - assets/images/
     - assets/
+    - assets/experts/
+    - assets/icons/
     - json/
     - json/profile/
     - json/label/

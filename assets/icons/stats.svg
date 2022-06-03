@@ -1,0 +1,6 @@
+<svg id="Component_Tab_Bar_Item_Normal" data-name="Component/Tab Bar/Item/Normal" xmlns="http://www.w3.org/2000/svg" width="21.354" height="21.436" viewBox="0 0 21.354 21.436">
+  <g id="Component_Icon_Home" data-name="Component/Icon/Home" transform="translate(0)">
+    <path id="path" d="M17.8,14.291A1.529,1.529,0,0,1,16.27,12.76V1.531A1.529,1.529,0,0,1,17.8,0h2.033a1.528,1.528,0,0,1,1.525,1.531V12.76a1.528,1.528,0,0,1-1.525,1.531Zm-16.271,0A1.529,1.529,0,0,1,0,12.76V5.614A1.528,1.528,0,0,1,1.525,4.083H3.559A1.528,1.528,0,0,1,5.084,5.614V12.76a1.529,1.529,0,0,1-1.525,1.531Z" transform="translate(0 7.145)" fill="#fff"/>
+    <path id="path-2" data-name="path" d="M1.525,0H3.559A1.528,1.528,0,0,1,5.084,1.531V19.9a1.528,1.528,0,0,1-1.525,1.531H1.525A1.528,1.528,0,0,1,0,19.9V1.531A1.528,1.528,0,0,1,1.525,0Z" transform="translate(8.135 0)" fill="#fff"/>
+  </g>
+</svg>

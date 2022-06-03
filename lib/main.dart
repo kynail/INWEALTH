@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:inwealth/controller/storeBinding.dart';
 import 'package:inwealth/utils/translations.dart';
@@ -8,8 +10,14 @@ import 'package:inwealth/utils/localization_delegate.dart';
 import 'package:inwealth/model/list.dart';
 import 'package:inwealth/view/dashboard_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'controller/profil_controller.dart';
+import 'controller/store_controller.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
 }
 
@@ -70,9 +78,32 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
+  SharedPreferences? prefs;
+  String? userID;
+  String? resiFisc;
+
+  Future<void> getProfilId() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+
+  Future<void> getResiFisc() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+
+  final storeController = Get.find<StoreController>();
+final profileController = Get.put(ProfilController());
 
   @override
   Widget build(BuildContext context) {
+              getProfilId().then((value)
+          { userID = prefs?.getString('userID');
+            getResiFisc().then(((value) => resiFisc = prefs?.getString('residenceFiscal')));
+            profileController.residenceFiscall = resiFisc.toString();
+          // if (userID != null) {
+          //   FlutterNativeSplash.remove();
+          // }
+          }
+          );
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -85,7 +116,26 @@ class _MyHomePageState extends State<MyHomePage> {
           primaryColor: CupertinoColors.systemOrange),
       routes: <String, WidgetBuilder>{
         '/': (BuildContext context) {
-          return OnboardPage();
+          
+          // getProfilId().then((value)
+          // { userID = prefs?.getString('userID');
+          // // if (userID != null) {
+          // // }
+          // }
+          // );
+            FlutterNativeSplash.remove();
+          // userID = prefs?.getString('userID');
+          print("TEEEEEEST  :  " + userID.toString());
+          print("TEEEEEEST22  :  " + userID.toString());
+          // print("TEEEEEEST2  :  " + profileController.userId.toString());
+
+          if (userID == null) {
+            return OnboardPage();
+          }
+          else {
+            return DashboardPage();
+          }
+
         },
         '/next': (BuildContext context) {
           return const CupertinoPageScaffold(
