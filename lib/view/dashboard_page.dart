@@ -5,18 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:inwealth/model/list.dart';
+import 'package:inwealth/view/dashboardBody_page.dart';
+import 'package:inwealth/view/meeting_page.dart';
+import 'package:inwealth/view/onboard_page.dart';
 import 'package:share_plus/share_plus.dart';
 import 'dart:collection';
 import 'package:flip_card/flip_card.dart';
 import 'package:badges/badges.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math';
 import '../../model/profile.dart';
 import '../controller/profil_controller.dart';
 import '../controller/store_controller.dart';
+import '../utils/customCard.dart';
 import '../utils/translations.dart';
 import 'package:inwealth/view/projet_page.dart';
-
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -30,6 +34,8 @@ final storeController = Get.find<StoreController>();
 class _DashboardPageState extends State<DashboardPage> {
   String Project = "";
   int _currentIndex = 1;
+  int _currentIndex2 = 0;
+
   bool _isLoading = false;
   String Country = "";
   String Projets = "";
@@ -40,6 +46,26 @@ class _DashboardPageState extends State<DashboardPage> {
   Color gold3 = Color(0xFF97876A);
 
   // ScrollController _dashboardController = new ScrollController();
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static List<Widget> _widgetOptions = <Widget>[
+    dashboardBodyPage(),
+    Text(
+      'Index 1: Business',
+      style: optionStyle,
+    ),
+    MeetingPage(),
+    Text(
+      'Index 3: Settings',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex2 = index;
+    });
+  }
 
   void getUserCountry(Profile profile) async {
     int? profil;
@@ -67,493 +93,258 @@ class _DashboardPageState extends State<DashboardPage> {
 
   final profileController = Get.put(ProfilController());
 
-
   getprojet2() {}
+
+  String? resific; 
+
+  Future<void> getResiFisc() async {
+    prefs = await SharedPreferences.getInstance();
+  }
 
   @override
   Widget build(BuildContext context) {
     List<String> _purposes = [
-      AppLocalizations.of(context)?.translate('local_realEstate', 0) ?? "Purchasing real estate.",
-      AppLocalizations.of(context)?.translate('restructuring', 0) ?? "Restructuring the compagny.",
-      AppLocalizations.of(context)?.translate('selling_biz', 0) ?? "Selling your business.",
+      AppLocalizations.of(context)?.translate('local_realEstate', 0) ??
+          "Purchasing real estate.",
+      AppLocalizations.of(context)?.translate('restructuring', 0) ??
+          "Restructuring the compagny.",
+      AppLocalizations.of(context)?.translate('selling_biz', 0) ??
+          "Selling your business.",
       // AppLocalizations.of(context)?.translate('selling_biz', 0) ?? "humk ",
-
     ];
-
-    var rng = new Random();
-    // String project;
+  setState(() {
+    getResiFisc().then(((value) => resific = prefs?.getString('residenceFiscal')));
+  });
+  if (resific == null) {
+    resific = profileController.residenceFiscall;
+  }
+  print(resific);
 
     return Scaffold(
-      appBar: AppBar(
-        // backgroundColor: Color(0xFF665840),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image(
-              image: AssetImage(profileController.residenceFiscall == "France"
-                  ? "assets/images/france.png"
-                  : profileController.residenceFiscall == "United Kingdom" ? "assets/royaume-uni.png" : "assets/images/switzerland.png"),
-              height: 40,
-              width: 40,
-            ),
-            // SizedBox(width: 80,),
-            Align(
-              alignment: Alignment.center,
-              child: Center(
-                child: const Text(
-                  "INWEALTH",
-                  style: TextStyle(
-                      fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                      color: Color(0xFF524D69)),
-                  textAlign: TextAlign.center,
-                ),
+
+        appBar: AppBar(
+          // backgroundColor: Color(0xFF665840),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image(
+                image: AssetImage(resific == "France"
+                    ? "assets/images/france.png"
+                    : resific == "United Kingdom"
+                        ? "assets/royaume-uni.png"
+                        : "assets/images/switzerland.png"),
+                height: 40,
+                width: 40,
               ),
-            ),
-            SizedBox(
-              width: 40,
-            ),
-          ],
-        ),
-        centerTitle: true,
-        backgroundColor: Color(0xFFBAAB90),
-      ),
-      // This is handled by the search bar itself.
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        decoration: BoxDecoration(color: Color(0xFFFFFFFF)),
-        child: Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 30),
-              child: ListView(
-                children: <Widget>[
-                  //buildMap(),
-                  //buildBottomNavigationBar(),
-                  SizedBox(
-                    height: 5,
-                  ),
-
-                  // Container(
-                  //   height: 80,
-                  //   child: Stack(fit: StackFit.expand, children: [
-                  //     buildFloatingSearchBar(context)
-                  //   ]),
-                  // ),
-
-                  Container(
-                    height: 40,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        AppLocalizations.of(context)?.translate('projet', 0) ??
-                            "Project",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                            fontSize: 28,
-                            color: Color(0xFF4E4965),
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: 0,
-                  ),
-
-                  Container(
-                    height: 200,
-                    margin: EdgeInsets.symmetric(vertical: 10.0),
-                    child: ListView.builder(
-                      // padding: const EdgeInsets.all(8),
-                      itemCount: _purposes.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        // print("test: " + _purposes[index]);
-                        // print("hum: " + _purposes[1]);
-                        return Cardhome(project: _purposes[index]);
-                      },
-                      scrollDirection: Axis.horizontal,
-                    ),
-                  ),
-
-                  Container(
-                    height: 50,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        AppLocalizations.of(context)
-                                ?.translate('iSolution', 0) ??
-                            "International Solutions",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Color(0xFF524D69),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 240,
-                    margin: EdgeInsets.symmetric(vertical: 1.0),
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 5,
-                          width: 10,
-                        ),
-                        Card2home(),
-                        SizedBox(
-                          height: 5,
-                          width: 0,
-                        ),
-                        Card2home(),
-                        SizedBox(
-                          height: 5,
-                          width: 0,
-                        ),
-                        Card2home(),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(color: Color(0xFFFFFFF)),
-                    child: Column(children: <Widget>[
-                      Container(
-                        child: Row(children: <Widget>[
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Expanded(
-                            child: Container(
-                              color: Color(0xFF494661),
-                              height: 2,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Image(
-                            image: AssetImage('assets/images/inw-logo.png'),
-                            height: 30,
-                            width: 30,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: Container(
-                              color: Color(0xFF494661),
-                              height: 2,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                        ]),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'INwealth ? Connectez-vous',
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Cardhome extends StatelessWidget {
-  final String project;
-  Cardhome({
-    required this.project,
-    Key? key,
-  }) : super(key: key);
-
-  GlobalKey<FlipCardState> cardkey = GlobalKey<FlipCardState>();
-  bool cardIsFlipped = false;
-
-  void updateCardIsFlipped() => cardIsFlipped = !cardIsFlipped;
-
-  Future<void> turnCard() async {
-    if (cardIsFlipped) {
-      cardkey.currentState?.toggleCard();
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    FlipCardController controller = FlipCardController();
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.all(15),
-          child: GestureDetector(
-            onTap: () => Get.to(ProjetPage()),
-            child: FlipCard(
-              key: cardkey,
-              fill: Fill.fillBack,
-              flipOnTouch: false,
-              // controller: controller,
-              direction: FlipDirection.HORIZONTAL,
-              front: Container(
-                child: Badge(
-                  elevation: 10,
-                  position: BadgePosition.topEnd(top: -9, end: -5),
-                  badgeContent:
-                      Text('7', style: TextStyle(fontWeight: FontWeight.w500)),
-                  badgeColor: Color(0xFF7F7A93),
-                  child: Stack(
-                    fit: StackFit.passthrough,
-                    children: [
-                      Container(
-                        height: 150.0,
-                        width: 150.0,
-                        decoration: BoxDecoration(
-                          color: Color(0xFF5E5B74),
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          image: DecorationImage(
-                              colorFilter: ColorFilter.mode(
-                                  Color(0xFFD5C6AC).withOpacity(1.0),
-                                  BlendMode.srcATop),
-                              image: AssetImage('assets/test.png'),
-                              fit: BoxFit.cover),
-                          shape: BoxShape.rectangle,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Container(
-                          height: 150,
-                          width: 150,
-                          child: Center(
-                            // child: Obx( () =>
-                            child: Text(
-                              project,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            // ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: -8,
-                        right: -5,
-                        child: TextButton(
-                          onPressed: () => cardkey.currentState?.toggleCard(),
-                          style: ButtonStyle(),
-                          // padding: EdgeInsets.all(10.0),
-                          child: Column(
-                            children: [
-                              Icon(Icons.info_rounded, color: Colors.white)
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
+              // SizedBox(width: 80,),
+              const Align(
+                alignment: Alignment.center,
+                child: Center(
+                  child: Text(
+                    "INWEALTH",
+                    style: TextStyle(
+                        fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
+                        color: Color(0xFF524D69)),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
-              back: Container(
-                child: Badge(
-                  position: BadgePosition.topEnd(top: -9, end: -5),
-                  badgeContent: Text('7'),
-                  badgeColor: Color(0xFF5E5B74),
-                  child: Stack(
-                    children: [
-                      Container(
-                        height: 150.0,
-                        width: 150.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
-                          image: DecorationImage(
-                              colorFilter: ColorFilter.mode(
-                                  Color(0xFFD5C6AC).withOpacity(1.0),
-                                  BlendMode.srcATop),
-                              image: AssetImage('assets/test.png'),
-                              fit: BoxFit.cover),
-                          shape: BoxShape.rectangle,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Container(
-                          height: 150,
-                          width: 150,
-                          child: Center(
-                            child: Text(
-                              "BACK",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: -8,
-                        right: -5,
-                        child: TextButton(
-                          onPressed: () => cardkey.currentState?.toggleCard(),
-                          style: ButtonStyle(),
-                          // padding: EdgeInsets.all(10.0),
-                          child: Column(
-                            children: [
-                              Icon(Icons.info_rounded, color: Colors.white)
-                            ],
-                          ),
-                        ),
-                      )
-                      // Align(
-                      //   alignment: Alignment.topRight,
-                      //   child: Badge(
-                      //     badgeContent: Text('7'),
-                      //     position: BadgePosition.topEnd(),
-                      //     badgeColor: Color(0xFF5E5B74),
-                      //   ),
-                      // ),
-                    ],
-                  ),
-                ),
+              const SizedBox(
+                width: 40,
               ),
-            ),
+            ],
           ),
+          centerTitle: true,
+          backgroundColor: const Color(0xFFBAAB90),
         ),
-        Text("test"),
-      ],
-    );
-  }
-}
-
-class Card2home extends StatelessWidget {
-  const Card2home({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    FlipCardController controller = FlipCardController();
-
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.all(15),
-          child: GestureDetector(
-            onTap: () => Get.to(DashboardPage()),
-            child: FlipCard(
-              fill: Fill.fillBack,
-              direction: FlipDirection.HORIZONTAL,
-              //flipOnTouch: false,
-              front: Container(
-                child: Badge(
-                  position: BadgePosition.topEnd(top: -9, end: -5),
-                  badgeContent: Text('6'),
-                  badgeColor: Color(0xFF5E5B74),
-                  child: Stack(
-                    fit: StackFit.passthrough,
-                    children: [
-                      Container(
-                        height: 190.0,
-                        width: 250.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
-                          image: DecorationImage(
-                              colorFilter: ColorFilter.mode(
-                                  Color(0xFF7F7A93).withOpacity(1.0),
-                                  BlendMode.srcATop),
-                              image: AssetImage('assets/test.png'),
-                              fit: BoxFit.cover),
-                          shape: BoxShape.rectangle,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Container(
-                          height: 190,
-                          width: 250,
-                          child: Center(
-                            child: Text(
-                              "FRONT",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white),
+        // This is handled by the search bar itself.
+        resizeToAvoidBottomInset: false,
+        body: 
+        profileController.finish != false
+            ? 
+            _widgetOptions.elementAt(_currentIndex2)
+            : Container(
+                decoration: const BoxDecoration(color: Color(0xFFFFFFFF)),
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: ListView(
+                        children: <Widget>[
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            height: 40,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                AppLocalizations.of(context)
+                                        ?.translate('projet', 0) ??
+                                    "Project",
+                                textAlign: TextAlign.left,
+                                style: const TextStyle(
+                                    fontSize: 28,
+                                    color: const Color(0xFF4E4965),
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: -6,
-                        right: -5,
-                        child: TextButton(
-                          onPressed: () => controller.toggleCard(),
-                          style: ButtonStyle(),
-                          // padding: EdgeInsets.all(10.0),
-                          child: Column(
-                            children: [
-                              Icon(Icons.info_rounded, color: Colors.white)
-                            ],
+                          const SizedBox(
+                            height: 0,
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              back: Container(
-                child: Badge(
-                  position: BadgePosition.topEnd(top: -9, end: -5),
-                  badgeContent: Text('6'),
-                  badgeColor: Color(0xFF5E5B74),
-                  child: Stack(
-                    //fit: StackFit.passthrough,
-                    children: [
-                      Container(
-                        height: 190.0,
-                        width: 250.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          image: DecorationImage(
-                              colorFilter: ColorFilter.mode(
-                                  Colors.black.withOpacity(0.2),
-                                  BlendMode.srcATop),
-                              image: AssetImage('assets/test.png'),
-                              fit: BoxFit.cover),
-                          shape: BoxShape.rectangle,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Container(
-                          height: 190.0,
-                          width: 250.0,
-                          child: Center(
-                            child: Text(
-                              "BACK",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white),
+                          Container(
+                            height: 200,
+                            margin: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: ListView.builder(
+                              // padding: const EdgeInsets.all(8),
+                              itemCount: _purposes.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                // print("test: " + _purposes[index]);
+                                // print("hum: " + _purposes[1]);
+                                return Cardhome(project: _purposes[index]);
+                              },
+                              scrollDirection: Axis.horizontal,
                             ),
                           ),
-                        ),
+                          Container(
+                            height: 50,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                AppLocalizations.of(context)
+                                        ?.translate('iSolution', 0) ??
+                                    "International Solutions",
+                                textAlign: TextAlign.left,
+                                style: const TextStyle(
+                                  fontSize: 25,
+                                  color: const Color(0xFF524D69),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 240,
+                            margin: const EdgeInsets.symmetric(vertical: 1.0),
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: const <Widget>[
+                                SizedBox(
+                                  height: 5,
+                                  width: 10,
+                                ),
+                                Card2home(),
+                                SizedBox(
+                                  height: 5,
+                                  width: 0,
+                                ),
+                                Card2home(),
+                                SizedBox(
+                                  height: 5,
+                                  width: 0,
+                                ),
+                                Card2home(),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 25,
+                          ),
+                          Container(
+                            decoration:
+                                const BoxDecoration(color: Color(0xFFFFFFF)),
+                            child: Column(children: <Widget>[
+                              Container(
+                                child: Row(children: <Widget>[
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      color: const Color(0xFF494661),
+                                      height: 2,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  const Image(
+                                    image: AssetImage(
+                                        'assets/images/inw-logo.png'),
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      color: const Color(0xFF494661),
+                                      height: 2,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                ]),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              const Text(
+                                'INwealth ? Connectez-vous',
+                                textAlign: TextAlign.center,
+                              ),
+                            ]),
+                          )
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ),
-        ),
-        Text("test"),
-      ],
-    );
+        // Stack(
+        //     clipBehavior: Clip.none,
+        //     alignment: new FractionalOffset(0.5, 1.0),
+        //     children: [
+        //       Container(
+        //         height: 80,
+        //         padding: EdgeInsets.symmetric(vertical: 10),
+        //         decoration: BoxDecoration(
+        //           border: Border.symmetric(
+        //             horizontal: BorderSide(
+        //               color: Colors.grey.shade200,
+        //             ),
+        //           ),
+        //         ),
+        //         child: Row(
+        //           crossAxisAlignment: CrossAxisAlignment.start,
+        //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //           children: [
+        //             Container(
+        //               height: 80,
+        //               padding: EdgeInsets.symmetric(vertical: 10),
+        //               decoration: BoxDecoration(
+        //                 border: Border.symmetric(
+        //                   horizontal: BorderSide(
+        //                     color: Colors.grey.shade200,
+        //                   ),
+        //                 ),
+        //               ),
+        //               child: Row(
+        //                 crossAxisAlignment: CrossAxisAlignment.start,
+        //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //                 children: [
+
+        //                 ],
+        //               ),
+        //             )
+        //           ],
+        //         ),
+        //       ),
+        //     ]
+        // ),
+        );
   }
 }
