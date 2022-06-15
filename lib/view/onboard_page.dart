@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:inwealth/controller/parameters.dart';
+import 'package:inwealth/utils/parameters.dart';
 import 'package:inwealth/utils/translations.dart';
 import 'package:inwealth/view/dashboard_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,22 +20,25 @@ class OnboardPage extends StatefulWidget {
 }
 
 // final storeController = Get.find<StoreController>();
+final parametersController = Get.put(ParametersController());
+
 final profileController = Get.put(ProfilController());
 SharedPreferences? prefs;
 SecurityDataProvider test = SecurityDataProvider();
+
+Parameters parameters = Parameters();
 
 Future<void> saveUserToken() async {
   prefs = await SharedPreferences.getInstance();
 }
 
 ahfu() async {
-  // test.authentifyUser().then((value) {
-  //   profileController.userToken = value;
-  //   print("valuuuue : " + value.id.toString());
-  // });
+
   profileController.userToken == null
   ? test.authentifyUser().then((value) {
     profileController.userToken = value;
+    profileController.userId = value.id;
+    prefs!.setString('userID', profileController.userToken!.id);
     print("valuuuue : " + value.id.toString());
     print("value 2 : " + profileController.userToken!.id);
   })
@@ -52,7 +57,6 @@ ahfu() async {
 
 
 class _OnboardPageState extends State<OnboardPage> {
-  
 // @override
 // void initState() {
 //   profileController.userToken == null
@@ -74,6 +78,9 @@ class _OnboardPageState extends State<OnboardPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    saveUserToken();
+
     List<String> country = [
       AppLocalizations.of(context)?.translate('France', 0) ?? " ",
       AppLocalizations.of(context)?.translate('Suisse', 0) ?? " ",
@@ -90,24 +97,7 @@ class _OnboardPageState extends State<OnboardPage> {
 
 
     
-    // profileController.userToken == null
-    //     ? test.authentifyUser().then((value) {
-    //         // print("hummmm : " + profileController.userToken!.id.toString());
-    //         profileController.userToken = value;
-    //       })
-    //     : null;
 
-    // saveUserToken().then(((value) {
-    //   // print("humhum");
-    //     prefs!.setString('userID', profileController.userToken!.id);
-    //     prefs!.setString('residenceFiscal', profileController.residenceFiscall);
-    //   // print(prefs!.getString('userID'));
-    // }));
-
-    // prefs!.setString('userID', profileController.userToken!.id);
-    // print(prefs!.getString('userID'));
-
-    // test.authentifyUser();
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Color(0xFF665840),
@@ -161,11 +151,11 @@ class _OnboardPageState extends State<OnboardPage> {
               dropdownDecoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
               ),
-              items: country
+              items: parameters.country
                   .map((item) => DropdownMenuItem<String>(
-                        value: item,
+                        value: item.key,
                         child: Text(
-                          item,
+                          item.name,
                           style: const TextStyle(
                             fontSize: 14,
                           ),
@@ -183,7 +173,7 @@ class _OnboardPageState extends State<OnboardPage> {
                   selectedValue = value as String;
                   if (profileController.residenceFiscall == "") {
                     profileController.residenceFiscall = selectedValue!;
-                    
+                    print("mais what ?? : " + profileController.residenceFiscall);
                     prefs!.setString('residenceFiscale', profileController.residenceFiscall);
                   }
                 });
@@ -206,7 +196,7 @@ class _OnboardPageState extends State<OnboardPage> {
 
                       if (snapshot.hasData) {
                         prefs!.setString('userID', profileController.userToken!.id);
-
+                        prefs!.setString('residenceFiscal', profileController.residenceFiscall);
                         print("ça marche ?");
                         return DashboardPage();
                       } else if (snapshot.hasError) {
@@ -217,28 +207,12 @@ class _OnboardPageState extends State<OnboardPage> {
                         return DashboardPage();
                       }
                     });
-                // test.authentifyUser().then((value) {
-                //   profileController.userToken = value;
-                //   print("valuuuue : " + value.id.toString());
-                // });
-
-                // saveUserToken().then(((value) {
-                //   print("ben ben ben : " + profileController.userToken!.id);
-                //   prefs!.setString('userID', profileController.userToken!.id);
-                //   prefs!.setString(
-                //       'residenceFiscal', profileController.residenceFiscall);
-                //   print("whyyyyyy : " +
-                //       prefs!.getString('residenceFiscal').toString());
-                // }));
-                // print(profileController.residenceFiscall);
-                // print(profileController.userToken!.id);
-                // prefs!.setString('userID', profileController.userToken!.id);
-                // print(prefs!.getString('userID'));
-                // print("resiresiresi : " +
-                //     prefs!.getString('residenceFiscal').toString());
-                // print("ididididid : " + prefs!.getString('userID').toString());
-
+           
+                print("ben ben ben : " + profileController.residenceFiscall);
                 print("teeeeeeeest");
+                        prefs!.setString('residenceFiscal', profileController.residenceFiscall);
+                print(prefs?.getString('residenceFiscal'));
+                print("fiiiiiin test");
                 Get.to(DashboardPage());
               },
               child: Text("Next", style: TextStyle(color: Color(0xFF524D69))),

@@ -237,11 +237,11 @@ class _MaritalPageState extends State<MaritalPage> {
                   dropdownDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  items: nationality
+                  items: parameters.nationality
                       .map((item) => DropdownMenuItem<String>(
-                            value: item,
+                            value: item.key,
                             child: Text(
-                              item,
+                              item.name,
                               style: const TextStyle(
                                 fontSize: 14,
                               ),
@@ -318,11 +318,11 @@ class _MaritalPageState extends State<MaritalPage> {
                   dropdownDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  items: maritalSta
+                  items: parameters.familySituations
                       .map((item) => DropdownMenuItem<String>(
-                            value: item,
+                            value: item.key,
                             child: Text(
-                              item,
+                              item.name,
                               style: const TextStyle(
                                 fontSize: 14,
                               ),
@@ -398,7 +398,7 @@ class _MaritalPageState extends State<MaritalPage> {
                         hint: profileController.maritalStatus != ""
                             ? Text(profileController.maritalStatus)
                             : const Text(
-                                'Select your maritalStatus',
+                                'Select your matrimonial Regimes',
                                 style: TextStyle(fontSize: 14),
                               ),
                         icon: const Icon(
@@ -412,11 +412,11 @@ class _MaritalPageState extends State<MaritalPage> {
                         dropdownDecoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        items: regimeMat
+                        items: parameters.matrimonialRegimes
                             .map((item) => DropdownMenuItem<String>(
-                                  value: item,
+                                  value: item.key,
                                   child: Text(
-                                    item,
+                                    item.name,
                                     style: const TextStyle(
                                       fontSize: 14,
                                     ),
@@ -426,7 +426,7 @@ class _MaritalPageState extends State<MaritalPage> {
                         validator: (value) {
                           if (profileController.regimeMatrimonial != "") {
                           } else if (value == null) {
-                            return 'Please select your marital status.';
+                            return 'Please select your matrimonial regime.';
                           }
                         },
                         onChanged: (value) {
@@ -572,11 +572,11 @@ class _MaritalPageState extends State<MaritalPage> {
                         dropdownDecoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        items: country
+                        items: parameters.country
                             .map((item) => DropdownMenuItem<String>(
-                                  value: item,
+                                  value: item.key,
                                   child: Text(
-                                    item,
+                                    item.name,
                                     style: const TextStyle(
                                       fontSize: 14,
                                     ),

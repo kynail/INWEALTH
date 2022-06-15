@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:inwealth/controller/parameters.dart';
+import 'package:inwealth/utils/data/data_model.dart';
+import 'package:inwealth/utils/parameters.dart';
 import 'package:inwealth/utils/translations.dart';
 import 'package:inwealth/view/marital_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
@@ -20,6 +23,7 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
   String? selectedValue;
 
 
+  Parameters parameters = Parameters();
 
 
 
@@ -53,18 +57,30 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
   @override
   Widget build(BuildContext context) {
 
-    List<String> country = [
-      'France'.tr,
-      'Suisse'.tr,
-      'Belgique'.tr,
-      'Luxembourg'.tr,
-      'Monaco'.tr,
-      'Royaume-Uni'.tr,
-      'Russie'.tr,
-      'Italie'.tr,
-      'Espagne'.tr,
-      'Allemagne'.tr
-    ];
+    // List<DataModel> country = [
+    // DataModel(name: 'France'.tr, key: "france"),
+    // DataModel(name: 'Suisse'.tr, key: "suisse"),
+    // DataModel(name: 'Belgique'.tr, key: "belgique"),
+    // DataModel(name: 'Luxembourg'.tr, key: "luxembourg"),
+    // DataModel(name: 'Monaco'.tr, key: "monaco"),
+    // DataModel(name: 'Royaume-Uni'.tr, key: "uk"),
+    // // DataModel(name: "Middle-East", key: "middleEast"),
+    // DataModel(name: 'Russie'.tr, key: "russie"),
+    // DataModel(name: 'Italie'.tr, key: "italie"),
+    // DataModel( name: 'Espagne'.tr, key: "espagne"),
+    // DataModel( name: 'Allemagne'.tr, key: "allemagne"),
+
+    //   // 'France'.tr,
+    //   // 'Suisse'.tr,
+    //   // 'Belgique'.tr,
+    //   // 'Luxembourg'.tr,
+    //   // 'Monaco'.tr,
+    //   // 'Royaume-Uni'.tr,
+    //   // 'Russie'.tr,
+    //   // 'Italie'.tr,
+    //   // 'Espagne'.tr,
+    //   // 'Allemagne'.tr
+    // ];
   
     print("fuuu flutter");
     print(AppLocalizations.of(context)?.translate('France', 0)) ;
@@ -141,11 +157,11 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                   dropdownDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  items: locality
+                  items: parameters.businessSectors
                       .map((item) => DropdownMenuItem<String>(
-                            value: item,
+                            value: item.key,
                             child: Text(
-                              item,
+                              item.name,
                               style: const TextStyle(
                                 fontSize: 14,
                               ),
@@ -162,6 +178,7 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                     setState(() {
                       selectedValue = value as String;
                       profileController.secteurActivite = selectedValue!;
+                      print("secteur act :  " + profileController.secteurActivite);
                     });
                   },
                   onSaved: (value) {
@@ -225,11 +242,11 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                   dropdownDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  items: country
+                  items: parameters.country
                       .map((item) => DropdownMenuItem<String>(
-                            value: item,
+                            value: item.name,
                             child: Text(
-                              item,
+                              item.name,
                               style: const TextStyle(
                                 fontSize: 14,
                               ),
@@ -246,6 +263,7 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                     setState(() {
                       selectedValue = value as String;
                       profileController.changementResi = selectedValue!;
+                      print("changement residence ? : " + profileController.changementResi);
                     });
                   },
                   onSaved: (value) {
@@ -300,11 +318,11 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                   dropdownDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  items: country
+                  items: parameters.country
                       .map((item) => DropdownMenuItem<String>(
-                            value: item,
+                            value: item.name,
                             child: Text(
-                              item,
+                              item.name,
                               style: const TextStyle(
                                 fontSize: 14,
                               ),

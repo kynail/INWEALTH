@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:inwealth/controller/parameters.dart';
 import 'package:inwealth/model/list.dart';
 import 'package:inwealth/view/dashboardBody_page.dart';
 import 'package:inwealth/view/meeting_page.dart';
@@ -160,6 +161,9 @@ class _DashboardPageState extends State<DashboardPage> {
       profileController.residenceFiscall = resific.toString();
     }
     // print("resifical profilecontrol : " + profileController.residenceFiscall);
+    print("resific dashboard : "+ profileController.residenceFiscall);
+    print("user id dashboard : " + profileController.userId);
+    // print("user id2 dashboard : " + profileController.userToken!.id);
 
 
         // print("test dashboard");

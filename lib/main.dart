@@ -105,6 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
   getResiFisc() async {
     getProfilId().then((value) {
       userID = prefs?.getString('userID');
+      resiFisc = prefs?.getString('residenceFiscal');
 
       if (userID != null && profileController.userId == "") {
         profileController.userId = userID.toString();
@@ -145,6 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    getProfilId();
     return CupertinoApp(
       theme: CupertinoThemeData(
           brightness: Brightness.dark,
@@ -156,26 +158,16 @@ class _MyHomePageState extends State<MyHomePage> {
               builder: (context, snapshot) {
                 print('UserID = ' + userID.toString());
                 print('Residence Fiscale = ' +
+                    resiFisc.toString());
+                                    print('Residence Fiscale22 = ' +
                     profileController.residenceFiscall.toString());
             FlutterNativeSplash.remove();
 
-                // if (snapshot.hasData) {
                   return userID == null &&
                           profileController.residenceFiscall == ""
                       ? OnboardPage()
                       : DashboardPage();
-                // } else if (snapshot.hasError) {
-                //   return SizedBox();
-                //   print("main error aaaaaaaaaaaaaah");
-                // } else {
-                //   return 
-                //     SizedBox(
-                //       width: 60,
-                //       height: 60,
-                //       child: CircularProgressIndicator(),
-                //     );
-                // }
-                // return Container();
+
               }));
         },
         
