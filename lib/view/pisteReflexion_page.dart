@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:inwealth/controller/expert_controller.dart';
+import 'package:inwealth/view/dashboardProject_page.dart';
 import 'package:inwealth/view/meeting_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
 
@@ -60,86 +61,34 @@ class _pisteReflexionState extends State<pisteReflexion> {
         backgroundColor: const Color(0xFFBAAB90),
       ),
       body: SingleChildScrollView(
-        child: ListView.separated(
-          separatorBuilder: (context, index) => const Divider(),
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: thinkingController.thinkings.length,
-          itemBuilder: (context, index) => Row(
-            children: <Widget>[
-              Expanded(child: Text(thinkingController.thinkings[index].name)),
-              // TextButton(
-      
-              //   // child: SvgPicture.asset("assets/icons/info.svg"),
-              //   onPressed: () {
-              //     showCupertinoModalPopup(
-              //       context: context,
-              //       builder: (context) {
-              //         return DismissibleModal(
-              //           dismissibleCrossBackgroundColor:
-              //               CustomColors.contrastPrimaryColor,
-              //           displayDismissibleCross: true,
-              //           key: ValueKey(Parameters.thinkings[index]),
-              //           child: CustomWebView(
-              //             url: Parameters.thinkings[index].url,
-              //           ),
-              //         );
-              //       },
-              //     );
-              //   },
-              // ),
-              CustomCheckBox(
-                // value: value,
-                // key: Key(index.toString()),
-                onChanged: (value) {
-                  Thinking thinking = thinkingController.thinkings[index];
-                  // List<Thinking> retainedThinkings = stateParcours
-                  //         .roadmap.retainedThinkings
-                  //         .contains(thinking)
-                  //     ? stateParcours.roadmap.retainedThinkings
-                  //         .where((element) => element != thinking)
-                  //         .toList()
-                  //     : [
-                  //         ...stateParcours
-                  //             .roadmap.retainedThinkings,
-                  //         thinking,
-                  //       ];
-      
-                  // SecurityService.getUserGuid()
-                  //     .then((userGuid) =>
-                  //         parcoursCubit.saveRetainedThinkings(
-                  //             userGuid!, retainedThinkings))
-                  //     .then(
-                  //       (value) => parcoursCubit.updateParcours(
-                  //         Roadmap.copy(
-                  //           stateParcours.roadmap,
-                  //           retainedThinkings:
-                  //               Optional.value(retainedThinkings),
-                  //           areThinkingsSaved:
-                  //               Optional.value(value),
-                  //         ),
-                  //       ),
-                  //     )
-                  //     .then(
-                  //       (_) => documentCubit.resetDocument(),
-                  //     );
-                },
-              )
-            ],
-          ),
+        child: Column(
+          children: [
+            ListView.separated(
+              separatorBuilder: (context, index) => const Divider(),
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: thinkingController.thinkings.length,
+              itemBuilder: (context, index) => Row(
+                children: <Widget>[
+                  Expanded(child: Text(thinkingController.thinkings[index].name)),
+                  CustomCheckBox(
+                    // value: value,
+                    // key: Key(index.toString()),
+                    onChanged: (value) {
+                      Thinking thinking = thinkingController.thinkings[index];
+
+                    },
+                  ),
+
+                ],
+              ),
+              
+            ),
+                          TextButton(onPressed: () =>
+              Get.to(dashboardProjectPage()), child: Text("Return to home page"))
+          ],
         ),
       ),
-      // footer: CustomButton(
-      //   color: CustomColors.primaryColor,
-      //   borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-      //   padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-      //   child: Text(
-      //     AppLocalizations.of(context)?.translate('Button_finish') ??
-      //         "Finish",
-      //     style: TextStyle(color: Colors.white),
-      //   ),
-      //   onPressed: widget.submit,
-      // ),
     );
   }
 }

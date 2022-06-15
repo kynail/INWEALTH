@@ -8,7 +8,7 @@ import 'i_security_data_provider.dart';
 class SecurityDataProvider implements ISecurityDataProvider {
   @override
   Future<UserTokenTransfert> authentifyUser() async {
-    print("test" + profileController.userId);
+    print("test" + profileController.residenceFiscall);
 
     String path = "/user/saveProfil";
     // DataProvider.post(path, body: {"residenceFiscale":"France", "nationalite":"france"}).then((response) 

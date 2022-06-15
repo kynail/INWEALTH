@@ -25,6 +25,7 @@ import 'package:inwealth/view/projet_page.dart';
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
 
+
   @override
   _DashboardPageState createState() => _DashboardPageState();
 }
@@ -95,15 +96,46 @@ class _DashboardPageState extends State<DashboardPage> {
 
   getprojet2() {}
 
-  String? resific; 
+  String? resific;
+  bool? endproject = false;
 
   Future<void> getResiFisc() async {
     prefs = await SharedPreferences.getInstance();
   }
 
+  ahtchoum() {
+    getResiFisc()
+        .then(((value) => resific = prefs?.getString('residenceFiscal')));
+    // while (resific == null) {
+    if (resific != null && profileController.residenceFiscall == "") {
+      // print("humhumhum : " + resific.toString());
+      profileController.residenceFiscall = resific.toString();
+    }
+    getResiFisc()
+        .then(((value) => endproject = prefs?.getBool('endProject')));
+        if (endproject != null) {
+      print("humhumhum : " + endproject.toString());
+      profileController.endProject = endproject!;
+      print("profile endproject : " + profileController.endProject.toString());
+    }
+  }
+
+  @override
+  // void initState() {
+  //   super.initState();
+  //   getResiFisc()
+  //       .then(((value) => resific = prefs?.getString('residenceFiscal')));
+  //   // while (resific == null) {
+  //   if (resific != null && profileController.residenceFiscall == "") {
+  //     print("humhumhum : " + resific.toString());
+  //     profileController.residenceFiscall = resific.toString();
+  //   }
+  //   // TODO: implement initState
+  // }
+
   @override
   Widget build(BuildContext context) {
-    List<String> _purposes = [
+    List<String> _purposesuk = [
       AppLocalizations.of(context)?.translate('local_realEstate', 0) ??
           "Purchasing real estate.",
       AppLocalizations.of(context)?.translate('restructuring', 0) ??
@@ -112,239 +144,258 @@ class _DashboardPageState extends State<DashboardPage> {
           "Selling your business.",
       // AppLocalizations.of(context)?.translate('selling_biz', 0) ?? "humk ",
     ];
-  setState(() {
-    getResiFisc().then(((value) => resific = prefs?.getString('residenceFiscal')));
-  });
-  if (resific == null) {
-    resific = profileController.residenceFiscall;
-  }
-  print(resific);
 
+
+    List<String> _purposesfr = [
+      "Ceder son entreprise",
+      "transmettre son entreprise à un tier",
+      "maitriser son impot sur la fortune",
+      // AppLocalizations.of(context)?.translate('selling_biz', 0) ?? "humk ",
+    ];
+
+    // }
+    // print("humhumhum2 : " + resific.toString());
+    if (resific != null && profileController.residenceFiscall == "") {
+      // print("humhumhum : " + resific.toString());
+      profileController.residenceFiscall = resific.toString();
+    }
+    // print("resifical profilecontrol : " + profileController.residenceFiscall);
+
+
+        // print("test dashboard");
+        // print(profileController.userId);
     return Scaffold(
+      appBar: AppBar(
+        // backgroundColor: Color(0xFF665840),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FutureBuilder(
+                future: ahtchoum(),
+                builder: (context, snapshot) {
+                  return Image(
+                    image: AssetImage(profileController.residenceFiscall ==
+                            "France"
+                        ? "assets/images/france.png"
+                        : profileController.residenceFiscall == "United Kingdom"
+                            ? "assets/royaume-uni.png"
+                            : "assets/images/switzerland.png"),
+                    height: 40,
+                    width: 40,
+                  );
+                }),
 
-        appBar: AppBar(
-          // backgroundColor: Color(0xFF665840),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Image(
-                image: AssetImage(resific == "France"
-                    ? "assets/images/france.png"
-                    : resific == "United Kingdom"
-                        ? "assets/royaume-uni.png"
-                        : "assets/images/switzerland.png"),
-                height: 40,
-                width: 40,
-              ),
-              // SizedBox(width: 80,),
-              const Align(
-                alignment: Alignment.center,
-                child: Center(
-                  child: Text(
-                    "INWEALTH",
-                    style: TextStyle(
-                        fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                        color: Color(0xFF524D69)),
-                    textAlign: TextAlign.center,
-                  ),
+            // SizedBox(width: 80,),
+            const Align(
+              alignment: Alignment.center,
+              child: Center(
+                child: Text(
+                  "INWEALTH",
+                  style: TextStyle(
+                      fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
+                      color: Color(0xFF524D69)),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              const SizedBox(
-                width: 40,
-              ),
-            ],
-          ),
-          centerTitle: true,
-          backgroundColor: const Color(0xFFBAAB90),
+            ),
+            const SizedBox(
+              width: 40,
+            ),
+          ],
         ),
-        // This is handled by the search bar itself.
-        resizeToAvoidBottomInset: false,
-        body: 
-        profileController.finish != false
-            ? 
-            _widgetOptions.elementAt(_currentIndex2)
-            : Container(
-                decoration: const BoxDecoration(color: Color(0xFFFFFFFF)),
-                child: Stack(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30),
-                      child: ListView(
-                        children: <Widget>[
-                          const SizedBox(
-                            height: 5,
+        centerTitle: true,
+        backgroundColor: const Color(0xFFBAAB90),
+      ),
+      // This is handled by the search bar itself.
+      resizeToAvoidBottomInset: false,
+      body: profileController.finish != false
+          ? _widgetOptions.elementAt(_currentIndex2)
+          : Container(
+              decoration: const BoxDecoration(color: Color(0xFFFFFFFF)),
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30),
+                    child: ListView(
+                      children: <Widget>[
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          height: 40,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Text(
+                              AppLocalizations.of(context)
+                                      ?.translate('projet', 0) ??
+                                  "Project.",
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(
+                                  fontSize: 28,
+                                  color: const Color(0xFF4E4965),
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
-                          Container(
-                            height: 40,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Text(
-                                AppLocalizations.of(context)
-                                        ?.translate('projet', 0) ??
-                                    "Project",
-                                textAlign: TextAlign.left,
-                                style: const TextStyle(
-                                    fontSize: 28,
-                                    color: const Color(0xFF4E4965),
-                                    fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          height: 0,
+                        ),
+                        Container(
+                          height: 200,
+                          margin: const EdgeInsets.symmetric(vertical: 10.0),
+                          child: ListView.builder(
+                            // padding: const EdgeInsets.all(8),
+                            itemCount: _purposesuk.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              // print("test: " + _purposes[index]);
+                              // print("hum: " + _purposes[1]);
+                              return  profileController.residenceFiscall == "United Kingdom"
+                              ? Cardhome(project: _purposesuk[index])
+                              : Cardhome(project: _purposesfr[index]);
+                              // profileController.residenceFiscall == "United Kingdom" 
+                                
+                            },
+                            scrollDirection: Axis.horizontal,
+                          ),
+                        ),
+                        Container(
+                          height: 50,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Text(
+                              AppLocalizations.of(context)
+                                      ?.translate('iSolution', 0) ??
+                                  "International Solutions",
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(
+                                fontSize: 25,
+                                color: const Color(0xFF524D69),
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 0,
+                        ),
+                        Container(
+                          height: 240,
+                          margin: const EdgeInsets.symmetric(vertical: 1.0),
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: const <Widget>[
+                              SizedBox(
+                                height: 5,
+                                width: 10,
+                              ),
+                              Card2home(),
+                              SizedBox(
+                                height: 5,
+                                width: 0,
+                              ),
+                              Card2home(),
+                              SizedBox(
+                                height: 5,
+                                width: 0,
+                              ),
+                              Card2home(),
+                            ],
                           ),
-                          Container(
-                            height: 200,
-                            margin: const EdgeInsets.symmetric(vertical: 10.0),
-                            child: ListView.builder(
-                              // padding: const EdgeInsets.all(8),
-                              itemCount: _purposes.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                // print("test: " + _purposes[index]);
-                                // print("hum: " + _purposes[1]);
-                                return Cardhome(project: _purposes[index]);
-                              },
-                              scrollDirection: Axis.horizontal,
-                            ),
-                          ),
-                          Container(
-                            height: 50,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Text(
-                                AppLocalizations.of(context)
-                                        ?.translate('iSolution', 0) ??
-                                    "International Solutions",
-                                textAlign: TextAlign.left,
-                                style: const TextStyle(
-                                  fontSize: 25,
-                                  color: const Color(0xFF524D69),
-                                  fontWeight: FontWeight.bold,
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        Container(
+                          decoration:
+                              const BoxDecoration(color: Color(0xFFFFFFF)),
+                          child: Column(children: <Widget>[
+                            Container(
+                              child: Row(children: <Widget>[
+                                const SizedBox(
+                                  width: 20,
                                 ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 240,
-                            margin: const EdgeInsets.symmetric(vertical: 1.0),
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: const <Widget>[
-                                SizedBox(
-                                  height: 5,
+                                Expanded(
+                                  child: Container(
+                                    color: const Color(0xFF494661),
+                                    height: 2,
+                                  ),
+                                ),
+                                const SizedBox(
                                   width: 10,
                                 ),
-                                Card2home(),
-                                SizedBox(
-                                  height: 5,
-                                  width: 0,
+                                const Image(
+                                  image:
+                                      AssetImage('assets/images/inw-logo.png'),
+                                  height: 30,
+                                  width: 30,
                                 ),
-                                Card2home(),
-                                SizedBox(
-                                  height: 5,
-                                  width: 0,
+                                const SizedBox(
+                                  width: 10,
                                 ),
-                                Card2home(),
-                              ],
+                                Expanded(
+                                  child: Container(
+                                    color: const Color(0xFF494661),
+                                    height: 2,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                              ]),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          Container(
-                            decoration:
-                                const BoxDecoration(color: Color(0xFFFFFFF)),
-                            child: Column(children: <Widget>[
-                              Container(
-                                child: Row(children: <Widget>[
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      color: const Color(0xFF494661),
-                                      height: 2,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  const Image(
-                                    image: AssetImage(
-                                        'assets/images/inw-logo.png'),
-                                    height: 30,
-                                    width: 30,
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      color: const Color(0xFF494661),
-                                      height: 2,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                ]),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              const Text(
-                                'INwealth ? Connectez-vous',
-                                textAlign: TextAlign.center,
-                              ),
-                            ]),
-                          )
-                        ],
-                      ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            const Text(
+                              'INwealth ? Connectez-vous',
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        )
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-        // Stack(
-        //     clipBehavior: Clip.none,
-        //     alignment: new FractionalOffset(0.5, 1.0),
-        //     children: [
-        //       Container(
-        //         height: 80,
-        //         padding: EdgeInsets.symmetric(vertical: 10),
-        //         decoration: BoxDecoration(
-        //           border: Border.symmetric(
-        //             horizontal: BorderSide(
-        //               color: Colors.grey.shade200,
-        //             ),
-        //           ),
-        //         ),
-        //         child: Row(
-        //           crossAxisAlignment: CrossAxisAlignment.start,
-        //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //           children: [
-        //             Container(
-        //               height: 80,
-        //               padding: EdgeInsets.symmetric(vertical: 10),
-        //               decoration: BoxDecoration(
-        //                 border: Border.symmetric(
-        //                   horizontal: BorderSide(
-        //                     color: Colors.grey.shade200,
-        //                   ),
-        //                 ),
-        //               ),
-        //               child: Row(
-        //                 crossAxisAlignment: CrossAxisAlignment.start,
-        //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //                 children: [
+            ),
+      // Stack(
+      //     clipBehavior: Clip.none,
+      //     alignment: new FractionalOffset(0.5, 1.0),
+      //     children: [
+      //       Container(
+      //         height: 80,
+      //         padding: EdgeInsets.symmetric(vertical: 10),
+      //         decoration: BoxDecoration(
+      //           border: Border.symmetric(
+      //             horizontal: BorderSide(
+      //               color: Colors.grey.shade200,
+      //             ),
+      //           ),
+      //         ),
+      //         child: Row(
+      //           crossAxisAlignment: CrossAxisAlignment.start,
+      //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //           children: [
+      //             Container(
+      //               height: 80,
+      //               padding: EdgeInsets.symmetric(vertical: 10),
+      //               decoration: BoxDecoration(
+      //                 border: Border.symmetric(
+      //                   horizontal: BorderSide(
+      //                     color: Colors.grey.shade200,
+      //                   ),
+      //                 ),
+      //               ),
+      //               child: Row(
+      //                 crossAxisAlignment: CrossAxisAlignment.start,
+      //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //                 children: [
 
-        //                 ],
-        //               ),
-        //             )
-        //           ],
-        //         ),
-        //       ),
-        //     ]
-        // ),
-        );
+      //                 ],
+      //               ),
+      //             )
+      //           ],
+      //         ),
+      //       ),
+      //     ]
+      // ),
+    );
   }
 }

@@ -118,6 +118,7 @@ class _dashboardProjectPageState extends State<dashboardProjectPage> {
           currentIndex: _currentIndex2,
           selectedItemColor: Colors.amber[800],
           onTap: _onItemTapped,
-        ));
+        )
+        );
   }
 }

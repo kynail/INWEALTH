@@ -20,12 +20,58 @@ class OnboardPage extends StatefulWidget {
 // final storeController = Get.find<StoreController>();
 final profileController = Get.put(ProfilController());
 SharedPreferences? prefs;
+SecurityDataProvider test = SecurityDataProvider();
 
 Future<void> saveUserToken() async {
   prefs = await SharedPreferences.getInstance();
 }
 
+ahfu() async {
+  // test.authentifyUser().then((value) {
+  //   profileController.userToken = value;
+  //   print("valuuuue : " + value.id.toString());
+  // });
+  profileController.userToken == null
+  ? test.authentifyUser().then((value) {
+    profileController.userToken = value;
+    print("valuuuue : " + value.id.toString());
+    print("value 2 : " + profileController.userToken!.id);
+  })
+  : null;
+
+  saveUserToken().then(((value) {
+    prefs!.setString('userID', profileController.userToken!.id);
+    if (profileController.residenceFiscall == "") {
+      prefs!.setString('residenceFiscal', profileController.residenceFiscall);
+    }
+    print("ben ben ben : " + profileController.residenceFiscall);
+    // print("whyyyyyy : " + prefs!.getString('residenceFiscal').toString());
+  }));
+  // print("testestest : " + prefs!.getString('residenceFiscal').toString());
+}
+
+
 class _OnboardPageState extends State<OnboardPage> {
+  
+// @override
+// void initState() {
+//   profileController.userToken == null
+//     ? test.authentifyUser().then((value) {
+//     profileController.userToken = value;
+//     print("valuuuue : " + value.id.toString());
+//     print("value 2 : " + profileController.userToken!.id);
+//   })
+//   : null;
+
+//   saveUserToken().then(((value) {
+//     prefs!.setString('userID', profileController.userToken!.id);
+//     // prefs!.setString('residenceFiscal', profileController.residenceFiscall);
+//     print("ben ben ben : " + profileController.userToken!.id);
+//     // print("whyyyyyy : " + prefs!.getString('residenceFiscal').toString());
+//   }));
+//   super.initState();
+// }
+
   @override
   Widget build(BuildContext context) {
     List<String> country = [
@@ -41,22 +87,22 @@ class _OnboardPageState extends State<OnboardPage> {
       AppLocalizations.of(context)?.translate('local_realEstate', 0) ?? " ",
     ];
     String? selectedValue;
-    SecurityDataProvider test = SecurityDataProvider();
 
-    profileController.userToken == null
-        ? test.authentifyUser().then((value) {
-            // print("hummmm : " + profileController.userToken!.id.toString());
-            profileController.userToken = value;
-          })
-        : null;
 
-    saveUserToken().then(((value) {
-      if (profileController.userToken != null) {
-        prefs!.setString('userID', profileController.userToken!.id);
-        prefs!.setString('residenceFiscal', profileController.residenceFiscall);
-      }
-      // print(prefs!.getString('userID'));
-    }));
+    
+    // profileController.userToken == null
+    //     ? test.authentifyUser().then((value) {
+    //         // print("hummmm : " + profileController.userToken!.id.toString());
+    //         profileController.userToken = value;
+    //       })
+    //     : null;
+
+    // saveUserToken().then(((value) {
+    //   // print("humhum");
+    //     prefs!.setString('userID', profileController.userToken!.id);
+    //     prefs!.setString('residenceFiscal', profileController.residenceFiscall);
+    //   // print(prefs!.getString('userID'));
+    // }));
 
     // prefs!.setString('userID', profileController.userToken!.id);
     // print(prefs!.getString('userID'));
@@ -86,90 +132,66 @@ class _OnboardPageState extends State<OnboardPage> {
             SizedBox(
               height: 50,
             ),
-            DropdownButtonHideUnderline(
-              child: DropdownButton2(
-                isExpanded: true,
-                hint: Row(
-                  children: [
-                    Icon(
-                      Icons.list,
-                      size: 16,
-                      color: Color(0xFF524D69),
-                    ),
-                    SizedBox(
-                      width: 4,
-                    ),
-                    Expanded(
-                      child: Text(
-                        profileController.residenceFiscall != null
-                            ? profileController.residenceFiscall
-                            : "Select item",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF524D69),
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
+            DropdownButtonFormField2(
+              decoration: InputDecoration(
+                //Add isDense true and zero Padding.
+                //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
+                isDense: true,
+                contentPadding: EdgeInsets.zero,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
                 ),
-                items: country
-                    .map((item) => DropdownMenuItem<String>(
-                          value: item,
-                          child: Text(
-                            item,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ))
-                    .toList(),
-                value: selectedValue,
-                onChanged: (value) {
-                  setState(() {
-                    selectedValue = value as String;
-                    profileController.residenceFiscall = selectedValue!;
-
-                    print("huuuuuuuuuuuuuuum : " +
-                        profileController.residenceFiscall);
-                  });
-                },
-                icon: const Icon(
-                  Icons.arrow_forward_ios_outlined,
-                ),
-                iconSize: 14,
-                iconEnabledColor: Color(0xFF524D69),
-                iconDisabledColor: Colors.grey,
-                buttonHeight: 50,
-                buttonWidth: 160,
-                buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                buttonDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(
-                    color: Colors.black26,
-                  ),
-                  color: Color(0xFFBAAB90),
-                ),
-                buttonElevation: 2,
-                itemHeight: 40,
-                itemPadding: const EdgeInsets.only(left: 14, right: 14),
-                dropdownMaxHeight: 200,
-                dropdownWidth: 200,
-                dropdownPadding: null,
-                dropdownDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(14),
-                  color: Color(0xFFBAAB90),
-                ),
-                dropdownElevation: 8,
-                scrollbarRadius: const Radius.circular(40),
-                scrollbarThickness: 6,
-                scrollbarAlwaysShow: true,
-                offset: const Offset(-20, 0),
+                //Add more decoration as you want here
+                //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
               ),
+              isExpanded: true,
+              hint: profileController.residenceFiscall != ""
+                  ? Text(profileController.residenceFiscall)
+                  : const Text(
+                      'Select your country',
+                      style: TextStyle(fontSize: 14),
+                    ),
+              icon: const Icon(
+                Icons.arrow_drop_down,
+                color: Colors.black45,
+              ),
+              iconSize: 30,
+              buttonHeight: 60,
+              buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+              dropdownDecoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              items: country
+                  .map((item) => DropdownMenuItem<String>(
+                        value: item,
+                        child: Text(
+                          item,
+                          style: const TextStyle(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
+                  .toList(),
+              validator: (value) {
+                if (profileController.residenceFiscall != "") {
+                } else if (value == null) {
+                  return 'Please select your country.';
+                }
+              },
+              onChanged: (value) {
+                setState(() {
+                  selectedValue = value as String;
+                  if (profileController.residenceFiscall == "") {
+                    profileController.residenceFiscall = selectedValue!;
+                    
+                    prefs!.setString('residenceFiscale', profileController.residenceFiscall);
+                  }
+                });
+              },
+              onSaved: (value) {
+
+                selectedValue = value.toString();
+              },
             ),
             SizedBox(
               height: 20,
@@ -177,22 +199,46 @@ class _OnboardPageState extends State<OnboardPage> {
             TextButton(
               // ignore: prefer_const_constructors
               onPressed: () {
-                // profileController.userToken == null
-                //     ? test.authentifyUser().then((value) {
-                //         profileController.userToken = value;
-                //       })
-                //     : null;
+                FutureBuilder(
+                    future: ahfu(),
+                    builder: (context, snapshot) {
+                      // return DashboardPage();
+
+                      if (snapshot.hasData) {
+                        prefs!.setString('userID', profileController.userToken!.id);
+
+                        print("ça marche ?");
+                        return DashboardPage();
+                      } else if (snapshot.hasError) {
+                        print("fuuu error");
+                        return DashboardPage();
+                      } else {
+                        print("fuuu deuxieme error");
+                        return DashboardPage();
+                      }
+                    });
+                // test.authentifyUser().then((value) {
+                //   profileController.userToken = value;
+                //   print("valuuuue : " + value.id.toString());
+                // });
 
                 // saveUserToken().then(((value) {
+                //   print("ben ben ben : " + profileController.userToken!.id);
                 //   prefs!.setString('userID', profileController.userToken!.id);
-                //   print(prefs!.getString('userID'));
+                //   prefs!.setString(
+                //       'residenceFiscal', profileController.residenceFiscall);
+                //   print("whyyyyyy : " +
+                //       prefs!.getString('residenceFiscal').toString());
                 // }));
-
+                // print(profileController.residenceFiscall);
+                // print(profileController.userToken!.id);
                 // prefs!.setString('userID', profileController.userToken!.id);
-                print(prefs!.getString('userID'));
+                // print(prefs!.getString('userID'));
+                // print("resiresiresi : " +
+                //     prefs!.getString('residenceFiscal').toString());
+                // print("ididididid : " + prefs!.getString('userID').toString());
 
                 print("teeeeeeeest");
-                print(profileController.userToken?.id);
                 Get.to(DashboardPage());
               },
               child: Text("Next", style: TextStyle(color: Color(0xFF524D69))),

@@ -1,0 +1,360 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:inwealth/utils/translations.dart';
+import 'package:inwealth/view/marital_page.dart';
+import 'package:inwealth/view/onboard_page.dart';
+import 'package:inwealth/controller/langue_controller.dart';
+import 'dashboard_page.dart';
+
+class ProjectFrPage extends StatefulWidget {
+  ProjectFrPage({Key? key}) : super(key: key);
+
+  @override
+  State<ProjectFrPage> createState() => _ProjectFrPageState();
+}
+
+class _ProjectFrPageState extends State<ProjectFrPage> {
+  String? selectedValue;
+
+
+
+
+
+  final List<String> locality = [
+    'Autres',
+    'BTP',
+    'Hotellerie',
+    'Industrie',
+    'Informatique',
+    'Negoce et distribution',
+    'restauration',
+    'santé',
+    'services'
+  ];
+
+  final List<String> type = [
+    'Commercial real estate',
+    'Rental invesment',
+    'Secondary residence',
+  ];
+
+  final List<String> genderItems = [
+    'Male',
+    'Female',
+  ];
+
+  bool isChecked = false;
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+
+    List<String> country = [
+      'France'.tr,
+      'Suisse'.tr,
+      'Belgique'.tr,
+      'Luxembourg'.tr,
+      'Monaco'.tr,
+      'Royaume-Uni'.tr,
+      'Russie'.tr,
+      'Italie'.tr,
+      'Espagne'.tr,
+      'Allemagne'.tr
+    ];
+  
+    print("fuuu flutter");
+    print(AppLocalizations.of(context)?.translate('France', 0)) ;
+    return Scaffold(
+      appBar: AppBar(
+        // backgroundColor: Color(0xFF665840),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image(
+              image: AssetImage(profileController.residenceFiscall == "France"
+                  ? "assets/images/france.png"
+                  : profileController.residenceFiscall == "United Kingdom"
+                      ? "assets/royaume-uni.png"
+                      : "assets/images/switzerland.png"),
+              height: 40,
+              width: 40,
+            ),
+            // SizedBox(width: 80,),
+            const Align(
+              alignment: Alignment.center,
+              child: Center(
+                child: Text(
+                  "INWEALTH",
+                  style: TextStyle(
+                      fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
+                      color: Color(0xFF524D69)),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 40,
+            ),
+          ],
+        ),
+        centerTitle: true,
+        backgroundColor: Color(0xFFBAAB90),
+      ),
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 60),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(height: 60,),
+                Text("First information"),
+          
+                const SizedBox(height: 30),
+                DropdownButtonFormField2(
+                  decoration: InputDecoration(
+                    isDense: true,
+                    contentPadding: EdgeInsets.zero,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  isExpanded: true,
+                  hint: profileController.locality != ""
+                      ? Text(profileController.locality)
+                      : const Text(
+                          'Select your business segment',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                  icon: const Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.black45,
+                  ),
+                  iconSize: 30,
+                  buttonHeight: 60,
+                  buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                  dropdownDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  items: locality
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  validator: (value) {
+                    if (profileController.secteurActivite != "") {
+                    } else if (value == null) {
+                      return 'Please select your business segment.';
+                    }
+                  },
+                  onChanged: (value) {
+                    setState(() {
+                      selectedValue = value as String;
+                      profileController.secteurActivite = selectedValue!;
+                    });
+                  },
+                  onSaved: (value) {
+                    selectedValue = value.toString();
+                  },
+                ),
+                const SizedBox(height: 30),
+          
+                TextFormField(
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 20,
+                    ),
+                    hintText: 'Enter Your valuation.',
+                    hintStyle: const TextStyle(fontSize: 14),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (profileController.valorisation != "") {
+                    } else if (value == null) {
+                      return 'Please select your valuation.';
+                    }
+                  },
+                  onChanged: (value) {
+                    setState(() {
+                      selectedValue = value as String;
+                      profileController.valorisation = selectedValue!;
+                    });
+                  },
+                  onSaved: (value) {
+                    selectedValue = value.toString();
+                  },
+                ),
+                const SizedBox(height: 30),
+                              DropdownButtonFormField2(
+                  decoration: InputDecoration(
+                    isDense: true,
+                    contentPadding: EdgeInsets.zero,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  isExpanded: true,
+                  hint: profileController.locality != ""
+                      ? Text(profileController.locality)
+                      : const Text(
+                          'Un changement de résidence est il prévu ?',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                  icon: const Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.black45,
+                  ),
+                  iconSize: 30,
+                  buttonHeight: 60,
+                  buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                  dropdownDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  items: country
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  validator: (value) {
+                    if (profileController.changementResi != "") {
+                    } else if (value == null) {
+                      return 'Please select your business segment.';
+                    }
+                  },
+                  onChanged: (value) {
+                    setState(() {
+                      selectedValue = value as String;
+                      profileController.changementResi = selectedValue!;
+                    });
+                  },
+                  onSaved: (value) {
+                    selectedValue = value.toString();
+                  },
+                ),
+                // Row(
+                //   children: [
+                //     Expanded(
+                //       child: const Text(
+                //         'Un changement de résidence est il prévu ?',
+                //         style: TextStyle(fontSize: 14),
+                //       ),
+                //     ),
+                //     Expanded(
+                //       child: Checkbox(
+                //           value: profileController.haveChild != false
+                //               ? profileController.haveChild
+                //               : isChecked,
+                //           onChanged: (bool? value) {
+                //             setState(() {
+                //               profileController.haveChild = value!;
+                //               isChecked = value;
+                //             });
+                //           }),
+                //     ),
+                //   ],
+                // ),
+                const SizedBox(height: 30),
+                                            DropdownButtonFormField2(
+                  decoration: InputDecoration(
+                    isDense: true,
+                    contentPadding: EdgeInsets.zero,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  isExpanded: true,
+                  hint: profileController.locality != ""
+                      ? Text(profileController.locality)
+                      : const Text(
+                          'Avez vous un élément étranger dans votre situation ?',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                  icon: const Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.black45,
+                  ),
+                  iconSize: 30,
+                  buttonHeight: 60,
+                  buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                  dropdownDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  items: country
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  validator: (value) {
+                    if (profileController.elementEtranger != "") {
+                    } else if (value == null) {
+                      return 'Please select your business segment.';
+                    }
+                  },
+                  onChanged: (value) {
+                    setState(() {
+                      selectedValue = value as String;
+                      profileController.elementEtranger = selectedValue!;
+                    });
+                  },
+                  onSaved: (value) {
+                    selectedValue = value.toString();
+                  },
+                ),
+          
+                const SizedBox(height: 30),
+                TextButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                    }
+                    print(profileController.locality);
+                    Get.to(MaritalPage());
+                  },
+                  child: const Text('Next'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      // Expanded(
+      //   child: ListView.separated(
+      //     itemCount: 25,
+      //     separatorBuilder: (BuildContext context, int index) => const Divider(),
+      //     itemBuilder: (BuildContext context, int index) {
+      //       return ListTile(
+      //         title: Text("test")
+      //       );
+      //     },
+      //   ),
+      // ),
+    );
+  }
+}

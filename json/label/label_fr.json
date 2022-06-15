@@ -1,4 +1,15 @@
 {
+    "France": "France",
+    "Suisse": "Swiss",
+    "Belgique": "Belgium",
+    "Luxembourg": "Luxemburg",
+    "Monaco": "Monaco",
+    "Royaume-Uni": "United Kingdom",
+    "Russie": "Russia",
+    "Italie": "Italy",
+    "Espagne": "Spain",
+    "Allemagne": "Germany",
+    
     "projet": "Projets",
     "iSolution": "Solutions Internationales"
 }
