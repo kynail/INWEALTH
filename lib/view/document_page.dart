@@ -142,10 +142,10 @@ class _DocumentPageState extends State<DocumentPage> {
                   children: [
                     Image(
                       image: AssetImage(
-                          profileController.residenceFiscall == "France"
+                          profileController.residenceFiscall == "france"
                               ? "assets/images/france.png"
                               : profileController.residenceFiscall ==
-                                      "United Kingdom"
+                                      "uk"
                                   ? "assets/royaume-uni.png"
                                   : "assets/images/switzerland.png"),
                       height: 40,

@@ -42,7 +42,7 @@ class _MaritalPageState extends State<MaritalPage> {
   final List<String> maritalSta = [
     'divorced',
     'in civil partnership',
-    'married',
+    'marie',
     'single',
     'widowed'
   ];
@@ -86,9 +86,9 @@ class _MaritalPageState extends State<MaritalPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Image(
-              image: AssetImage(profileController.residenceFiscall == "France"
+              image: AssetImage(profileController.residenceFiscall == "france"
                   ? "assets/images/france.png"
-                  : profileController.residenceFiscall == "United Kingdom"
+                  : profileController.residenceFiscall == "uk"
                       ? "assets/royaume-uni.png"
                       : "assets/images/switzerland.png"),
               height: 40,
@@ -351,7 +351,7 @@ class _MaritalPageState extends State<MaritalPage> {
                   },
                 ),
                 const SizedBox(height: 30),
-                profileController.maritalStatus == "married"
+                profileController.maritalStatus == "marie"
                     ? TextFormField(
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
@@ -376,12 +376,12 @@ class _MaritalPageState extends State<MaritalPage> {
                         },
                       )
                     : Container(),
-                profileController.maritalStatus == "married"
+                profileController.maritalStatus == "marie"
                     ? Container(
                         height: 30,
                       )
                     : Container(),
-                profileController.maritalStatus == "married"
+                profileController.maritalStatus == "marie"
                     ? DropdownButtonFormField2(
                         decoration: InputDecoration(
                           //Add isDense true and zero Padding.
@@ -445,13 +445,13 @@ class _MaritalPageState extends State<MaritalPage> {
                         },
                       )
                     : Container(),
-                profileController.maritalStatus == "married"
+                profileController.maritalStatus == "marie"
                     ? Container(
                         height: 20,
                       )
                     : Container(),
                 // const SizedBox(height: 30),
-                profileController.maritalStatus == "married"
+                profileController.maritalStatus == "marie"
                     ? Row(
                         children: [
                           Expanded(

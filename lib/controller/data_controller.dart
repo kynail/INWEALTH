@@ -39,8 +39,9 @@ class DataController extends GetxController {
     // "chargeDontImpot":int.parse(profileController.netRessources),
     "ValorisationSteGroupe":int.parse(profileController.financialBank),
     "secteurActivite":profileController.secteurActivite,
-    "detentionImmoExploitation":profileController.immoExploitation,
-    "groupe":profileController.formeJuridique
+    "detentionImmoExploitation":profileController.immobilierExploitation,
+    "groupe":profileController.ifHolding,
+    "formeJuridique":profileController.formeJuridique
     })
     .then(
         (response) => UserTokenTransfert.fromJson(jsonDecode(response.body)));

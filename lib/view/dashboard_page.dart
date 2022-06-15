@@ -179,9 +179,9 @@ class _DashboardPageState extends State<DashboardPage> {
                 builder: (context, snapshot) {
                   return Image(
                     image: AssetImage(profileController.residenceFiscall ==
-                            "France"
+                            "france"
                         ? "assets/images/france.png"
-                        : profileController.residenceFiscall == "United Kingdom"
+                        : profileController.residenceFiscall == "uk"
                             ? "assets/royaume-uni.png"
                             : "assets/images/switzerland.png"),
                     height: 40,

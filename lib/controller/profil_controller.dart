@@ -20,9 +20,11 @@ class ProfilController extends GetxController {
   String changementResi = "";
   String elementEtranger = "";
   String secteurActivite = "";
-  String immoExploitation = "";
   bool groupe = false;
   String formeJuridique = "";
+  bool ifHolding = false;
+  bool ifImmoExploit = false;
+  String immobilierExploitation = "";
 
   //projet uk
   String locality = "";

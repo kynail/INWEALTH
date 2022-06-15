@@ -143,9 +143,9 @@ class _MeetingPageState extends State<MeetingPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image(
-                image: AssetImage(profileController.residenceFiscall == "France"
+                image: AssetImage(profileController.residenceFiscall == "france"
                     ? "assets/images/france.png"
-                    : profileController.residenceFiscall == "United Kingdom"
+                    : profileController.residenceFiscall == "uk"
                         ? "assets/royaume-uni.png"
                         : "assets/images/switzerland.png"),
                 height: 40,
