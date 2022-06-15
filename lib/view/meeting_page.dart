@@ -36,8 +36,20 @@ final expertController = Get.put(ExpertController());
 class _MeetingPageState extends State<MeetingPage> {
   static String username = 'kadage.eg@gmail.com';
   static String mdp = 'miedbvbxobfjojzw';
-
+  Color purp1 = Color(0xFF5E5B74);
+  Color purp2 = Color(0xFF272243);
+  Color gold1 = Color(0xFFD5C6AC);
+  Color gold2 = Color(0xFFBAAB90);
+  Color gold3 = Color(0xFF97876A);
   final _formKey = GlobalKey<FormState>();
+  
+  int _currentIndex2 = 0;
+
+    void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex2 = index;
+    });
+  }
 
   // Future<File> _downloadDocument(DocumentCubit documentCubit, int iff) async {
   //   setState(() {
@@ -139,6 +151,7 @@ class _MeetingPageState extends State<MeetingPage> {
                 height: 40,
                 width: 40,
               ),
+
               // SizedBox(width: 80,),
               const Align(
                 alignment: Alignment.center,
@@ -160,208 +173,241 @@ class _MeetingPageState extends State<MeetingPage> {
           centerTitle: true,
           backgroundColor: const Color(0xFFBAAB90),
         ) : null,
-        body: Column(
-          children: [
-            Text("calendrier !"),
-            // Container(height: 50,
-            // child: Text("expert"),),
-            SfCalendar(
-              view: CalendarView.week,
-              dataSource: MeetingDataSource(_getDataSource()),
-              timeSlotViewSettings:
-                  (TimeSlotViewSettings(startHour: 9, endHour: 18)),
-              monthViewSettings: MonthViewSettings(
-                  appointmentDisplayMode:
-                      MonthAppointmentDisplayMode.appointment),
-              // loadMoreWidgetBuilder: (BuildContext context, LoadMoreCallback loadMoreCallback) {
-              //   return FutureBuilder(
-              //     future: loadMoreCallback(),
-              //     builder: (context, snapshot) {
-              //       return Container(
-              //         alignment: Alignment.center,
-              //         child:
-              //       )
-              //     }
-              //     );
-              // },
-            ),
-            TextButton(
-                onPressed: () => {
-                  expertController.appbarCalendar = true,
-                  Get.to(TakeMeeting())},
-                child: Text('Take appointment')),
-            Container(
-              height: 10,
-            ),
-            profileController.date != null
-                ? TextButton(onPressed: _onClick, child: Text('Go to visio'))
-                : Container(),
-            Container(
-              height: 10,
-            ),
-            profileController.date != null
-                ? TextButton(
-                    onPressed: () => showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                              content: Stack(
-                            children: <Widget>[
-                              Positioned(
-                                  right: -40,
-                                  top: -40,
-                                  child: Container(
-                                    height: 300,
-                                    width: 300,
-                                    child: InkResponse(
-                                      onTap: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  )),
-                              Form(
-                                  key: _formKey,
-                                  child: Container(
-                                    height: 500,
-                                    width: 300,
-                                    child: ListView(
-                                      children: [
-                                        Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            Padding(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 20,),
+              Text("calendrier !"),
+              // Container(height: 50,
+              // child: Text("expert"),),
+              SfCalendar(
+                view: CalendarView.week,
+                dataSource: MeetingDataSource(_getDataSource()),
+                timeSlotViewSettings:
+                    (TimeSlotViewSettings(startHour: 9, endHour: 18)),
+                monthViewSettings: MonthViewSettings(
+                    appointmentDisplayMode:
+                        MonthAppointmentDisplayMode.appointment),
+                // loadMoreWidgetBuilder: (BuildContext context, LoadMoreCallback loadMoreCallback) {
+                //   return FutureBuilder(
+                //     future: loadMoreCallback(),
+                //     builder: (context, snapshot) {
+                //       return Container(
+                //         alignment: Alignment.center,
+                //         child:
+                //       )
+                //     }
+                //     );
+                // },
+              ),
+
+              TextButton(
+                  onPressed: () => {
+                    expertController.appbarCalendar = true,
+                    Get.to(TakeMeeting())},
+                  child: Text('Take appointment')),
+              Container(
+                height: 10,
+              ),
+              profileController.date != null
+                  ? TextButton(onPressed: _onClick, child: Text('Go to visio'))
+                  : Container(),
+              Container(
+                height: 10,
+              ),
+              profileController.date != null
+                  ? TextButton(
+                      onPressed: () => showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                                content: Stack(
+                              children: <Widget>[
+                                Positioned(
+                                    right: -40,
+                                    top: -40,
+                                    child: Container(
+                                      height: 300,
+                                      width: 300,
+                                      child: InkResponse(
+                                        onTap: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    )),
+                                Form(
+                                    key: _formKey,
+                                    child: Container(
+                                      height: 500,
+                                      width: 300,
+                                      child: ListView(
+                                        children: [
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: <Widget>[
+                                              Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: TextFormField(
+                                                    decoration: InputDecoration(
+                                                        hintText: "Nom"),
+                                                    controller: expertController
+                                                        .controllerName,
+                                                  )),
+                                              Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: TextFormField(
+                                                    decoration: InputDecoration(
+                                                        hintText: "Prénom"),
+                                                    controller: expertController
+                                                        .controllerSurame,
+                                                  )),
+                                              Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: TextFormField(
+                                                    decoration: InputDecoration(
+                                                        hintText: "Job"),
+                                                    controller: expertController
+                                                        .controllerJob,
+                                                  )),
+                                              Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: TextFormField(
+                                                    decoration: InputDecoration(
+                                                        hintText: "Email"),
+                                                    controller: expertController
+                                                        .controllerEmail,
+                                                  )),
+                                              Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: TextFormField(
+                                                    decoration: InputDecoration(
+                                                        hintText: "Numéro"),
+                                                    controller: expertController
+                                                        .controllerNumber,
+                                                  )),
+                                              Padding(
                                                 padding: EdgeInsets.all(8.0),
-                                                child: TextFormField(
-                                                  decoration: InputDecoration(
-                                                      hintText: "Nom"),
-                                                  controller: expertController
-                                                      .controllerName,
-                                                )),
-                                            Padding(
+                                                child: TextButton(
+                                                    onPressed: () {
+                                                      if (_formKey.currentState!
+                                                          .validate()) {
+                                                        _formKey.currentState!
+                                                            .save();
+                                                        print(expertController
+                                                            .controllerEmail
+                                                            .text);
+                                                        print(expertController
+                                                            .controllerName.text);
+                                                        sendEmail(
+                                                            expertController
+                                                                .controllerEmail
+                                                                .text,
+                                                            expertController
+                                                                .controllerName
+                                                                .text,
+                                                            profileController
+                                                                .date!);
+                                                        final snackbar = SnackBar(
+                                                          content:
+                                                              Text("Mail send"),
+                                                        );
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                                snackbar);
+                                                      }
+                                                    },
+                                                    child: Text("Send email",
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                        ))),
+                                              ),
+                                              Padding(
                                                 padding: EdgeInsets.all(8.0),
-                                                child: TextFormField(
-                                                  decoration: InputDecoration(
-                                                      hintText: "Prénom"),
-                                                  controller: expertController
-                                                      .controllerSurame,
-                                                )),
-                                            Padding(
-                                                padding: EdgeInsets.all(8.0),
-                                                child: TextFormField(
-                                                  decoration: InputDecoration(
-                                                      hintText: "Job"),
-                                                  controller: expertController
-                                                      .controllerJob,
-                                                )),
-                                            Padding(
-                                                padding: EdgeInsets.all(8.0),
-                                                child: TextFormField(
-                                                  decoration: InputDecoration(
-                                                      hintText: "Email"),
-                                                  controller: expertController
-                                                      .controllerEmail,
-                                                )),
-                                            Padding(
-                                                padding: EdgeInsets.all(8.0),
-                                                child: TextFormField(
-                                                  decoration: InputDecoration(
-                                                      hintText: "Numéro"),
-                                                  controller: expertController
-                                                      .controllerNumber,
-                                                )),
-                                            Padding(
-                                              padding: EdgeInsets.all(8.0),
-                                              child: TextButton(
-                                                  onPressed: () {
-                                                    if (_formKey.currentState!
-                                                        .validate()) {
-                                                      _formKey.currentState!
-                                                          .save();
-                                                      print(expertController
-                                                          .controllerEmail
-                                                          .text);
-                                                      print(expertController
-                                                          .controllerName.text);
-                                                      sendEmail(
-                                                          expertController
-                                                              .controllerEmail
-                                                              .text,
-                                                          expertController
-                                                              .controllerName
-                                                              .text,
-                                                          profileController
-                                                              .date!);
-                                                      final snackbar = SnackBar(
-                                                        content:
-                                                            Text("Mail send"),
-                                                      );
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              snackbar);
-                                                    }
-                                                  },
-                                                  child: Text("Send email",
-                                                      style: TextStyle(
-                                                        color: Colors.black,
-                                                      ))),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.all(8.0),
-                                              child: TextButton(
-                                                  onPressed: () {
-                                                    if (_formKey.currentState!
-                                                        .validate()) {
-                                                      _formKey.currentState!
-                                                          .save();
-                                                      print(expertController
-                                                          .controllerName.text);
-                                                      print(expertController
-                                                          .controllerNumber
-                                                          .text);
-                                                      List<String> number = [
-                                                        expertController
+                                                child: TextButton(
+                                                    onPressed: () {
+                                                      if (_formKey.currentState!
+                                                          .validate()) {
+                                                        _formKey.currentState!
+                                                            .save();
+                                                        print(expertController
+                                                            .controllerName.text);
+                                                        print(expertController
                                                             .controllerNumber
-                                                            .text
-                                                      ];
-                                                      _sendSMS(
+                                                            .text);
+                                                        List<String> number = [
                                                           expertController
-                                                              .controllerName
-                                                              .text,
-                                                          number,
-                                                          profileController
-                                                              .date!);
-                                                      // sendEmail(controllerEmail.text, controllerName.text, documentCubit);
-                                                      final snackbar = SnackBar(
-                                                        content:
-                                                            Text("SMS send"),
-                                                      );
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              snackbar);
-                                                    }
-                                                  },
-                                                  child: Text("Send SMS",
-                                                      style: TextStyle(
-                                                        color: Colors.black,
-                                                      ))),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ))
-                            ],
-                          ));
-                        }),
-                    child: Text('Send invitation to expert'))
-                : Container(),
-            Container(
-              height: 10,
+                                                              .controllerNumber
+                                                              .text
+                                                        ];
+                                                        _sendSMS(
+                                                            expertController
+                                                                .controllerName
+                                                                .text,
+                                                            number,
+                                                            profileController
+                                                                .date!);
+                                                        // sendEmail(controllerEmail.text, controllerName.text, documentCubit);
+                                                        final snackbar = SnackBar(
+                                                          content:
+                                                              Text("SMS send"),
+                                                        );
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                                snackbar);
+                                                      }
+                                                    },
+                                                    child: Text("Send SMS",
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                        ))),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ))
+                              ],
+                            ));
+                          }),
+                      child: Text('Send invitation to expert'))
+                  : Container(),
+              Container(
+                height: 10,
+              ),
+            ],
+          ),
+        ),
+                bottomNavigationBar: expertController.appbarCalendar != false 
+                ? BottomNavigationBar(
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home!',
+              backgroundColor: gold1,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.picture_as_pdf),
+              label: 'Business',
+              backgroundColor: purp1,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_month),
+              label: 'Meeting',
+              backgroundColor: gold3,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+              backgroundColor: purp2,
             ),
           ],
-        ));
+          currentIndex: _currentIndex2,
+          selectedItemColor: Colors.amber[800],
+          onTap: _onItemTapped,
+        ) : null,
+        );
   }
 }
 

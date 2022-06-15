@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inwealth/view/dashboardProject_page.dart';
+import 'package:inwealth/view/infoEntreprise_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
 import 'package:inwealth/view/ressources_page.dart';
 
@@ -46,6 +47,13 @@ class _MaritalPageState extends State<MaritalPage> {
     'widowed'
   ];
 
+  final List<String> regimeMat = [
+    'Communauté réduites aux acquets',
+    'communauté universelle',
+    'participation aux acquets',
+    'séparations de biens',
+  ];
+
   final List<String> genderItems = [
     'Male',
     'Female',
@@ -57,17 +65,18 @@ class _MaritalPageState extends State<MaritalPage> {
 
   @override
   Widget build(BuildContext context) {
+
     List<String> country = [
-      AppLocalizations.of(context)?.translate('France', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Suisse', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Belgique', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Luxembourg', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Monaco', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Royaume-Uni', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Russie', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Italie', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Espagne', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('local_realEstate', 0) ?? " ",
+      'France'.tr,
+      'Suisse'.tr,
+      'Belgique'.tr,
+      'Luxembourg'.tr,
+      'Monaco'.tr,
+      'Royaume-Uni'.tr,
+      'Russie'.tr,
+      'Italie'.tr,
+      'Espagne'.tr,
+      'Allemagne'.tr
     ];
 
     return Scaffold(
@@ -228,11 +237,11 @@ class _MaritalPageState extends State<MaritalPage> {
                   dropdownDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  items: nationality
+                  items: parameters.nationality
                       .map((item) => DropdownMenuItem<String>(
-                            value: item,
+                            value: item.key,
                             child: Text(
-                              item,
+                              item.name,
                               style: const TextStyle(
                                 fontSize: 14,
                               ),
@@ -309,11 +318,11 @@ class _MaritalPageState extends State<MaritalPage> {
                   dropdownDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  items: maritalSta
+                  items: parameters.familySituations
                       .map((item) => DropdownMenuItem<String>(
-                            value: item,
+                            value: item.key,
                             child: Text(
-                              item,
+                              item.name,
                               style: const TextStyle(
                                 fontSize: 14,
                               ),
@@ -367,23 +376,108 @@ class _MaritalPageState extends State<MaritalPage> {
                         },
                       )
                     : Container(),
+                profileController.maritalStatus == "married"
+                    ? Container(
+                        height: 30,
+                      )
+                    : Container(),
+                profileController.maritalStatus == "married"
+                    ? DropdownButtonFormField2(
+                        decoration: InputDecoration(
+                          //Add isDense true and zero Padding.
+                          //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
+                          isDense: true,
+                          contentPadding: EdgeInsets.zero,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          //Add more decoration as you want here
+                          //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
+                        ),
+                        isExpanded: true,
+                        hint: profileController.maritalStatus != ""
+                            ? Text(profileController.maritalStatus)
+                            : const Text(
+                                'Select your matrimonial Regimes',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.black45,
+                        ),
+                        iconSize: 30,
+                        buttonHeight: 60,
+                        buttonPadding:
+                            const EdgeInsets.only(left: 20, right: 10),
+                        dropdownDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        items: parameters.matrimonialRegimes
+                            .map((item) => DropdownMenuItem<String>(
+                                  value: item.key,
+                                  child: Text(
+                                    item.name,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        validator: (value) {
+                          if (profileController.regimeMatrimonial != "") {
+                          } else if (value == null) {
+                            return 'Please select your matrimonial regime.';
+                          }
+                        },
+                        onChanged: (value) {
+                          setState(() {
+                            selectedValue = value as String;
+                            profileController.regimeMatrimonial =
+                                selectedValue!;
+                          });
+                        },
+                        onSaved: (value) {
+                          selectedValue = value.toString();
+                          // _formKey.currentState!.save();
+                          // profileController.maritalstatus = value.toString();
+
+                          // print(profileController.maritalstatus);
+                        },
+                      )
+                    : Container(),
+                profileController.maritalStatus == "married"
+                    ? Container(
+                        height: 20,
+                      )
+                    : Container(),
                 // const SizedBox(height: 30),
                 profileController.maritalStatus == "married"
                     ? Row(
                         children: [
-                          const Text(
-                            'Do you have children ?',
-                            style: TextStyle(fontSize: 14),
+                          Expanded(
+                            child: const Text(
+                              'Do you have children ?',
+                              style: TextStyle(fontSize: 14),
+                            ),
                           ),
-                          Checkbox(
-                              value: profileController.haveChild != false ? profileController.haveChild : isChecked,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  profileController.haveChild = value!;
-                                  isChecked = value;
-                                });
-                              }),
+                          Expanded(
+                            child: Checkbox(
+                                value: profileController.haveChild != false
+                                    ? profileController.haveChild
+                                    : isChecked,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    profileController.haveChild = value!;
+                                    isChecked = value;
+                                  });
+                                }),
+                          ),
                         ],
+                      )
+                    : Container(),
+                profileController.haveChild == true
+                    ? Container(
+                        height: 30,
                       )
                     : Container(),
                 // const SizedBox(height: 30),
@@ -412,6 +506,11 @@ class _MaritalPageState extends State<MaritalPage> {
                         },
                       )
                     : Container(),
+                profileController.haveChild == true
+                    ? Container(
+                        height: 30,
+                      )
+                    : Container(),
                 // const SizedBox(height: 30),
                 profileController.haveChild == true
                     ? TextFormField(
@@ -437,6 +536,9 @@ class _MaritalPageState extends State<MaritalPage> {
                           selectedValue = value.toString();
                         },
                       )
+                    : Container(),
+                                                            profileController.haveChild == true
+                    ? Container(height: 30,)
                     : Container(),
                 // const SizedBox(height: 30),
                 profileController.haveChild == true
@@ -470,11 +572,11 @@ class _MaritalPageState extends State<MaritalPage> {
                         dropdownDecoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        items: country
+                        items: parameters.country
                             .map((item) => DropdownMenuItem<String>(
-                                  value: item,
+                                  value: item.key,
                                   child: Text(
-                                    item,
+                                    item.name,
                                     style: const TextStyle(
                                       fontSize: 14,
                                     ),
@@ -510,7 +612,12 @@ class _MaritalPageState extends State<MaritalPage> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                     }
-                    Get.to(RessourcesPage());
+                    // if (profileController.residenceFiscall == "France") {
+                    //   Get.to(InfoEntreprisePage());
+                    // }
+                    // else {
+                      Get.to(RessourcesPage());
+                    // }
                   },
                   child: const Text('Next'),
                 ),

@@ -4,7 +4,9 @@ import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:inwealth/view/dashboardProject_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
+import 'package:inwealth/view/projectFr_page.dart';
 
 import '../view/dashboard_page.dart';
 import '../view/projet_page.dart';
@@ -38,7 +40,21 @@ class Cardhome extends StatelessWidget {
             onTap: () {
               profileController.project = project;
               print(project);
-              Get.to(ProjetPage());
+              if (profileController.project == "Purchasing real estate") {
+                if (profileController.endProject == true) {
+                  Get.to(dashboardProjectPage());
+                } else {
+                  Get.to(ProjetPage());
+                }
+              } else if (profileController.project == "Ceder son entreprise") {
+                print("if projet fini");
+                print(profileController.endProject);
+                if (profileController.endProject == true) {
+                  Get.to(dashboardProjectPage());
+                } else {
+                  Get.to(ProjectFrPage());
+                }
+              }
             },
             child: FlipCard(
               key: cardkey,

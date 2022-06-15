@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inwealth/view/dashboard_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../controller/data_controller.dart';
 import '../controller/profil_controller.dart';
 import 'dashboardProject_page.dart';
 
@@ -13,6 +15,29 @@ class financialWealth extends StatefulWidget {
 
   @override
   State<financialWealth> createState() => _financialWealthState();
+}
+
+DataController test = DataController();
+
+ahfu() {
+  test.modifUser().then((value) {
+    // profileController.userToken = value;
+    // print("valuuuue : " + value.id.toString());
+    // print("value 2 : " + profileController.userToken!.id);
+  });
+}
+
+saveEndProject() async {
+  prefs = await SharedPreferences.getInstance();
+}
+
+endproject() async {
+  saveEndProject().then(((value) {
+    prefs!.setBool('endProject', true);
+    // prefs!.setString('residenceFiscal', profileController.residenceFiscall);
+    // print("ben ben ben : " + profileController.userToken!.id);
+    // print("whyyyyyy : " + prefs!.getString('residenceFiscal').toString());
+  }));
 }
 
 class _financialWealthState extends State<financialWealth> {
@@ -26,6 +51,9 @@ class _financialWealthState extends State<financialWealth> {
   @override
   Widget build(BuildContext context) {
     int netRessources = int.parse(financialBank) - int.parse(pensionsFunds);
+
+    print("test last form");
+    print(profileController.userId);
 
     return Scaffold(
       appBar: AppBar(
@@ -133,7 +161,48 @@ class _financialWealthState extends State<financialWealth> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       profileController.finish = true;
+                      print("test test test test");
+                      print(profileController.userId);
+                      FutureBuilder(
+                          future: ahfu(),
+                          builder: (context, snapshot) {
+                            // return DashboardPage();
+
+                            if (snapshot.hasData) {
+                              prefs!.setString(
+                                  'userID', profileController.userId);
+
+                              print("ça marche ?");
+                              return DashboardPage();
+                            } else if (snapshot.hasError) {
+                              print("fuuu error");
+                              return DashboardPage();
+                            } else {
+                              print("fuuu deuxieme error");
+                              return DashboardPage();
+                            }
+                          });
                     }
+                    FutureBuilder(
+                        future: endproject(),
+                        builder: (context, snapshot) {
+                          // return DashboardPage();
+
+                          if (snapshot.hasData) {
+                            prefs!.setBool('endProject', true);
+                            // print("ça marche ?");
+                            return DashboardPage();
+                          } else if (snapshot.hasError) {
+                            print("fuuu error");
+                            return DashboardPage();
+                          } else {
+                            print("fuuu deuxieme error");
+                            return DashboardPage();
+                          }
+                        });
+                        print("if project end on end form");
+                        print(prefs!.getBool('endProject'));
+                    profileController.endProject = true;
                     Get.to(dashboardProjectPage());
                   },
                   child: const Text('Finish'),

@@ -28,6 +28,7 @@ class ExpertController extends GetxController {
   // List<String> competencies = [];
   bool docu = false;
   bool appbarCalendar = false;
+  bool appbar2 = true;
 
   final controllerName = TextEditingController();
   final controllerSurame = TextEditingController();

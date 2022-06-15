@@ -111,11 +111,11 @@ class _RessourcesPageState extends State<RessourcesPage> {
                   dropdownDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  items: wealth
+                  items: parameters.fortuneLevels
                       .map((item) => DropdownMenuItem<String>(
-                            value: item,
+                            value: item.key,
                             child: Text(
-                              item,
+                              item.name,
                               style: const TextStyle(
                                 fontSize: 14,
                               ),
