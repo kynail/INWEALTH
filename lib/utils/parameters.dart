@@ -43,6 +43,13 @@ class Parameters {
     ),
   ];
 
+  List<DataModel> purposesfr = [
+    DataModel(name: "Ceder son entreprise", key: "cederEntreprise"),
+    DataModel(name: "transmettre son entreprise à un tier", key: "france"),
+    DataModel(name: "maitriser son impot sur la fortune", key: "france"),
+    // AppLocalizations.of(context)?.translate('selling_biz', 0) ?? "humk ",
+  ];
+
   // list pays + traduction
   List<DataModel> country = [
     DataModel(name: 'France'.tr, key: "france"),
@@ -69,7 +76,6 @@ class Parameters {
     DataModel(name: 'Spanish', key: "espagne"),
     DataModel(name: 'German', key: "allemagne"),
   ];
-
 
   List<DataModel> familySituations = [
     DataModel(
@@ -281,9 +287,7 @@ class Parameters {
     DataModel(name: "Inférieur à 2 M €", key: "inf2"),
     DataModel(name: "Entre 2 et 5 M €", key: "entre2et5"),
     DataModel(name: "Entre 5 et 10 M €", key: "entre5et10"),
-    DataModel(
-        name: "Entre 10 et 20 M €", key: "entre10et20"),
+    DataModel(name: "Entre 10 et 20 M €", key: "entre10et20"),
     DataModel(name: "Supérieur à 20 M €", key: "sup20"),
   ];
-
 }

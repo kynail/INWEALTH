@@ -111,7 +111,7 @@ class _JuridiquePageState extends State<JuridiquePage> {
                           ))
                       .toList(),
                   validator: (value) {
-                    if (profileController.elementEtranger != "") {
+                    if (profileController.horizon != "") {
                     } else if (value == null) {
                       return 'Please select your horizont.';
                     }
@@ -119,7 +119,7 @@ class _JuridiquePageState extends State<JuridiquePage> {
                   onChanged: (value) {
                     setState(() {
                       selectedValue = value as String;
-                      profileController.elementEtranger = selectedValue!;
+                      profileController.horizon = selectedValue!;
                     });
                   },
                   onSaved: (value) {

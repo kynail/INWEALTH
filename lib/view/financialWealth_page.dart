@@ -25,6 +25,10 @@ ahfu() {
     // print("valuuuue : " + value.id.toString());
     // print("value 2 : " + profileController.userToken!.id);
   });
+  test.addParcours().then(((value) {
+
+  }));
+
 }
 
 saveEndProject() async {
@@ -163,25 +167,25 @@ class _financialWealthState extends State<financialWealth> {
                       profileController.finish = true;
                       print("test test test test");
                       print(profileController.userId);
-                      // FutureBuilder(
-                      //     future: ahfu(),
-                      //     builder: (context, snapshot) {
-                      //       // return DashboardPage();
+                      FutureBuilder(
+                          future: ahfu(),
+                          builder: (context, snapshot) {
+                            // return DashboardPage();
 
-                      //       if (snapshot.hasData) {
-                      //         prefs!.setString(
-                      //             'userID', profileController.userId);
+                            if (snapshot.hasData) {
+                              prefs!.setString(
+                                  'userID', profileController.userId);
 
-                      //         print("ça marche ?");
-                      //         return DashboardPage();
-                      //       } else if (snapshot.hasError) {
-                      //         print("fuuu error");
-                      //         return DashboardPage();
-                      //       } else {
-                      //         print("fuuu deuxieme error");
-                      //         return DashboardPage();
-                      //       }
-                      //     });
+                              print("ça marche ?");
+                              return DashboardPage();
+                            } else if (snapshot.hasError) {
+                              print("fuuu error");
+                              return DashboardPage();
+                            } else {
+                              print("fuuu deuxieme error");
+                              return DashboardPage();
+                            }
+                          });
                     }
                     FutureBuilder(
                         future: endproject(),

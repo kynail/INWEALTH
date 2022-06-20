@@ -8,12 +8,15 @@ import '../utils/data/user_token_transfert.dart';
 class ProfilController extends GetxController {
   String residenceFiscall = "";
   String userId = "";
+  bool endProject = false;
 
   //projet générale 
-  String project = "";
-  bool endProject = false;
   // String maritalstatus = "";
 
+  // String typeParcours = "";
+  String project = "";
+  String horizon = "";
+  String etapeParcours = "reflexion";
 
   //projet fr
   String valorisation = "";

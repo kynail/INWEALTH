@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:inwealth/controller/data_controller.dart';
 import 'package:inwealth/view/document_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -15,6 +16,36 @@ class dashboardProjectPage extends StatefulWidget {
   @override
   State<dashboardProjectPage> createState() => _dashboardProjectPageState();
 }
+
+DataController test = DataController();
+
+ThinkingController thinking = ThinkingController();
+
+ahtchoum() {
+  test.getPistes().then((value) {
+    if (thinking.think == null) {
+      thinking.think = value;
+      print("think token : " + thinking.think.toString());
+      thinking.pisteExperte = value.expertThinkings;
+      print("Piste experte : " + thinking.pisteExperte.toString());
+      thinking.pistePrioritaire = value.priorityThinkings;
+      print("Piste prioritaire : " + thinking.pisteNonPrioritaire.toString());
+      thinking.pisteNonPrioritaire = value.nonPriorityThinkings;
+      print("Piste non prioritaire : " + thinking.pisteNonPrioritaire.toString());
+
+    }
+    // thinking.piste = value.retainedThinkings[1];
+    print("test récupération pistes ok ");
+    // print(thinking.piste);
+    // thinking.piste = va
+    // profileController.userId = value.id;
+    // prefs!.setString('userID', profileController.userToken!.id);
+    // print("valuuuue : " + value.id.toString());
+    // print("value 2 : " + profileController.userToken!.id);
+  });
+}
+
+
 
 class _dashboardProjectPageState extends State<dashboardProjectPage> {
   String Project = "";
@@ -48,10 +79,20 @@ class _dashboardProjectPageState extends State<dashboardProjectPage> {
     });
   }
 
+@override
+void initState() {
+  print("humhumhumhum");
+  ahtchoum();
+  super.initState();
+  
+}
+
   @override
   Widget build(BuildContext context) {
-      final thinkingController = Get.put(ThinkingController());
-
+    print("fuuu");
+  final thinkingController = Get.put(ThinkingController());
+    
+    
     expertController.docu = false;
     expertController.appbarCalendar = false;
 
@@ -118,7 +159,6 @@ class _dashboardProjectPageState extends State<dashboardProjectPage> {
           currentIndex: _currentIndex2,
           selectedItemColor: Colors.amber[800],
           onTap: _onItemTapped,
-        )
-        );
+        ));
   }
 }

@@ -13,3 +13,31 @@ class UserTokenTransfert {
     };
   }
 }
+
+class PisteTokenTransfert {
+  final List<String> expertThinkings;
+  final List<String> priorityThinkings;
+  final List<String> nonPriorityThinkings;
+
+  const PisteTokenTransfert({
+    required this.expertThinkings,
+    required this.priorityThinkings,
+    required this.nonPriorityThinkings,
+  });
+
+  factory PisteTokenTransfert.fromJson(Map<String, dynamic> json) {
+    return PisteTokenTransfert(
+      expertThinkings: List.from(json["pisteExperte"]),
+      priorityThinkings: List.from(json["pistePrioritaire"]),
+      nonPriorityThinkings: List.from(json["pisteNonPrioritaire"]),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "pisteExperte": expertThinkings,
+      "pistePrioritaire": priorityThinkings,
+      "pisteNonPrioritaire": nonPriorityThinkings,
+    };
+  }
+}

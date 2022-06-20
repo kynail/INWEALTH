@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:get/get.dart';
+import 'package:inwealth/utils/data/user_token_transfert.dart';
 
 class Thinking extends Equatable {
   int id = 0;
@@ -18,7 +19,35 @@ class Thinking extends Equatable {
   List<Object?> get props => [id, name, url, key];
 }
 
+
+// abstract class RetainedThinkingTransformer {
+//   static PisteTokenTransfert toPisteTokenTransfert(
+//     List<Thinking> thinkings,
+//   ) {
+//     List<String> retainedThinkings = thinkings
+//         .map((thinking) => thinkings
+//             .find((element) => element.id == thinking.id)
+//             ?.key)
+//         .where((element) => element != null)
+//         .map((element) => element!)
+//         .toList();
+
+//     return PisteTokenTransfert(retainedThinkings: retainedThinkings);
+//   }
+// }
+
+
+
 class ThinkingController extends GetxController {
+
+  List<String> selectedPiste = [];
+  List<String> pisteExperte = [];
+  List<String> pisteNonPrioritaire = [];
+  List<String> pistePrioritaire = [];
+  PisteTokenTransfert? think;
+  bool already = false;
+  List<String> pisteRecu = [];
+  List<String> selectThink = [];
 
   List<Thinking> thinkings = [
     Thinking(
@@ -166,5 +195,7 @@ class ThinkingController extends GetxController {
           "https://www.canva.com/design/DAEptpd0TyU/nvS2xq0DJAzcyHXyBoeYjw/watch?utm_content=DAEptpd0TyU&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink",
     ),
   ];
+
+
 
 }

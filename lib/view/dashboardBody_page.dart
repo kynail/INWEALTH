@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:inwealth/controller/data_controller.dart';
 import 'package:inwealth/model/list.dart';
+import 'package:inwealth/view/dashboardProject_page.dart';
 import 'package:inwealth/view/document_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
 import 'package:inwealth/view/pisteReflexion_page.dart';
@@ -32,6 +34,36 @@ class dashboardBodyPage extends StatefulWidget {
   State<dashboardBodyPage> createState() => _dashboardBodyPageState();
 }
 
+DataController test = DataController();
+
+ahtchoum() {
+  test.getPistes().then((value) {
+    if (thinking.think == null) {
+      thinking.think = value;
+      print("think token : " + thinking.think.toString());
+      thinking.pisteExperte = value.expertThinkings;
+      print("Piste experte : " + thinking.pisteExperte.toString());
+      thinking.pistePrioritaire = value.priorityThinkings;
+      print("Piste prioritaire : " + thinking.pisteNonPrioritaire.toString());
+      thinking.pisteNonPrioritaire = value.nonPriorityThinkings;
+      print("Piste non prioritaire : " + thinking.pisteNonPrioritaire.toString());
+
+    }
+      print("Piste experte : " + thinking.pisteExperte.toString());
+
+    // thinking.piste = value.retainedThinkings[1];
+    print("test récupération pistes ok ");
+    // print(thinking.piste);
+    // thinking.piste = va
+    // profileController.userId = value.id;
+    // prefs!.setString('userID', profileController.userToken!.id);
+    // print("valuuuue : " + value.id.toString());
+    // print("value 2 : " + profileController.userToken!.id);
+  });
+}
+
+
+
 class _dashboardBodyPageState extends State<dashboardBodyPage> {
   Color purp1 = Color(0xFF5E5B74);
   Color purp2 = Color(0xFF272243);
@@ -39,6 +71,15 @@ class _dashboardBodyPageState extends State<dashboardBodyPage> {
   Color gold2 = Color(0xFFBAAB90);
   Color gold3 = Color(0xFF97876A);
   Expert? expert = expertController.experts[1];
+  
+  @override
+void initState() {
+  print("humhumhumhum");
+  ahtchoum();
+  super.initState();
+  
+}
+  
   @override
   Widget build(BuildContext context) {
     expertController.docu = false;
@@ -184,7 +225,10 @@ class _dashboardBodyPageState extends State<dashboardBodyPage> {
               color: gold3,
             ),
           ),
-          onPressed: () => Get.to(pisteReflexion()),
+          onPressed: () {
+            print("clic bouton think : " + thinking.pisteExperte.toString());
+            Get.to(pisteReflexion());
+            },
         )
       ]),
     );
