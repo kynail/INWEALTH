@@ -13,8 +13,10 @@ import '../view/projet_page.dart';
 
 class Cardhome extends StatelessWidget {
   final String project;
+  final String keys;
   Cardhome({
     required this.project,
+    required this.keys,
     Key? key,
   }) : super(key: key);
 
@@ -38,15 +40,15 @@ class Cardhome extends StatelessWidget {
           padding: const EdgeInsets.all(15),
           child: GestureDetector(
             onTap: () {
-              profileController.project = project;
-              print(project);
+              profileController.project = keys;
+              print(keys);
               if (profileController.project == "Purchasing real estate") {
                 if (profileController.endProject == true) {
                   Get.to(dashboardProjectPage());
                 } else {
                   Get.to(ProjetPage());
                 }
-              } else if (profileController.project == "Ceder son entreprise") {
+              } else if (profileController.project == "cederEntreprise") {
                 print("if projet fini");
                 print(profileController.endProject);
                 if (profileController.endProject == true) {

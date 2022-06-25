@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -41,8 +43,8 @@ class ExpertController extends GetxController {
           id: 1,
           name: "Sébastien Pagano",
           url: "assets/experts/sebastien-pagano.jpeg",
-          legislations: ["France"],
-          competencies: ["Donation", "Assurance-vie", "Art"],
+          legislations: const ["France"],
+          competencies: const ["Donation", "Assurance-vie", "Art"],
     ),
   };
 }

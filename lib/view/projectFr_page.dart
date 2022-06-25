@@ -7,6 +7,7 @@ import 'package:inwealth/controller/parameters.dart';
 import 'package:inwealth/utils/data/data_model.dart';
 import 'package:inwealth/utils/parameters.dart';
 import 'package:inwealth/utils/translations.dart';
+import 'package:inwealth/view/juridique_page.dart';
 import 'package:inwealth/view/marital_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
 import 'package:inwealth/controller/langue_controller.dart';
@@ -91,9 +92,9 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Image(
-              image: AssetImage(profileController.residenceFiscall == "France"
+              image: AssetImage(profileController.residenceFiscall == "france"
                   ? "assets/images/france.png"
-                  : profileController.residenceFiscall == "United Kingdom"
+                  : profileController.residenceFiscall == "uk"
                       ? "assets/royaume-uni.png"
                       : "assets/images/switzerland.png"),
               height: 40,
@@ -244,7 +245,7 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                   ),
                   items: parameters.country
                       .map((item) => DropdownMenuItem<String>(
-                            value: item.name,
+                            value: item.key,
                             child: Text(
                               item.name,
                               style: const TextStyle(
@@ -320,7 +321,7 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                   ),
                   items: parameters.country
                       .map((item) => DropdownMenuItem<String>(
-                            value: item.name,
+                            value: item.key,
                             child: Text(
                               item.name,
                               style: const TextStyle(
@@ -353,7 +354,7 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                       _formKey.currentState!.save();
                     }
                     print(profileController.locality);
-                    Get.to(MaritalPage());
+                    Get.to(JuridiquePage());
                   },
                   child: const Text('Next'),
                 ),

@@ -25,6 +25,10 @@ ahfu() {
     // print("valuuuue : " + value.id.toString());
     // print("value 2 : " + profileController.userToken!.id);
   });
+  test.addParcours().then(((value) {
+
+  }));
+
 }
 
 saveEndProject() async {
@@ -62,9 +66,9 @@ class _financialWealthState extends State<financialWealth> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Image(
-              image: AssetImage(profileController.residenceFiscall == "France"
+              image: AssetImage(profileController.residenceFiscall == "france"
                   ? "assets/images/france.png"
-                  : profileController.residenceFiscall == "United Kingdom"
+                  : profileController.residenceFiscall == "uk"
                       ? "assets/royaume-uni.png"
                       : "assets/images/switzerland.png"),
               height: 40,

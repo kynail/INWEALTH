@@ -39,11 +39,50 @@ class DataController extends GetxController {
     // "chargeDontImpot":int.parse(profileController.netRessources),
     "ValorisationSteGroupe":int.parse(profileController.financialBank),
     "secteurActivite":profileController.secteurActivite,
-    "detentionImmoExploitation":profileController.immoExploitation,
-    "groupe":profileController.formeJuridique
+    "detentionImmoExploitation":profileController.immobilierExploitation,
+    "groupe":profileController.ifHolding,
+    "formeJuridique":profileController.formeJuridique
     })
     .then(
         (response) => UserTokenTransfert.fromJson(jsonDecode(response.body)));
   }
+
+  Future<UserTokenTransfert> addParcours() async {
+    print("test" + profileController.userId);
+
+    String path = "/parcours/save/"+ profileController.userId;
+    // DataProvider.post(path, body: {"residenceFiscale":"France", "nationalite":"france"}).then((response) 
+    // {UserTokenTransfert.fromJson(jsonDecode(response.body));
+    // profileController.userId = response.body;});
+    // print(profileController.userId);
+    return DataProvider.post(path, body: {
+    "typeParcours":profileController.project,  
+    "horizon":profileController.horizon,
+    "etapeParcours":profileController.etapeParcours,
+    })
+    .then(
+        (response) => UserTokenTransfert.fromJson(jsonDecode(response.body)));
+  }
+
+    Future<PisteTokenTransfert> getPistes() async {
+    print("test" + profileController.userId);
+
+    String path = "/user/listePiste/"+ profileController.userId;
+    // DataProvider.post(path, body: {"residenceFiscale":"France", "nationalite":"france"}).then((response) 
+    // {UserTokenTransfert.fromJson(jsonDecode(response.body));
+    // profileController.userId = response.body;});
+    // print(profileController.userId);
+    return DataProvider.fetch(path)
+    .then(
+        (response) => PisteTokenTransfert.fromJson(jsonDecode(response.body)));
+  }
+
+  Future<PisteTokenTransfert> getParcoursThinkings(
+      String userGuid) async {
+    String path = "/user/listePiste/$userGuid";
+    return DataProvider.fetch(path).then((response) =>
+        PisteTokenTransfert.fromJson(jsonDecode(response.body)));
+  }
+
 
 }

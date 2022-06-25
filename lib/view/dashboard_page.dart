@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:inwealth/controller/parameters.dart';
+import 'package:inwealth/controller/pisteReflexion_controller.dart';
 import 'package:inwealth/model/list.dart';
+import 'package:inwealth/utils/data/data_model.dart';
 import 'package:inwealth/view/dashboardBody_page.dart';
 import 'package:inwealth/view/meeting_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
@@ -94,6 +96,7 @@ class _DashboardPageState extends State<DashboardPage> {
   // }
 
   final profileController = Get.put(ProfilController());
+  final thinkingController = Get.put(ThinkingController());
 
   getprojet2() {}
 
@@ -121,7 +124,6 @@ class _DashboardPageState extends State<DashboardPage> {
     }
   }
 
-  @override
   // void initState() {
   //   super.initState();
   //   getResiFisc()
@@ -147,12 +149,7 @@ class _DashboardPageState extends State<DashboardPage> {
     ];
 
 
-    List<String> _purposesfr = [
-      "Ceder son entreprise",
-      "transmettre son entreprise à un tier",
-      "maitriser son impot sur la fortune",
-      // AppLocalizations.of(context)?.translate('selling_biz', 0) ?? "humk ",
-    ];
+
 
     // }
     // print("humhumhum2 : " + resific.toString());
@@ -179,9 +176,9 @@ class _DashboardPageState extends State<DashboardPage> {
                 builder: (context, snapshot) {
                   return Image(
                     image: AssetImage(profileController.residenceFiscall ==
-                            "France"
+                            "france"
                         ? "assets/images/france.png"
-                        : profileController.residenceFiscall == "United Kingdom"
+                        : profileController.residenceFiscall == "uk"
                             ? "assets/royaume-uni.png"
                             : "assets/images/switzerland.png"),
                     height: 40,
@@ -254,8 +251,8 @@ class _DashboardPageState extends State<DashboardPage> {
                               // print("test: " + _purposes[index]);
                               // print("hum: " + _purposes[1]);
                               return  profileController.residenceFiscall == "United Kingdom"
-                              ? Cardhome(project: _purposesuk[index])
-                              : Cardhome(project: _purposesfr[index]);
+                              ? Cardhome(project: _purposesuk[index], keys: _purposesuk[index])
+                              : Cardhome(project: parameters.purposesfr[index].name, keys: parameters.purposesfr[index].key);
                               // profileController.residenceFiscall == "United Kingdom" 
                                 
                             },
