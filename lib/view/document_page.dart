@@ -133,7 +133,8 @@ class _DocumentPageState extends State<DocumentPage> {
   Widget build(BuildContext context) {
     // _checkPermission();
     // loadPdf();
-    return Scaffold(
+    return 
+    Scaffold(
         appBar: expertController.docu != false
             ? AppBar(
                 // backgroundColor: Color(0xFF665840),
@@ -227,7 +228,7 @@ class _DocumentPageState extends State<DocumentPage> {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: 'Home!',
+              label: 'Home',
               backgroundColor: gold1,
             ),
             BottomNavigationBarItem(
@@ -249,6 +250,7 @@ class _DocumentPageState extends State<DocumentPage> {
           currentIndex: _currentIndex2,
           selectedItemColor: Colors.amber[800],
           onTap: _onItemTapped,
-        ) :null);
+        ) :null
+        );
   }
 }

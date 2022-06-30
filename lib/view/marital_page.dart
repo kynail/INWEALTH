@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inwealth/view/dashboardProject_page.dart';
+import 'package:inwealth/view/financialWealth_page.dart';
 import 'package:inwealth/view/infoEntreprise_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
 import 'package:inwealth/view/ressources_page.dart';
@@ -65,7 +66,6 @@ class _MaritalPageState extends State<MaritalPage> {
 
   @override
   Widget build(BuildContext context) {
-
     List<String> country = [
       'France'.tr,
       'Suisse'.tr,
@@ -537,8 +537,10 @@ class _MaritalPageState extends State<MaritalPage> {
                         },
                       )
                     : Container(),
-                                                            profileController.haveChild == true
-                    ? Container(height: 30,)
+                profileController.haveChild == true
+                    ? Container(
+                        height: 30,
+                      )
                     : Container(),
                 // const SizedBox(height: 30),
                 profileController.haveChild == true
@@ -616,7 +618,11 @@ class _MaritalPageState extends State<MaritalPage> {
                     //   Get.to(InfoEntreprisePage());
                     // }
                     // else {
+                    if (profileController.residenceFiscall == "france")
                       Get.to(RessourcesPage());
+                    else
+                      Get.to(financialWealth());
+
                     // }
                   },
                   child: const Text('Next'),

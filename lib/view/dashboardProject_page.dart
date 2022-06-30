@@ -50,7 +50,7 @@ ahtchoum() {
 class _dashboardProjectPageState extends State<dashboardProjectPage> {
   String Project = "";
   int _currentIndex = 1;
-  int _currentIndex2 = 0;
+  // int profileController.current      Index = 0;
 
   bool _isLoading = false;
   String Country = "";
@@ -75,7 +75,7 @@ class _dashboardProjectPageState extends State<dashboardProjectPage> {
 
   void _onItemTapped(int index) {
     setState(() {
-      _currentIndex2 = index;
+      profileController.currentIndex = index;
     });
   }
 
@@ -132,12 +132,12 @@ void initState() {
           centerTitle: true,
           backgroundColor: const Color(0xFFBAAB90),
         ),
-        body: _widgetOptions.elementAt(_currentIndex2),
+        body: profileController.widgetOptions.elementAt(profileController.currentIndex),
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: 'Home!',
+              label: 'Home',
               backgroundColor: gold1,
             ),
             BottomNavigationBarItem(
@@ -156,7 +156,7 @@ void initState() {
               backgroundColor: purp2,
             ),
           ],
-          currentIndex: _currentIndex2,
+          currentIndex: profileController.currentIndex,
           selectedItemColor: Colors.amber[800],
           onTap: _onItemTapped,
         ));

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, must_be_immutable
+
 import 'package:equatable/equatable.dart';
 import 'package:get/get.dart';
 import 'package:inwealth/utils/data/user_token_transfert.dart';

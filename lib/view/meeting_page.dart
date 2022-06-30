@@ -51,20 +51,6 @@ class _MeetingPageState extends State<MeetingPage> {
     });
   }
 
-  // Future<File> _downloadDocument(DocumentCubit documentCubit, int iff) async {
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-
-  //   File document = await SecurityService.getUserGuid()
-  //       .then((userGuid) => documentCubit.saveDocument(userGuid!));
-
-  //   setState(() {
-  //     _isLoading = false;
-  //   });
-  //   if (iff == 1) await Share.shareFiles(["${document.path}"]);
-  //   return document;
-  // }
 
   sendEmail(String email, String nom, DateTime datetest) async {
     final smtpServer = gmail(username, mdp);
@@ -384,7 +370,7 @@ class _MeetingPageState extends State<MeetingPage> {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: 'Home!',
+              label: 'Home',
               backgroundColor: gold1,
             ),
             BottomNavigationBarItem(

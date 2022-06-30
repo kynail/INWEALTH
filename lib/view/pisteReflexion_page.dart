@@ -149,7 +149,11 @@ class _pisteReflexionState extends State<pisteReflexion> {
               ),
             ),
             TextButton(
-                onPressed: () => Get.to(dashboardProjectPage()),
+                
+                onPressed: () {
+                        profileController.currentIndex = 0;
+                        Get.to(dashboardProjectPage());
+                },
                 child: const Text("Return to home page"))
           ],
         ),
