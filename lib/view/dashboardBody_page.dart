@@ -163,6 +163,12 @@ void initState() {
         TextButton(
             onPressed: () {
               expertController.docu = true;
+              print("ok");
+              // setState(() {
+              //   profileController.currentIndex = 1;
+              //           // Get.to(dashboardProjectPage());
+              // });
+              //   profileController.widgetOptions.elementAt(1);
               Get.to(DocumentPage());
             },
             child: Row(children: [

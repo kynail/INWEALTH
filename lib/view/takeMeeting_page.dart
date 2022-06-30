@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:inwealth/view/dashboardProject_page.dart';
 import 'package:inwealth/view/meeting_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
 import 'package:inwealth/view/ressources_page.dart';
@@ -94,8 +95,8 @@ class _TakeMeetingState extends State<TakeMeeting> {
                         // if (_formKey.currentState!.validate()) {
                         //   _formKey.currentState!.save();
                         // }
-                      
-                        Get.to(MeetingPage());
+                        profileController.currentIndex = 2;
+                        Get.to(dashboardProjectPage());
                       },
                       child: const Text('Take a meeting and choose an expert',
                       style: TextStyle(color: Colors.black),),

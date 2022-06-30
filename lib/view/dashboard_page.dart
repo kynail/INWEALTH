@@ -140,11 +140,11 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     List<String> _purposesuk = [
       AppLocalizations.of(context)?.translate('local_realEstate', 0) ??
-          "Purchasing real estate.",
+          "Purchasing real estate",
       AppLocalizations.of(context)?.translate('restructuring', 0) ??
-          "Restructuring the compagny.",
+          "Restructuring the compagny",
       AppLocalizations.of(context)?.translate('selling_biz', 0) ??
-          "Selling your business.",
+          "Selling your business",
       // AppLocalizations.of(context)?.translate('selling_biz', 0) ?? "humk ",
     ];
 
@@ -250,7 +250,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             itemBuilder: (BuildContext context, int index) {
                               // print("test: " + _purposes[index]);
                               // print("hum: " + _purposes[1]);
-                              return  profileController.residenceFiscall == "United Kingdom"
+                              return  profileController.residenceFiscall == "uk"
                               ? Cardhome(project: _purposesuk[index], keys: _purposesuk[index])
                               : Cardhome(project: parameters.purposesfr[index].name, keys: parameters.purposesfr[index].key);
                               // profileController.residenceFiscall == "United Kingdom" 

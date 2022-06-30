@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:inwealth/model/profile.dart';
+import 'package:inwealth/view/dashboardBody_page.dart';
+import 'package:inwealth/view/document_page.dart';
+import 'package:inwealth/view/meeting_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/data/user_token_transfert.dart';
@@ -28,7 +31,7 @@ class ProfilController extends GetxController {
   bool ifHolding = false;
   bool ifImmoExploit = false;
   String immobilierExploitation = "";
-
+  int currentIndex = 0;
   //projet uk
   String locality = "";
   String type = "";
@@ -61,6 +64,15 @@ class ProfilController extends GetxController {
   String financialBank = "0";
   String pensionsFunds = "0";
 
+
+  List<Widget> widgetOptions = <Widget>[
+    dashboardBodyPage(),
+    DocumentPage(),
+    MeetingPage(),
+    Text(
+      'Index 3: Settings',
+    ),
+  ];
 
   
   UserTokenTransfert? userToken;

@@ -41,7 +41,10 @@ class DataController extends GetxController {
     "secteurActivite":profileController.secteurActivite,
     "detentionImmoExploitation":profileController.immobilierExploitation,
     "groupe":profileController.ifHolding,
-    "formeJuridique":profileController.formeJuridique
+    "formeJuridique":profileController.formeJuridique,
+    "locality":profileController.locality,
+    "type":profileController.type,
+    "marketValue":profileController.marketValue,
     })
     .then(
         (response) => UserTokenTransfert.fromJson(jsonDecode(response.body)));
@@ -63,6 +66,7 @@ class DataController extends GetxController {
     .then(
         (response) => UserTokenTransfert.fromJson(jsonDecode(response.body)));
   }
+  
 
     Future<PisteTokenTransfert> getPistes() async {
     print("test" + profileController.userId);
