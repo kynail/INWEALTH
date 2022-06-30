@@ -22,43 +22,75 @@ import 'controller/store_controller.dart';
 void main() {
   // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
+ThemeData _darkTheme = ThemeData(
+    accentColor: Color(0xff121421),
+    brightness: Brightness.dark,
+    primaryColor: Color(0xff121421),
+    backgroundColor: Color(0xff121421),
+    buttonTheme: ButtonThemeData(
+      buttonColor: Colors.amber,
+      disabledColor: Colors.grey,
+    ));
+
+ThemeData _lightTheme = ThemeData(
+    accentColor: Colors.white,
+    brightness: Brightness.light,
+    appBarTheme: AppBarTheme(color: Colors.white),
+    primaryColor: Colors.white,
+    buttonTheme: ButtonThemeData(
+      buttonColor: Colors.white,
+      disabledColor: Colors.grey,
+    ));
+
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+
+  RxBool _isLightTheme = false.obs;
+
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  _saveThemeStatus() async {
+    SharedPreferences pref = await _prefs;
+    pref.setBool('theme', _isLightTheme.value);
+  }
+
+  _getThemeStatus() async {
+    var _isLight = _prefs.then((SharedPreferences prefs) {
+      return prefs.getBool('theme') != null ? prefs.getBool('theme') : true;
+    }).obs;
+    _isLightTheme.value = (await _isLight.value)!;
+    Get.changeThemeMode(_isLightTheme.value ? ThemeMode.light : ThemeMode.dark);
+  }
+
+  MyApp() {
+    _getThemeStatus();
+  }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      builder: (context, child) {
-        return GetMaterialApp(
-          translations: Languages(),
-          locale: Get.deviceLocale,
-          fallbackLocale: const Locale('en', 'US'),
-          title: 'INWEALTH',
-          initialBinding: StoreBinding(),
-          theme: ThemeData(
-            // This is the theme of your application.
-            //
-            // Try running your application with "flutter run". You'll see the
-            // application has a blue toolbar. Then, without quitting the app, try
-            // changing the primarySwatch below to Colors.green and then invoke
-            // "hot reload" (press "r" in the console where you ran "flutter run",
-            // or simply save your changes to "hot reload" in a Flutter IDE).
-            // Notice that the counter didn't reset back to zero; the application
-            // is not restarted.
-          ),
-          home: const MyHomePage(title: 'Flutter Demo Home Page'),
-          // routes: {
-          //   'onboard': (context) => OnboardPage(),
-          //   'dashboard': (context) => DashboardPage(),
-          // },
-        );
-      }
-    );
+        designSize: const Size(375, 812),
+        builder: (context, child) {
+          return GetMaterialApp(
+            translations: Languages(),
+            locale: Get.deviceLocale,
+            fallbackLocale: const Locale('en', 'US'),
+            title: 'iNwealth',
+            initialBinding: StoreBinding(),
+            theme: _lightTheme,
+            darkTheme: _darkTheme,
+            themeMode: ThemeMode.system,
+            debugShowCheckedModeBanner: false,
+            home: const MyHomePage(title: 'Flutter Demo Home Page'),
+            // routes: {
+            //   'onboard': (context) => OnboardPage(),
+            //   'dashboard': (context) => DashboardPage(),
+            // },
+          );
+        });
   }
 }
 
@@ -102,8 +134,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-
-
   final storeController = Get.find<StoreController>();
   final profileController = Get.put(ProfilController());
 
@@ -114,7 +144,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
       if (userID != null && profileController.userId == "") {
         profileController.userId = userID.toString();
-
       }
     });
 
@@ -146,7 +175,6 @@ class _MyHomePageState extends State<MyHomePage> {
       print("oh no ");
       profileController.residenceFiscall = resiFisc.toString();
     }
-
   }
 
   @override
@@ -162,20 +190,17 @@ class _MyHomePageState extends State<MyHomePage> {
               future: getResiFisc(),
               builder: (context, snapshot) {
                 print('UserID = ' + userID.toString());
-                print('Residence Fiscale = ' +
-                    resiFisc.toString());
-                                    print('Residence Fiscale22 = ' +
+                print('Residence Fiscale = ' + resiFisc.toString());
+                print('Residence Fiscale22 = ' +
                     profileController.residenceFiscall.toString());
-            // FlutterNativeSplash.remove();
+                // FlutterNativeSplash.remove();
 
-                  return userID == null &&
-                          profileController.residenceFiscall == ""
-                      ? OnboardPage()
-                      : DashboardPage();
-
+                return userID == null &&
+                        profileController.residenceFiscall == ""
+                    ? OnboardPage()
+                    : DashboardPage();
               }));
         },
-        
         '/next': (BuildContext context) {
           return const CupertinoPageScaffold(
             navigationBar: CupertinoNavigationBar(
