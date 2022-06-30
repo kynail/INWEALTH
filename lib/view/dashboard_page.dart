@@ -3,11 +3,13 @@ import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:inwealth/controller/parameters.dart';
 import 'package:inwealth/controller/pisteReflexion_controller.dart';
 import 'package:inwealth/model/list.dart';
 import 'package:inwealth/utils/data/data_model.dart';
+import 'package:inwealth/utils/theme/widgets/category_boxes.dart';
 import 'package:inwealth/view/dashboardBody_page.dart';
 import 'package:inwealth/view/meeting_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
@@ -25,9 +27,25 @@ import '../utils/customCard.dart';
 import '../utils/translations.dart';
 import 'package:inwealth/view/projet_page.dart';
 
+RxBool _isLightTheme = false.obs;
+
+Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+_saveThemeStatus() async {
+  SharedPreferences pref = await _prefs;
+  pref.setBool('theme', _isLightTheme.value);
+}
+
+_getThemeStatus() async {
+  var _isLight = _prefs.then((SharedPreferences prefs) {
+    return prefs.getBool('theme') != null ? prefs.getBool('theme') : true;
+  }).obs;
+  _isLightTheme.value = (await _isLight.value)!;
+  Get.changeThemeMode(_isLightTheme.value ? ThemeMode.light : ThemeMode.dark);
+}
+
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
-
 
   @override
   _DashboardPageState createState() => _DashboardPageState();
@@ -115,9 +133,8 @@ class _DashboardPageState extends State<DashboardPage> {
       // print("humhumhum : " + resific.toString());
       profileController.residenceFiscall = resific.toString();
     }
-    getResiFisc()
-        .then(((value) => endproject = prefs?.getBool('endProject')));
-        if (endproject != null) {
+    getResiFisc().then(((value) => endproject = prefs?.getBool('endProject')));
+    if (endproject != null) {
       print("humhumhum : " + endproject.toString());
       profileController.endProject = endproject!;
       print("profile endproject : " + profileController.endProject.toString());
@@ -148,9 +165,6 @@ class _DashboardPageState extends State<DashboardPage> {
       // AppLocalizations.of(context)?.translate('selling_biz', 0) ?? "humk ",
     ];
 
-
-
-
     // }
     // print("humhumhum2 : " + resific.toString());
     if (resific != null && profileController.residenceFiscall == "") {
@@ -158,72 +172,110 @@ class _DashboardPageState extends State<DashboardPage> {
       profileController.residenceFiscall = resific.toString();
     }
     // print("resifical profilecontrol : " + profileController.residenceFiscall);
-    print("resific dashboard : "+ profileController.residenceFiscall);
+    print("resific dashboard : " + profileController.residenceFiscall);
     print("user id dashboard : " + profileController.userId);
     // print("user id2 dashboard : " + profileController.userToken!.id);
 
-
-        // print("test dashboard");
-        // print(profileController.userId);
+    // print("test dashboard");
+    // print(profileController.userId);
     return Scaffold(
+      // backgroundColor: Color(0xff121421),
       appBar: AppBar(
         // backgroundColor: Color(0xFF665840),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            const Align(
+              alignment: Alignment.center,
+              child: Center(
+                child: Text(
+                  "iNwealth",
+                  style: TextStyle(
+                      fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
+                      color: Colors.white,
+                      fontSize: 34,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
             FutureBuilder(
                 future: ahtchoum(),
                 builder: (context, snapshot) {
                   return Image(
-                    image: AssetImage(profileController.residenceFiscall ==
-                            "france"
-                        ? "assets/images/france.png"
-                        : profileController.residenceFiscall == "uk"
-                            ? "assets/royaume-uni.png"
-                            : "assets/images/switzerland.png"),
+                    image: AssetImage(
+                        profileController.residenceFiscall == "france"
+                            ? "assets/images/france.png"
+                            : profileController.residenceFiscall == "uk"
+                                ? "assets/royaume-uni.png"
+                                : "assets/images/switzerland.png"),
                     height: 40,
                     width: 40,
                   );
                 }),
 
             // SizedBox(width: 80,),
-            const Align(
-              alignment: Alignment.center,
-              child: Center(
-                child: Text(
-                  "INWEALTH",
-                  style: TextStyle(
-                      fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                      color: Color(0xFF524D69)),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 40,
-            ),
+
+            // const SizedBox(
+            //   width: 40,
+            // ),
           ],
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xFFBAAB90),
+        // backgroundColor: Color(0xff121421),
+
+        // backgroundColor: const Color(0xFFFFFFFF),
+        // backgroundColor: const Color(0xFFBAAB90),
       ),
       // This is handled by the search bar itself.
       resizeToAvoidBottomInset: false,
       body: profileController.finish != false
           ? _widgetOptions.elementAt(_currentIndex2)
           : Container(
-              decoration: const BoxDecoration(color: Color(0xFFFFFFFF)),
+              // decoration: const BoxDecoration(color: Color(0xFFFFFFFF)),
               child: Stack(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 30),
+                    padding: const EdgeInsets.only(top: 10),
                     child: ListView(
                       children: <Widget>[
-                        const SizedBox(
-                          height: 5,
-                        ),
                         Container(
-                          height: 40,
+                          height: 50.h,
+                          child: ListView(
+                            physics: BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              SizedBox(
+                                width: 28.w,
+                              ),
+                              CategoryBoxes(
+                                text: "Dirigeant",
+                                onPressed: (value) => print(value),
+                              ),
+                              CategoryBoxes(
+                                text: "Entreprise",
+                                onPressed: (value) => print(value),
+                              ),
+                              CategoryBoxes(
+                                text: "Privé",
+                                onPressed: (value) => print(value),
+                              ),
+                              CategoryBoxes(
+                                text: "Immobilier",
+                                onPressed: (value) => print(value),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+
+                        // const SizedBox(
+                        //   height: 25,
+                        // ),
+                        Container(
+                          height: 20,
                           child: Padding(
                             padding: const EdgeInsets.only(left: 10),
                             child: Text(
@@ -231,10 +283,10 @@ class _DashboardPageState extends State<DashboardPage> {
                                       ?.translate('projet', 0) ??
                                   "Project.",
                               textAlign: TextAlign.left,
-                              style: const TextStyle(
-                                  fontSize: 28,
-                                  color: const Color(0xFF4E4965),
-                                  fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  color: Color(0xff515979),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14.w),
                             ),
                           ),
                         ),
@@ -250,17 +302,21 @@ class _DashboardPageState extends State<DashboardPage> {
                             itemBuilder: (BuildContext context, int index) {
                               // print("test: " + _purposes[index]);
                               // print("hum: " + _purposes[1]);
-                              return  profileController.residenceFiscall == "uk"
-                              ? Cardhome(project: _purposesuk[index], keys: _purposesuk[index])
-                              : Cardhome(project: parameters.purposesfr[index].name, keys: parameters.purposesfr[index].key);
-                              // profileController.residenceFiscall == "United Kingdom" 
-                                
+                              return profileController.residenceFiscall == "uk"
+                                  ? Cardhome(
+                                      project: _purposesuk[index],
+                                      keys: _purposesuk[index])
+                                  : Cardhome(
+                                      project:
+                                          parameters.purposesfr[index].name,
+                                      keys: parameters.purposesfr[index].key);
+                              // profileController.residenceFiscall == "United Kingdom"
                             },
                             scrollDirection: Axis.horizontal,
                           ),
                         ),
                         Container(
-                          height: 50,
+                          height: 30,
                           child: Padding(
                             padding: const EdgeInsets.only(left: 10),
                             child: Text(
@@ -268,17 +324,16 @@ class _DashboardPageState extends State<DashboardPage> {
                                       ?.translate('iSolution', 0) ??
                                   "International Solutions",
                               textAlign: TextAlign.left,
-                              style: const TextStyle(
-                                fontSize: 25,
-                                color: const Color(0xFF524D69),
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: TextStyle(
+                                  color: Color(0xff515979),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14.w),
                             ),
                           ),
                         ),
                         Container(
                           height: 240,
-                          margin: const EdgeInsets.symmetric(vertical: 1.0),
+                          // margin: const EdgeInsets.symmetric(vertical: 0.0),
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: const <Widget>[
@@ -291,7 +346,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 height: 5,
                                 width: 0,
                               ),
-                              Card2home(),
+                              Card3home(),
                               SizedBox(
                                 height: 5,
                                 width: 0,
@@ -300,12 +355,9 @@ class _DashboardPageState extends State<DashboardPage> {
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          height: 25,
-                        ),
                         Container(
-                          decoration:
-                              const BoxDecoration(color: Color(0xFFFFFFF)),
+                          // decoration:
+                          // const BoxDecoration(color: Color(0xFFFFFFF)),
                           child: Column(children: <Widget>[
                             Container(
                               child: Row(children: <Widget>[
@@ -346,7 +398,28 @@ class _DashboardPageState extends State<DashboardPage> {
                             ),
                             const Text(
                               'INwealth ? Connectez-vous',
+                              style: TextStyle(color: Colors.white),
                               textAlign: TextAlign.center,
+                            ),
+                            Obx(
+                              () => Text(
+                                'Click on switch to change to ${_isLightTheme.value ? 'Dark' : 'Light'} theme',
+                              ),
+                            ),
+                            ObxValue(
+                              (data) => Switch(
+                                value: _isLightTheme.value,
+                                onChanged: (val) {
+                                  _isLightTheme.value = val;
+                                  Get.changeThemeMode(
+                                    _isLightTheme.value
+                                        ? ThemeMode.light
+                                        : ThemeMode.dark,
+                                  );
+                                  _saveThemeStatus();
+                                },
+                              ),
+                              false.obs,
                             ),
                           ]),
                         )

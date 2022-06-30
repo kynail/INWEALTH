@@ -14,9 +14,6 @@ class ProfilController extends GetxController {
   bool endProject = false;
 
   //projet générale 
-  // String maritalstatus = "";
-
-  // String typeParcours = "";
   String project = "";
   String horizon = "";
   String etapeParcours = "reflexion";
@@ -32,6 +29,7 @@ class ProfilController extends GetxController {
   bool ifImmoExploit = false;
   String immobilierExploitation = "";
   int currentIndex = 0;
+
   //projet uk
   String locality = "";
   String type = "";

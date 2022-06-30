@@ -3,8 +3,11 @@ import 'package:get/get.dart';
 class Languages extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
-
         'fr': {
+          //vvvv
+
+
+          //
           "France": "France",
           "Suisse": "Swiss",
           "Belgique": "Belgium",
@@ -18,7 +21,6 @@ class Languages extends Translations {
           "projet": "Projets",
           "iSolution": "Solutions Internationales"
         },
-
         'en': {
           "France": "France",
           "Suisse": "Swiss",

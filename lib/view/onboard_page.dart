@@ -84,14 +84,14 @@ class _OnboardPageState extends State<OnboardPage> {
     List<String> country = [
       AppLocalizations.of(context)?.translate('France', 0) ?? " ",
       AppLocalizations.of(context)?.translate('Suisse', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Belgique', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Luxembourg', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Monaco', 0) ?? " ",
       AppLocalizations.of(context)?.translate('Royaume-Uni', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Russie', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Italie', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Espagne', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('local_realEstate', 0) ?? " ",
+      // AppLocalizations.of(context)?.translate('Belgique', 0) ?? " ",
+      // AppLocalizations.of(context)?.translate('Luxembourg', 0) ?? " ",
+      // AppLocalizations.of(context)?.translate('Monaco', 0) ?? " ",
+      // AppLocalizations.of(context)?.translate('Russie', 0) ?? " ",
+      // AppLocalizations.of(context)?.translate('Italie', 0) ?? " ",
+      // AppLocalizations.of(context)?.translate('Espagne', 0) ?? " ",
+      // AppLocalizations.of(context)?.translate('local_realEstate', 0) ?? " ",
     ];
     String? selectedValue;
 
@@ -105,7 +105,7 @@ class _OnboardPageState extends State<OnboardPage> {
           alignment: Alignment.center,
           child: Center(
             child: Text(
-              "INWEALTH",
+              "iNwealth",
               style: TextStyle(
                   fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
                   color: Color(0xFF524D69)),
@@ -114,7 +114,9 @@ class _OnboardPageState extends State<OnboardPage> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFFBAAB90),
+        backgroundColor: Color(0xFFFFFFFF),
+        // backgroundColor: Color(0xFFBAAB90),
+
       ),
       body: Center(
         child: Column(

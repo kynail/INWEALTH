@@ -80,7 +80,7 @@ class _DetailPageState extends State<DetailPage> {
                         height: 280.w,
                         width: 280.w,
                         decoration: BoxDecoration(
-                          color: Colors.blue,
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(
                             fit: BoxFit.cover,
