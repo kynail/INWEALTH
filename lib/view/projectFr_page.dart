@@ -23,10 +23,7 @@ class ProjectFrPage extends StatefulWidget {
 class _ProjectFrPageState extends State<ProjectFrPage> {
   String? selectedValue;
 
-
   Parameters parameters = Parameters();
-
-
 
   final List<String> locality = [
     'Autres',
@@ -57,7 +54,6 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
 
   @override
   Widget build(BuildContext context) {
-
     // List<DataModel> country = [
     // DataModel(name: 'France'.tr, key: "france"),
     // DataModel(name: 'Suisse'.tr, key: "suisse"),
@@ -82,15 +78,28 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
     //   // 'Espagne'.tr,
     //   // 'Allemagne'.tr
     // ];
-  
+
     print("fuuu flutter");
-    print(AppLocalizations.of(context)?.translate('France', 0)) ;
+    print(AppLocalizations.of(context)?.translate('France', 0));
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Color(0xFF665840),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            const Align(
+              alignment: Alignment.center,
+              child: Center(
+                child: Text(
+                  "iNwealth",
+                  style: TextStyle(
+                      fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
+                      fontSize: 34,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
             Image(
               image: AssetImage(profileController.residenceFiscall == "france"
                   ? "assets/images/france.png"
@@ -99,27 +108,20 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                       : "assets/images/switzerland.png"),
               height: 40,
               width: 40,
-            ),
+            )
+
             // SizedBox(width: 80,),
-            const Align(
-              alignment: Alignment.center,
-              child: Center(
-                child: Text(
-                  "INWEALTH",
-                  style: TextStyle(
-                      fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                      color: Color(0xFF524D69)),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 40,
-            ),
+
+            // const SizedBox(
+            //   width: 40,
+            // ),
           ],
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFFBAAB90),
+        // backgroundColor: Color(0xff121421),
+
+        // backgroundColor: const Color(0xFFFFFFFF),
+        // backgroundColor: const Color(0xFFBAAB90),
       ),
       body: Form(
         key: _formKey,
@@ -129,9 +131,17 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(height: 60,),
+                Container(
+                  height: 30,
+                ),
+                            Image(
+              image: AssetImage("assets/iNw_app.png")
+            ),
+                Container(
+                  height: 60,
+                ),
                 Text("First information"),
-          
+
                 const SizedBox(height: 30),
                 DropdownButtonFormField2(
                   decoration: InputDecoration(
@@ -179,7 +189,8 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                     setState(() {
                       selectedValue = value as String;
                       profileController.secteurActivite = selectedValue!;
-                      print("secteur act :  " + profileController.secteurActivite);
+                      print("secteur act :  " +
+                          profileController.secteurActivite);
                     });
                   },
                   onSaved: (value) {
@@ -187,7 +198,7 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                   },
                 ),
                 const SizedBox(height: 30),
-          
+
                 TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
@@ -218,7 +229,7 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                   },
                 ),
                 const SizedBox(height: 30),
-                              DropdownButtonFormField2(
+                DropdownButtonFormField2(
                   decoration: InputDecoration(
                     isDense: true,
                     contentPadding: EdgeInsets.zero,
@@ -264,7 +275,8 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                     setState(() {
                       selectedValue = value as String;
                       profileController.changementResi = selectedValue!;
-                      print("changement residence ? : " + profileController.changementResi);
+                      print("changement residence ? : " +
+                          profileController.changementResi);
                     });
                   },
                   onSaved: (value) {
@@ -294,7 +306,7 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                 //   ],
                 // ),
                 const SizedBox(height: 30),
-                                            DropdownButtonFormField2(
+                DropdownButtonFormField2(
                   decoration: InputDecoration(
                     isDense: true,
                     contentPadding: EdgeInsets.zero,
@@ -346,7 +358,7 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                     selectedValue = value.toString();
                   },
                 ),
-          
+
                 const SizedBox(height: 30),
                 TextButton(
                   onPressed: () {

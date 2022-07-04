@@ -45,6 +45,7 @@ class _ProjetPageState extends State<ProjetPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("testhumomfg");
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Color(0xFF665840),
@@ -68,7 +69,8 @@ class _ProjetPageState extends State<ProjetPage> {
                   "INWEALTH",
                   style: TextStyle(
                       fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                      color: Color(0xFF524D69)),
+                      // color: Color(0xFF524D69)
+                      ),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -79,7 +81,7 @@ class _ProjetPageState extends State<ProjetPage> {
           ],
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFFBAAB90),
+        // backgroundColor: Color(0xFFBAAB90),
       ),
       body: Form(
         key: _formKey,
@@ -88,6 +90,13 @@ class _ProjetPageState extends State<ProjetPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Container(
+                height: 30,
+              ),
+              Image(image: AssetImage("assets/iNw_app.png")),
+                                          Container(
+                  height: 30,
+                ),
               Text("First information"),
               // TextFormField(
               //   decoration: InputDecoration(

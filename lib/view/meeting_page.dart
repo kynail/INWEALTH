@@ -146,7 +146,8 @@ class _MeetingPageState extends State<MeetingPage> {
                     "INWEALTH",
                     style: TextStyle(
                         fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                        color: Color(0xFF524D69)),
+                        // color: Color(0xFF524D69)
+                        ),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -157,7 +158,7 @@ class _MeetingPageState extends State<MeetingPage> {
             ],
           ),
           centerTitle: true,
-          backgroundColor: const Color(0xFFBAAB90),
+          // backgroundColor: const Color(0xFFBAAB90),
         ) : null,
         body: SingleChildScrollView(
           child: Column(

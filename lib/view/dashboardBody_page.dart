@@ -82,6 +82,8 @@ void initState() {
   
   @override
   Widget build(BuildContext context) {
+    print("testhumomfg");
+
     expertController.docu = false;
     // expertController.appbarCalendar = false;
     return Scaffold(
@@ -92,9 +94,9 @@ void initState() {
         Container(
           width: 400,
           decoration: BoxDecoration(
-            color: gold1,
+            // color: gold1,
             border: Border.all(
-              color: purp1,
+              // color: purp1,
               width: 1,
             ),
             borderRadius: BorderRadius.circular(8),
@@ -151,7 +153,7 @@ void initState() {
               Container(
                 child: Icon(
                   Icons.chevron_right,
-                  color: gold2,
+                  // color: gold2,
                 ),
               )
             ],

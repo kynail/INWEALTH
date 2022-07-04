@@ -27,12 +27,12 @@ class _RessourcesPageState extends State<RessourcesPage> {
   final profileController = Get.put(ProfilController());
   bool isChecked = false;
   String? selectedValue;
-  String grossAnual = "0"; 
+  String grossAnual = "0";
   String loan = "0";
 
   @override
   Widget build(BuildContext context) {
-  int netRessources = int.parse(grossAnual) - int.parse(loan) ;
+    int netRessources = int.parse(grossAnual) - int.parse(loan);
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Color(0xFF665840),
@@ -53,10 +53,11 @@ class _RessourcesPageState extends State<RessourcesPage> {
               alignment: Alignment.center,
               child: Center(
                 child: Text(
-                  "INWEALTH",
+                  "iNwealth",
                   style: TextStyle(
-                      fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                      color: Color(0xFF524D69)),
+                    fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
+                    // color: Color(0xFF524D69)
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -67,7 +68,7 @@ class _RessourcesPageState extends State<RessourcesPage> {
           ],
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFFBAAB90),
+        // backgroundColor: Color(0xFFBAAB90),
       ),
       body: Form(
         key: _formKey,
@@ -77,6 +78,10 @@ class _RessourcesPageState extends State<RessourcesPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Container(
+                  height: 30,
+                ),
+                Image(image: AssetImage("assets/iNw_app.png")),
                 SizedBox(
                   height: 50,
                 ),
@@ -206,7 +211,6 @@ class _RessourcesPageState extends State<RessourcesPage> {
                       selectedValue = value as String;
                       profileController.loan = selectedValue!;
                       loan = profileController.loan;
-
                     });
                   },
                   onSaved: (value) {

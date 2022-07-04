@@ -108,19 +108,26 @@ class _OnboardPageState extends State<OnboardPage> {
               "iNwealth",
               style: TextStyle(
                   fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                  color: Color(0xFF524D69)),
+                  // color: Color(0xFF524D69)
+                  ),
               textAlign: TextAlign.center,
             ),
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFFFFFFFF),
+        // backgroundColor: Color(0xFFFFFFFF),
         // backgroundColor: Color(0xFFBAAB90),
 
       ),
       body: Center(
         child: Column(
           children: [
+                        SizedBox(
+              height:50,
+            ),
+            Image(
+              image: AssetImage("assets/iNw_app.png")
+            ),
             SizedBox(
               height: 50,
             ),
@@ -217,7 +224,9 @@ class _OnboardPageState extends State<OnboardPage> {
                 print("fiiiiiin test");
                 Get.to(DashboardPage());
               },
-              child: Text("Next", style: TextStyle(color: Color(0xFF524D69))),
+              child: Text("Next", style: TextStyle(
+                // color: Color(0xFF524D69)
+              )),
             ),
           ],
         ),
