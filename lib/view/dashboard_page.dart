@@ -249,26 +249,26 @@ class _DashboardPageState extends State<DashboardPage> {
                                 width: 28.w,
                               ),
                               CategoryBoxes(
-                                text: "Dirigeant",
+                                text: "Patrimoine Privé",
                                 onPressed: (value) => print(value),
                               ),
                               CategoryBoxes(
-                                text: "Entreprise",
+                                text: "Patrimoine Professionnel",
                                 onPressed: (value) => print(value),
                               ),
-                              CategoryBoxes(
-                                text: "Privé",
-                                onPressed: (value) => print(value),
-                              ),
-                              CategoryBoxes(
-                                text: "Immobilier",
-                                onPressed: (value) => print(value),
-                              ),
+                              // CategoryBoxes(
+                              //   text: "Privé",
+                              //   onPressed: (value) => print(value),
+                              // ),
+                              // CategoryBoxes(
+                              //   text: "Immobilier",
+                              //   onPressed: (value) => print(value),
+                              // ),
                             ],
                           ),
                         ),
                         const SizedBox(
-                          height: 15,
+                          height: 10,
                         ),
 
                         // const SizedBox(
@@ -281,7 +281,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             child: Text(
                               AppLocalizations.of(context)
                                       ?.translate('projet', 0) ??
-                                  "Project.",
+                                  "Enjeux patrimoniaux",
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   color: Color(0xff515979),
