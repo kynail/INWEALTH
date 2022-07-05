@@ -65,35 +65,46 @@ class _financialWealthState extends State<financialWealth> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image(
-              image: AssetImage(profileController.residenceFiscall == "france"
-                  ? "assets/images/france.png"
-                  : profileController.residenceFiscall == "uk"
-                      ? "assets/royaume-uni.png"
-                      : "assets/images/switzerland.png"),
-              height: 40,
-              width: 40,
-            ),
-            // SizedBox(width: 80,),
             const Align(
               alignment: Alignment.center,
               child: Center(
                 child: Text(
-                  "INWEALTH",
+                  "iNwealth",
                   style: TextStyle(
                       fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                      color: Color(0xFF524D69)),
+                      fontSize: 34,
+                      fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
-            SizedBox(
-              width: 40,
-            ),
+            FutureBuilder(
+                future: ahtchoum(),
+                builder: (context, snapshot) {
+                  return Image(
+                    image: AssetImage(
+                        profileController.residenceFiscall == "france"
+                            ? "assets/images/france.png"
+                            : profileController.residenceFiscall == "uk"
+                                ? "assets/royaume-uni.png"
+                                : "assets/images/switzerland.png"),
+                    height: 40,
+                    width: 40,
+                  );
+                }),
+
+            // SizedBox(width: 80,),
+
+            // const SizedBox(
+            //   width: 40,
+            // ),
           ],
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFFBAAB90),
+        // backgroundColor: Color(0xff121421),
+
+        // backgroundColor: const Color(0xFFFFFFFF),
+        // backgroundColor: const Color(0xFFBAAB90),
       ),
       body: Form(
         key: _formKey,
@@ -103,6 +114,12 @@ class _financialWealthState extends State<financialWealth> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                                              Container(
+                  height: 30,
+                ),
+                            Image(
+              image: AssetImage("assets/iNw_app.png")
+            ),
                 SizedBox(
                   height: 50,
                 ),

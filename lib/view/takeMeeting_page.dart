@@ -38,10 +38,11 @@ class _TakeMeetingState extends State<TakeMeeting> {
                 alignment: Alignment.center,
                 child: Center(
                   child: Text(
-                    "INWEALTH",
+                    "iNwealth",
                     style: TextStyle(
                         fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                        color: Color(0xFF524D69)),
+                        // color: Color(0xFF524D69)
+                        ),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -52,7 +53,7 @@ class _TakeMeetingState extends State<TakeMeeting> {
             ],
           ),
           centerTitle: true,
-          backgroundColor: const Color(0xFFBAAB90),
+          // backgroundColor: const Color(0xFFBAAB90),
         ),
         body: Container(
           height: 500,

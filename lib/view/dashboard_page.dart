@@ -53,7 +53,10 @@ class DashboardPage extends StatefulWidget {
 
 final storeController = Get.find<StoreController>();
 
-class _DashboardPageState extends State<DashboardPage> {
+class _DashboardPageState extends State<DashboardPage>
+    with WidgetsBindingObserver {
+  Brightness? _brightness;
+
   String Project = "";
   int _currentIndex = 1;
   int _currentIndex2 = 0;
@@ -126,6 +129,8 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   ahtchoum() {
+    // print("brightnessssssss : ");
+    // print(_brightness);
     getResiFisc()
         .then(((value) => resific = prefs?.getString('residenceFiscal')));
     // while (resific == null) {
@@ -135,26 +140,48 @@ class _DashboardPageState extends State<DashboardPage> {
     }
     getResiFisc().then(((value) => endproject = prefs?.getBool('endProject')));
     if (endproject != null) {
-      print("humhumhum : " + endproject.toString());
+      // print("humhumhum : " + endproject.toString());
       profileController.endProject = endproject!;
-      print("profile endproject : " + profileController.endProject.toString());
+      log(10);
+      // print("profile endproject !! : " + _isLightTheme.value.toString());
     }
   }
 
-  // void initState() {
-  //   super.initState();
-  //   getResiFisc()
-  //       .then(((value) => resific = prefs?.getString('residenceFiscal')));
-  //   // while (resific == null) {
-  //   if (resific != null && profileController.residenceFiscall == "") {
-  //     print("humhumhum : " + resific.toString());
-  //     profileController.residenceFiscall = resific.toString();
-  //   }
-  //   // TODO: implement initState
-  // }
+  @override
+  void initState() {
+    print("testestest");
+    // debugPrint("testtestest");
+    WidgetsBinding.instance.addObserver(this);
+    _brightness = WidgetsBinding.instance.window.platformBrightness;
+    // print("brightnessssssss : ");
+    // print(_brightness);
+    //     if (_brightness == Brightness.light) {
+    //   Get.changeThemeMode(ThemeMode.light);
+    // }
+    // else {
+    //   Get.changeThemeMode(ThemeMode.light);
+    // }
+    super.initState();
+    // print("testestest");
+  }
 
   @override
   Widget build(BuildContext context) {
+    // print("brightnessssssss : ");
+
+    // if (_brightness == Brightness.light) {
+    //   Get.changeThemeMode(ThemeMode.light);
+    // }
+    // else {
+    //   Get.changeThemeMode(ThemeMode.light);
+    // }
+    // Get.changeThemeMode(
+    //   _isLightTheme.value
+    //       ? ThemeMode.light
+    //       : ThemeMode.dark,
+    // );
+    // _saveThemeStatus();
+
     List<String> _purposesuk = [
       AppLocalizations.of(context)?.translate('local_realEstate', 0) ??
           "Purchasing real estate",
@@ -172,10 +199,11 @@ class _DashboardPageState extends State<DashboardPage> {
       profileController.residenceFiscall = resific.toString();
     }
     // print("resifical profilecontrol : " + profileController.residenceFiscall);
-    print("resific dashboard : " + profileController.residenceFiscall);
-    print("user id dashboard : " + profileController.userId);
+    // print("resific dashboard : " + profileController.residenceFiscall);
+    // print("user id dashboard : " + profileController.userId);
     // print("user id2 dashboard : " + profileController.userToken!.id);
-
+    // print("brightnessssssss : ");
+    // print(_brightness);
     // print("test dashboard");
     // print(profileController.userId);
     return Scaffold(
@@ -192,7 +220,6 @@ class _DashboardPageState extends State<DashboardPage> {
                   "iNwealth",
                   style: TextStyle(
                       fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                      color: Colors.white,
                       fontSize: 34,
                       fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
@@ -401,26 +428,26 @@ class _DashboardPageState extends State<DashboardPage> {
                               style: TextStyle(color: Colors.white),
                               textAlign: TextAlign.center,
                             ),
-                            Obx(
-                              () => Text(
-                                'Click on switch to change to ${_isLightTheme.value ? 'Dark' : 'Light'} theme',
-                              ),
-                            ),
-                            ObxValue(
-                              (data) => Switch(
-                                value: _isLightTheme.value,
-                                onChanged: (val) {
-                                  _isLightTheme.value = val;
-                                  Get.changeThemeMode(
-                                    _isLightTheme.value
-                                        ? ThemeMode.light
-                                        : ThemeMode.dark,
-                                  );
-                                  _saveThemeStatus();
-                                },
-                              ),
-                              false.obs,
-                            ),
+                            // Obx(
+                            //   () => Text(
+                            //     'Click on switch to change to ${_isLightTheme.value ? 'Dark' : 'Light'} theme',
+                            //   ),
+                            // ),
+                            // ObxValue(
+                            //   (data) => Switch(
+                            //     value: _isLightTheme.value,
+                            //     onChanged: (val) {
+                            //       _isLightTheme.value = val;
+                            //       Get.changeThemeMode(
+                            //         _brightness == Brightness.light
+                            //             ? ThemeMode.light
+                            //             : ThemeMode.dark,
+                            //       );
+                            //       _saveThemeStatus();
+                            //     },
+                            //   ),
+                            //   false.obs,
+                            // ),
                           ]),
                         )
                       ],

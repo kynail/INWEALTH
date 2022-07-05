@@ -90,6 +90,8 @@ void initState() {
   @override
   Widget build(BuildContext context) {
     print("fuuu");
+    print("testhumomfg");
+
   final thinkingController = Get.put(ThinkingController());
     
     
@@ -97,41 +99,52 @@ void initState() {
     expertController.appbarCalendar = false;
 
     return Scaffold(
-        appBar: AppBar(
-          // backgroundColor: Color(0xFF665840),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Image(
-                image: AssetImage(profileController.residenceFiscall == "france"
-                    ? "assets/images/france.png"
-                    : profileController.residenceFiscall == "uk"
-                        ? "assets/royaume-uni.png"
-                        : "assets/images/switzerland.png"),
-                height: 40,
-                width: 40,
-              ),
-              // SizedBox(width: 80,),
-              const Align(
-                alignment: Alignment.center,
-                child: Center(
-                  child: Text(
-                    "INWEALTH",
-                    style: TextStyle(
-                        fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                        color: Color(0xFF524D69)),
-                    textAlign: TextAlign.center,
-                  ),
+      appBar: AppBar(
+        // backgroundColor: Color(0xFF665840),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Align(
+              alignment: Alignment.center,
+              child: Center(
+                child: Text(
+                  "iNwealth",
+                  style: TextStyle(
+                      fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
+                      fontSize: 34,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              const SizedBox(
-                width: 40,
-              ),
-            ],
-          ),
-          centerTitle: true,
-          backgroundColor: const Color(0xFFBAAB90),
+            ),
+            FutureBuilder(
+                future: ahtchoum(),
+                builder: (context, snapshot) {
+                  return Image(
+                    image: AssetImage(
+                        profileController.residenceFiscall == "france"
+                            ? "assets/images/france.png"
+                            : profileController.residenceFiscall == "uk"
+                                ? "assets/royaume-uni.png"
+                                : "assets/images/switzerland.png"),
+                    height: 40,
+                    width: 40,
+                  );
+                }),
+
+            // SizedBox(width: 80,),
+
+            // const SizedBox(
+            //   width: 40,
+            // ),
+          ],
         ),
+        centerTitle: true,
+        // backgroundColor: Color(0xff121421),
+
+        // backgroundColor: const Color(0xFFFFFFFF),
+        // backgroundColor: const Color(0xFFBAAB90),
+      ),
         body: profileController.widgetOptions.elementAt(profileController.currentIndex),
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[

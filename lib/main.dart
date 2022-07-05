@@ -36,10 +36,12 @@ ThemeData _darkTheme = ThemeData(
     ));
 
 ThemeData _lightTheme = ThemeData(
-    accentColor: Colors.white,
+    accentColor: Colors.red,
+    textTheme: TextTheme(bodyText1: TextStyle(color: Colors.black), bodyText2: TextStyle(color: Colors.black)),
+    textSelectionColor: Colors.black,
     brightness: Brightness.light,
     appBarTheme: AppBarTheme(color: Colors.white),
-    primaryColor: Colors.white,
+    primaryColor: Colors.red,
     buttonTheme: ButtonThemeData(
       buttonColor: Colors.white,
       disabledColor: Colors.grey,
@@ -67,6 +69,7 @@ class MyApp extends StatelessWidget {
   MyApp() {
     _getThemeStatus();
   }
+  
 
   // This widget is the root of your application.
   @override
