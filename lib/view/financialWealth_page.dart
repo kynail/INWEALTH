@@ -30,7 +30,11 @@ ahfu() {
   }));
 
 }
-
+  Color purp1 = Color(0xFF5E5B74);
+  Color purp2 = Color(0xFF272243);
+  Color gold1 = Color(0xFFD5C6AC);
+  Color gold2 = Color(0xFFBAAB90);
+  Color gold3 = Color(0xFF97876A);
 saveEndProject() async {
   prefs = await SharedPreferences.getInstance();
 }
@@ -109,7 +113,7 @@ class _financialWealthState extends State<financialWealth> {
       body: Form(
         key: _formKey,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 80),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -129,14 +133,14 @@ class _financialWealthState extends State<financialWealth> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
+                      horizontal: 0,
+                      vertical: 0,
                     ),
                     hintText: 'Gross Anual pensionsFunds payment.',
                     hintStyle: const TextStyle(fontSize: 14),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -154,14 +158,14 @@ class _financialWealthState extends State<financialWealth> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
+                      horizontal: 0,
+                      vertical: 0,
                     ),
                     hintText: 'Annual pensions Funds.',
                     hintStyle: const TextStyle(fontSize: 14),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -177,23 +181,44 @@ class _financialWealthState extends State<financialWealth> {
                 const SizedBox(height: 30),
                 Text(netRessources.toString()),
                 const SizedBox(height: 30),
-                TextButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                      profileController.finish = true;
-                      print("test test test test");
-                      print(profileController.userId);
+                Container(
+                                                      decoration: BoxDecoration(color: purp1,
+                  borderRadius: BorderRadius.circular(15),),
+                  child: TextButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        profileController.finish = true;
+                        print("test test test test");
+                        print(profileController.userId);
+                        FutureBuilder(
+                            future: ahfu(),
+                            builder: (context, snapshot) {
+                              // return DashboardPage();
+                
+                              if (snapshot.hasData) {
+                                prefs!.setString(
+                                    'userID', profileController.userId);
+                
+                                print("ça marche ?");
+                                return DashboardPage();
+                              } else if (snapshot.hasError) {
+                                print("fuuu error");
+                                return DashboardPage();
+                              } else {
+                                print("fuuu deuxieme error");
+                                return DashboardPage();
+                              }
+                            });
+                      }
                       FutureBuilder(
-                          future: ahfu(),
+                          future: endproject(),
                           builder: (context, snapshot) {
                             // return DashboardPage();
-
+                
                             if (snapshot.hasData) {
-                              prefs!.setString(
-                                  'userID', profileController.userId);
-
-                              print("ça marche ?");
+                              prefs!.setBool('endProject', true);
+                              // print("ça marche ?");
                               return DashboardPage();
                             } else if (snapshot.hasError) {
                               print("fuuu error");
@@ -203,30 +228,13 @@ class _financialWealthState extends State<financialWealth> {
                               return DashboardPage();
                             }
                           });
-                    }
-                    FutureBuilder(
-                        future: endproject(),
-                        builder: (context, snapshot) {
-                          // return DashboardPage();
-
-                          if (snapshot.hasData) {
-                            prefs!.setBool('endProject', true);
-                            // print("ça marche ?");
-                            return DashboardPage();
-                          } else if (snapshot.hasError) {
-                            print("fuuu error");
-                            return DashboardPage();
-                          } else {
-                            print("fuuu deuxieme error");
-                            return DashboardPage();
-                          }
-                        });
-                        print("if project end on end form");
-                        print(prefs!.getBool('endProject'));
-                    profileController.endProject = true;
-                    Get.to(dashboardProjectPage());
-                  },
-                  child: const Text('Finish'),
+                          print("if project end on end form");
+                          print(prefs!.getBool('endProject'));
+                      profileController.endProject = true;
+                      Get.to(dashboardProjectPage());
+                    },
+                    child: const Text('Finish'),
+                  ),
                 ),
               ],
             ),

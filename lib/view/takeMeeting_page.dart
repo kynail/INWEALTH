@@ -24,6 +24,21 @@ class _TakeMeetingState extends State<TakeMeeting> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+                            const Align(
+                alignment: Alignment.center,
+                child: Center(
+                  child: Text(
+                    "iNwealth",
+                    style: TextStyle(
+                        fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
+                        fontSize: 34,
+                        fontWeight: FontWeight.bold
+                        // color: Color(0xFF524D69)
+                        ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
               Image(
                 image: AssetImage(profileController.residenceFiscall == "france"
                     ? "assets/images/france.png"
@@ -34,39 +49,39 @@ class _TakeMeetingState extends State<TakeMeeting> {
                 width: 40,
               ),
               // SizedBox(width: 80,),
-              const Align(
-                alignment: Alignment.center,
-                child: Center(
-                  child: Text(
-                    "iNwealth",
-                    style: TextStyle(
-                        fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                        // color: Color(0xFF524D69)
-                        ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 40,
-              ),
+              // const Align(
+              //   alignment: Alignment.center,
+              //   child: Center(
+              //     child: Text(
+              //       "iNwealth",
+              //       style: TextStyle(
+              //           fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
+              //           // color: Color(0xFF524D69)
+              //           ),
+              //       textAlign: TextAlign.center,
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   width: 40,
+              // ),
             ],
           ),
           centerTitle: true,
           // backgroundColor: const Color(0xFFBAAB90),
         ),
         body: Container(
-          height: 500,
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          height: 700,
+          // margin: EdgeInsets.symmetric(horizontal: 20),
 
             child: Center(
               
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(
-                      height: 30,
-                    ),
+                    // Container(
+                    //   height: 30,
+                    // ),
                     Container(
                       height: 40,
                       child: Text("Make an appointment"),
@@ -76,9 +91,13 @@ class _TakeMeetingState extends State<TakeMeeting> {
                     : Container(),
                     Container(height: 20,),
                     Container(
-                      height: 300,
+                      decoration: BoxDecoration(
+                        color: Color(0xff6a6a6a),
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                      ),
+                      height: 370,
                         child: Container(
-                          height: 200,
+                          height: 400,
                           child: Calendar(
                             selected: profileController.date,
                             saveChanges: (value) {

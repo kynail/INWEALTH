@@ -64,11 +64,6 @@ class _DashboardPageState extends State<DashboardPage>
   bool _isLoading = false;
   String Country = "";
   String Projets = "";
-  Color purp1 = Color(0xFF5E5B74);
-  Color purp2 = Color(0xFF272243);
-  Color gold1 = Color(0xFFD5C6AC);
-  Color gold2 = Color(0xFFBAAB90);
-  Color gold3 = Color(0xFF97876A);
 
   // ScrollController _dashboardController = new ScrollController();
   static const TextStyle optionStyle =
@@ -129,21 +124,21 @@ class _DashboardPageState extends State<DashboardPage>
   }
 
   ahtchoum() {
-    // print("brightnessssssss : ");
-    // print(_brightness);
+    print("brightnessssssss : ");
+    print(_brightness);
     getResiFisc()
         .then(((value) => resific = prefs?.getString('residenceFiscal')));
     // while (resific == null) {
     if (resific != null && profileController.residenceFiscall == "") {
-      // print("humhumhum : " + resific.toString());
+      print("humhumhum : " + resific.toString());
       profileController.residenceFiscall = resific.toString();
     }
     getResiFisc().then(((value) => endproject = prefs?.getBool('endProject')));
     if (endproject != null) {
-      // print("humhumhum : " + endproject.toString());
+      print("humhumhum : " + endproject.toString());
       profileController.endProject = endproject!;
       log(10);
-      // print("profile endproject !! : " + _isLightTheme.value.toString());
+      print("profile endproject !! : " + _isLightTheme.value.toString());
     }
   }
 
@@ -151,9 +146,11 @@ class _DashboardPageState extends State<DashboardPage>
   void initState() {
     print("testestest");
     // debugPrint("testtestest");
+    // _getThemeStatus();
     WidgetsBinding.instance.addObserver(this);
     _brightness = WidgetsBinding.instance.window.platformBrightness;
-    // print("brightnessssssss : ");
+    profileController.brightness = _brightness;
+    print("brightnessssssss : ");
     // print(_brightness);
     //     if (_brightness == Brightness.light) {
     //   Get.changeThemeMode(ThemeMode.light);
@@ -167,7 +164,7 @@ class _DashboardPageState extends State<DashboardPage>
 
   @override
   Widget build(BuildContext context) {
-    // print("brightnessssssss : ");
+    print("brightnessssssss : ");
 
     // if (_brightness == Brightness.light) {
     //   Get.changeThemeMode(ThemeMode.light);
@@ -213,14 +210,15 @@ class _DashboardPageState extends State<DashboardPage>
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Align(
+            Align(
               alignment: Alignment.center,
               child: Center(
                 child: Text(
                   "iNwealth",
                   style: TextStyle(
-                      fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
+                      // fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
                       fontSize: 34,
+                      // color: Colors.black,
                       fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
@@ -321,8 +319,9 @@ class _DashboardPageState extends State<DashboardPage>
                           height: 0,
                         ),
                         Container(
-                          height: 200,
-                          margin: const EdgeInsets.symmetric(vertical: 10.0),
+                          height: 230,
+                          // width: 4500,
+                          // margin: const EdgeInsets.symmetric(vertical: 10.0),
                           child: ListView.builder(
                             // padding: const EdgeInsets.all(8),
                             itemCount: _purposesuk.length,
@@ -332,15 +331,24 @@ class _DashboardPageState extends State<DashboardPage>
                               return profileController.residenceFiscall == "uk"
                                   ? Cardhome(
                                       project: _purposesuk[index],
-                                      keys: _purposesuk[index])
+                                      keys: _purposesuk[index],
+                                      temps: parameters.purposesfr[index].temps,
+                                      question:
+                                          parameters.purposesfr[index].question)
                                   : Cardhome(
                                       project:
                                           parameters.purposesfr[index].name,
-                                      keys: parameters.purposesfr[index].key);
+                                      keys: parameters.purposesfr[index].key,
+                                      temps: parameters.purposesfr[index].temps,
+                                      question: parameters
+                                          .purposesfr[index].question);
                               // profileController.residenceFiscall == "United Kingdom"
                             },
                             scrollDirection: Axis.horizontal,
                           ),
+                        ),
+                        SizedBox(
+                          height: 10,
                         ),
                         Container(
                           height: 30,
@@ -359,11 +367,11 @@ class _DashboardPageState extends State<DashboardPage>
                           ),
                         ),
                         Container(
-                          height: 240,
+                          height: 260,
                           // margin: const EdgeInsets.symmetric(vertical: 0.0),
                           child: ListView(
                             scrollDirection: Axis.horizontal,
-                            children: const <Widget>[
+                            children: <Widget>[
                               SizedBox(
                                 height: 5,
                                 width: 10,
@@ -378,9 +386,12 @@ class _DashboardPageState extends State<DashboardPage>
                                 height: 5,
                                 width: 0,
                               ),
-                              Card2home(),
+                              // Card2home(),
                             ],
                           ),
+                        ),
+                        SizedBox(
+                          height: 30,
                         ),
                         Container(
                           // decoration:
@@ -425,7 +436,7 @@ class _DashboardPageState extends State<DashboardPage>
                             ),
                             const Text(
                               'INwealth ? Connectez-vous',
-                              style: TextStyle(color: Colors.white),
+                              // style: TextStyle(color: Colors.white),
                               textAlign: TextAlign.center,
                             ),
                             // Obx(

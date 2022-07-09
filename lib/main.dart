@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -28,27 +30,54 @@ void main() {
 ThemeData _darkTheme = ThemeData(
     accentColor: Color(0xff121421),
     brightness: Brightness.dark,
+    textTheme: TextTheme(
+        headline1: TextStyle(color: Colors.white),
+        headline2: TextStyle(color: Colors.white),
+        bodyText1: TextStyle(color: Colors.white),
+        bodyText2: TextStyle(color: Colors.white)),
     primaryColor: Color(0xff121421),
     backgroundColor: Color(0xff121421),
-    buttonTheme: ButtonThemeData(
-      buttonColor: Colors.amber,
-      disabledColor: Colors.grey,
-    ));
-
-ThemeData _lightTheme = ThemeData(
-    accentColor: Colors.red,
-    textTheme: TextTheme(bodyText1: TextStyle(color: Colors.black), bodyText2: TextStyle(color: Colors.black)),
-    textSelectionColor: Colors.black,
-    brightness: Brightness.light,
-    appBarTheme: AppBarTheme(color: Colors.white),
-    primaryColor: Colors.red,
     buttonTheme: ButtonThemeData(
       buttonColor: Colors.white,
       disabledColor: Colors.grey,
     ));
 
-class MyApp extends StatelessWidget {
+ThemeData _lightTheme = ThemeData(
+    accentColor: Colors.red,
+    // colorScheme: ColorScheme(),
+    textTheme: TextTheme(
+        headline1: TextStyle(color: Colors.black),
+        headline2: TextStyle(color: Colors.black),
+        headline3: TextStyle(color: Colors.black),
+        headline4: TextStyle(color: Colors.black),
+        headline5: TextStyle(color: Colors.black),
+        headline6: TextStyle(color: Colors.black),
+        subtitle1: TextStyle(color: Colors.black),
+        subtitle2: TextStyle(color: Colors.black),
+        bodyText1: TextStyle(color: Colors.black),
+        bodyText2: TextStyle(color: Colors.black)),
+    textSelectionColor: Colors.black,
+    brightness: Brightness.light,
+    appBarTheme: AppBarTheme(
+        backgroundColor: Colors.white,
+        textTheme: TextTheme(
+            headline1: TextStyle(color: Colors.black),
+            headline2: TextStyle(color: Colors.black),
+            headline3: TextStyle(color: Colors.black),
+            headline4: TextStyle(color: Colors.black),
+            headline5: TextStyle(color: Colors.black),
+            headline6: TextStyle(color: Colors.black),
+            subtitle1: TextStyle(color: Colors.black),
+            subtitle2: TextStyle(color: Colors.black),
+            bodyText1: TextStyle(color: Colors.black),
+            bodyText2: TextStyle(color: Colors.black))),
+    primaryColor: Colors.red,
+    buttonTheme: ButtonThemeData(
+      buttonColor: Colors.black,
+      disabledColor: Colors.grey,
+    ));
 
+class MyApp extends StatelessWidget {
   RxBool _isLightTheme = false.obs;
 
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
@@ -69,7 +98,6 @@ class MyApp extends StatelessWidget {
   MyApp() {
     _getThemeStatus();
   }
-  
 
   // This widget is the root of your application.
   @override

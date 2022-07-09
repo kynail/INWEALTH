@@ -78,4 +78,5 @@ class ProfilController extends GetxController {
   DateTime? date;
   SharedPreferences? prefs;
   final resFisController = TextEditingController();
+  Brightness? brightness;
 }

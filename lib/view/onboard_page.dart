@@ -33,16 +33,15 @@ Future<void> saveUserToken() async {
 }
 
 ahfu() async {
-
   profileController.userToken == null
-  ? test.authentifyUser().then((value) {
-    profileController.userToken = value;
-    profileController.userId = value.id;
-    prefs!.setString('userID', profileController.userToken!.id);
-    print("valuuuue : " + value.id.toString());
-    print("value 2 : " + profileController.userToken!.id);
-  })
-  : null;
+      ? test.authentifyUser().then((value) {
+          profileController.userToken = value;
+          profileController.userId = value.id;
+          prefs!.setString('userID', profileController.userToken!.id);
+          print("valuuuue : " + value.id.toString());
+          print("value 2 : " + profileController.userToken!.id);
+        })
+      : null;
 
   saveUserToken().then(((value) {
     prefs!.setString('userID', profileController.userToken!.id);
@@ -54,7 +53,6 @@ ahfu() async {
   }));
   // print("testestest : " + prefs!.getString('residenceFiscal').toString());
 }
-
 
 class _OnboardPageState extends State<OnboardPage> {
 // @override
@@ -78,7 +76,6 @@ class _OnboardPageState extends State<OnboardPage> {
 
   @override
   Widget build(BuildContext context) {
-
     saveUserToken();
 
     List<String> country = [
@@ -95,9 +92,6 @@ class _OnboardPageState extends State<OnboardPage> {
     ];
     String? selectedValue;
 
-
-    
-
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Color(0xFF665840),
@@ -107,9 +101,9 @@ class _OnboardPageState extends State<OnboardPage> {
             child: Text(
               "iNwealth",
               style: TextStyle(
-                  fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                  // color: Color(0xFF524D69)
-                  ),
+                fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
+                // color: Color(0xFF524D69)
+              ),
               textAlign: TextAlign.center,
             ),
           ),
@@ -117,17 +111,14 @@ class _OnboardPageState extends State<OnboardPage> {
         centerTitle: true,
         // backgroundColor: Color(0xFFFFFFFF),
         // backgroundColor: Color(0xFFBAAB90),
-
       ),
       body: Center(
         child: Column(
           children: [
-                        SizedBox(
-              height:50,
+            SizedBox(
+              height: 50,
             ),
-            Image(
-              image: AssetImage("assets/iNw_app.png")
-            ),
+            Image(image: AssetImage("assets/iNw_app.png")),
             SizedBox(
               height: 50,
             ),
@@ -137,9 +128,9 @@ class _OnboardPageState extends State<OnboardPage> {
                 //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
                 isDense: true,
                 contentPadding: EdgeInsets.zero,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
+                // border: OutlineInputBorder(
+                //   borderRadius: BorderRadius.circular(15),
+                // ),
                 //Add more decoration as you want here
                 //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
               ),
@@ -152,7 +143,7 @@ class _OnboardPageState extends State<OnboardPage> {
                     ),
               icon: const Icon(
                 Icons.arrow_drop_down,
-                color: Colors.black45,
+                // color: Colors.black45,
               ),
               iconSize: 30,
               buttonHeight: 60,
@@ -182,13 +173,14 @@ class _OnboardPageState extends State<OnboardPage> {
                   selectedValue = value as String;
                   if (profileController.residenceFiscall == "") {
                     profileController.residenceFiscall = selectedValue!;
-                    print("mais what ?? : " + profileController.residenceFiscall);
-                    prefs!.setString('residenceFiscale', profileController.residenceFiscall);
+                    print(
+                        "mais what ?? : " + profileController.residenceFiscall);
+                    prefs!.setString(
+                        'residenceFiscale', profileController.residenceFiscall);
                   }
                 });
               },
               onSaved: (value) {
-
                 selectedValue = value.toString();
               },
             ),
@@ -204,8 +196,10 @@ class _OnboardPageState extends State<OnboardPage> {
                       // return DashboardPage();
 
                       if (snapshot.hasData) {
-                        prefs!.setString('userID', profileController.userToken!.id);
-                        prefs!.setString('residenceFiscal', profileController.residenceFiscall);
+                        prefs!.setString(
+                            'userID', profileController.userToken!.id);
+                        prefs!.setString('residenceFiscal',
+                            profileController.residenceFiscall);
                         print("ça marche ?");
                         return DashboardPage();
                       } else if (snapshot.hasError) {
@@ -216,17 +210,19 @@ class _OnboardPageState extends State<OnboardPage> {
                         return DashboardPage();
                       }
                     });
-           
+
                 print("ben ben ben : " + profileController.residenceFiscall);
                 print("teeeeeeeest");
-                        prefs!.setString('residenceFiscal', profileController.residenceFiscall);
+                prefs!.setString(
+                    'residenceFiscal', profileController.residenceFiscall);
                 print(prefs?.getString('residenceFiscal'));
                 print("fiiiiiin test");
                 Get.to(DashboardPage());
               },
-              child: Text("Next", style: TextStyle(
-                // color: Color(0xFF524D69)
-              )),
+              child: Text("Next",
+                  style: TextStyle(
+                      // color: Color(0xFF524D69)
+                      )),
             ),
           ],
         ),

@@ -25,6 +25,12 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
 
   Parameters parameters = Parameters();
 
+  Color purp1 = Color(0xFF5E5B74);
+  Color purp2 = Color(0xFF272243);
+  Color gold1 = Color(0xFFD5C6AC);
+  Color gold2 = Color(0xFFBAAB90);
+  Color gold3 = Color(0xFF97876A);
+
   final List<String> locality = [
     'Autres',
     'BTP',
@@ -126,7 +132,7 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
       body: Form(
         key: _formKey,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 60),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -134,9 +140,7 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                 Container(
                   height: 30,
                 ),
-                            Image(
-              image: AssetImage("assets/iNw_app.png")
-            ),
+                Image(image: AssetImage("assets/iNw_app.png")),
                 Container(
                   height: 60,
                 ),
@@ -145,11 +149,11 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                 const SizedBox(height: 30),
                 DropdownButtonFormField2(
                   decoration: InputDecoration(
-                    isDense: true,
+                    // isDense: true,
                     contentPadding: EdgeInsets.zero,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
                   ),
                   isExpanded: true,
                   hint: profileController.locality != ""
@@ -160,7 +164,7 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                         ),
                   icon: const Icon(
                     Icons.arrow_drop_down,
-                    color: Colors.black45,
+                    // color: Colors.black45,
                   ),
                   iconSize: 30,
                   buttonHeight: 60,
@@ -208,9 +212,9 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                     ),
                     hintText: 'Enter Your valuation.',
                     hintStyle: const TextStyle(fontSize: 14),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
                   ),
                   validator: (value) {
                     if (profileController.valorisation != "") {
@@ -231,11 +235,11 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                 const SizedBox(height: 30),
                 DropdownButtonFormField2(
                   decoration: InputDecoration(
-                    isDense: true,
+                    // isDense: true,
                     contentPadding: EdgeInsets.zero,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
                   ),
                   isExpanded: true,
                   hint: profileController.locality != ""
@@ -246,7 +250,7 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                         ),
                   icon: const Icon(
                     Icons.arrow_drop_down,
-                    color: Colors.black45,
+                    // color: Colors.black45,
                   ),
                   iconSize: 30,
                   buttonHeight: 60,
@@ -308,11 +312,11 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                 const SizedBox(height: 30),
                 DropdownButtonFormField2(
                   decoration: InputDecoration(
-                    isDense: true,
+                    // isDense: true,
                     contentPadding: EdgeInsets.zero,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
                   ),
                   isExpanded: true,
                   hint: profileController.locality != ""
@@ -323,7 +327,7 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                         ),
                   icon: const Icon(
                     Icons.arrow_drop_down,
-                    color: Colors.black45,
+                    // color: Colors.black45,
                   ),
                   iconSize: 30,
                   buttonHeight: 60,
@@ -360,15 +364,20 @@ class _ProjectFrPageState extends State<ProjectFrPage> {
                 ),
 
                 const SizedBox(height: 30),
-                TextButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                    }
-                    print(profileController.locality);
-                    Get.to(JuridiquePage());
-                  },
-                  child: const Text('Next'),
+                Container(
+                  width: 150,
+                  decoration: BoxDecoration(color: purp1,
+                  borderRadius: BorderRadius.circular(15),),
+                  child: TextButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                      }
+                      print(profileController.locality);
+                      Get.to(JuridiquePage());
+                    },
+                    child: const Text('Next', style: TextStyle(color: Colors.white)),
+                  ),
                 ),
               ],
             ),

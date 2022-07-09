@@ -16,10 +16,13 @@ class JuridiquePage extends StatefulWidget {
 bool isChecked = false;
 bool isChecked2 = false;
 
-
 final _formKey = GlobalKey<FormState>();
 String? selectedValue;
-
+Color purp1 = Color(0xFF5E5B74);
+Color purp2 = Color(0xFF272243);
+Color gold1 = Color(0xFFD5C6AC);
+Color gold2 = Color(0xFFBAAB90);
+Color gold3 = Color(0xFF97876A);
 Parameters parameters = Parameters();
 
 class _JuridiquePageState extends State<JuridiquePage> {
@@ -53,12 +56,6 @@ class _JuridiquePageState extends State<JuridiquePage> {
               height: 40,
               width: 40,
             )
-
-            // SizedBox(width: 80,),
-
-            // const SizedBox(
-            //   width: 40,
-            // ),
           ],
         ),
         centerTitle: true,
@@ -70,17 +67,15 @@ class _JuridiquePageState extends State<JuridiquePage> {
       body: Form(
         key: _formKey,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 60),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                                              Container(
+                Container(
                   height: 30,
                 ),
-                            Image(
-              image: AssetImage("assets/iNw_app.png")
-            ),
+                Image(image: AssetImage("assets/iNw_app.png")),
                 Container(
                   height: 60,
                 ),
@@ -90,9 +85,9 @@ class _JuridiquePageState extends State<JuridiquePage> {
                   decoration: InputDecoration(
                     isDense: true,
                     contentPadding: EdgeInsets.zero,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
                   ),
                   isExpanded: true,
                   hint: profileController.locality != ""
@@ -103,11 +98,11 @@ class _JuridiquePageState extends State<JuridiquePage> {
                         ),
                   icon: const Icon(
                     Icons.arrow_drop_down,
-                    color: Colors.black45,
+                    // color: Colors.black45,
                   ),
                   iconSize: 30,
                   buttonHeight: 60,
-                  buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                  buttonPadding: const EdgeInsets.only(left: 00, right: 10),
                   dropdownDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                   ),
@@ -143,9 +138,9 @@ class _JuridiquePageState extends State<JuridiquePage> {
                   decoration: InputDecoration(
                     isDense: true,
                     contentPadding: EdgeInsets.zero,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
                   ),
                   isExpanded: true,
                   hint: profileController.locality != ""
@@ -156,11 +151,11 @@ class _JuridiquePageState extends State<JuridiquePage> {
                         ),
                   icon: const Icon(
                     Icons.arrow_drop_down,
-                    color: Colors.black45,
+                    // color: Colors.black45,
                   ),
                   iconSize: 30,
                   buttonHeight: 60,
-                  buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                  buttonPadding: const EdgeInsets.only(left: 0, right:  10),
                   dropdownDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                   ),
@@ -195,49 +190,57 @@ class _JuridiquePageState extends State<JuridiquePage> {
                 ),
                 const SizedBox(height: 30),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: const Text(
-                        "Détenez vous une socité holding ?",
-                        style: TextStyle(fontSize: 14),
-                      ),
+                    const Text(
+                      "Détenez vous une socité holding ?",
+                      style: TextStyle(fontSize: 14),
                     ),
-                    Expanded(
-                      child: Checkbox(
-                          value: profileController.ifHolding != false
-                              ? profileController.ifHolding
-                              : isChecked,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              profileController.ifHolding = value!;
-                              isChecked = value;
-                            });
-                          }),
-                    ),
+                    Checkbox(
+                        value: profileController.ifHolding != false
+                            ? profileController.ifHolding
+                            : isChecked,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            profileController.ifHolding = value!;
+                            isChecked = value;
+                          });
+                        }),
                   ],
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  height: 1,
+                  decoration: BoxDecoration(
+                    color: Colors.white 
+                  ),
                 ),
                 const SizedBox(height: 30),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: const Text(
-                        "Détenez vous de l'immobilier d'exploitation ?",
-                        style: TextStyle(fontSize: 14),
-                      ),
+                    const Text(
+                      "Détenez vous de l'immobilier d'exploitation ?",
+                      style: TextStyle(fontSize: 14),
                     ),
-                    Expanded(
-                      child: Checkbox(
-                          value: profileController.ifImmoExploit != false
-                              ? profileController.ifImmoExploit
-                              : isChecked2,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              profileController.ifImmoExploit = value!;
-                              isChecked2 = value;
-                            });
-                          }),
-                    ),
+                    Checkbox(
+                        value: profileController.ifImmoExploit != false
+                            ? profileController.ifImmoExploit
+                            : isChecked2,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            profileController.ifImmoExploit = value!;
+                            isChecked2 = value;
+                          });
+                        }),
                   ],
+                ),
+                                const SizedBox(height: 8),
+                Container(
+                  height: 1,
+                  decoration: BoxDecoration(
+                    color: Colors.white 
+                  ),
                 ),
                 const SizedBox(height: 30),
                 profileController.ifImmoExploit == true
@@ -258,7 +261,7 @@ class _JuridiquePageState extends State<JuridiquePage> {
                               ),
                         icon: const Icon(
                           Icons.arrow_drop_down,
-                          color: Colors.black45,
+                          // color: Colors.black45,
                         ),
                         iconSize: 30,
                         buttonHeight: 60,
@@ -299,15 +302,23 @@ class _JuridiquePageState extends State<JuridiquePage> {
                       )
                     : Container(),
                 const SizedBox(height: 30),
-                TextButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                    }
-                    print(profileController.locality);
-                    Get.to(MaritalPage());
-                  },
-                  child: const Text('Next'),
+                Container(
+                  width: 150,
+                  decoration: BoxDecoration(
+                    color: purp1,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: TextButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                      }
+                      print(profileController.locality);
+                      Get.to(MaritalPage());
+                    },
+                    child: const Text('Next',
+                        style: TextStyle(color: Colors.white)),
+                  ),
                 ),
               ],
             ),
