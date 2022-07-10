@@ -57,27 +57,30 @@ class Calendar extends StatelessWidget {
     ScrollController controller =
         ScrollController(initialScrollOffset: (index ?? 0) * (50 + 10));
 
-    return ListView.builder(
-      controller: controller,
-      shrinkWrap: true,
-      itemCount: keys.length,
-      itemBuilder: (context, indexDay) {
-        String key = keys[indexDay];
-        List<DateTime> availabilities = availabilitiesPerKey[key]!;
-
-        bool Function(DateTime availability) isPicked = (availability) {
-          return indexDay == index &&
-              availability.hour == selected?.hour &&
-              availability.minute == selected?.minute;
-        };
-
-        return CalendarRow(
-          title: key,
-          availabilities: availabilities,
-          isPicked: isPicked,
-          onPressed: saveChanges,
-        );
-      },
+    return Container(
+      height: 600,
+      child: ListView.builder(
+        controller: controller,
+        shrinkWrap: true,
+        itemCount: keys.length,
+        itemBuilder: (context, indexDay) {
+          String key = keys[indexDay];
+          List<DateTime> availabilities = availabilitiesPerKey[key]!;
+    
+          bool Function(DateTime availability) isPicked = (availability) {
+            return indexDay == index &&
+                availability.hour == selected?.hour &&
+                availability.minute == selected?.minute;
+          };
+    
+          return CalendarRow(
+            title: key,
+            availabilities: availabilities,
+            isPicked: isPicked,
+            onPressed: saveChanges,
+          );
+        },
+      ),
     );
   }
 }

@@ -43,10 +43,10 @@ class Parameters {
     ),
   ];
 
-  List<DataModel> purposesfr = [
-    DataModel(name: "Ceder son entreprise", key: "cederEntreprise"),
-    DataModel(name: "transmettre son entreprise à un tier", key: "france"),
-    DataModel(name: "maitriser son impot sur la fortune", key: "france"),
+  List<ProjectModel> purposesfr = [
+    ProjectModel(name: "Ceder son entreprise", key: "cederEntreprise", temps: "8", question: "12"),
+    ProjectModel(name: "transmettre son entreprise à un tier", key: "france", temps: "8", question: "12"),
+    ProjectModel(name: "maitriser son impot sur la fortune", key: "france",  temps: "8", question: "12"),
     // AppLocalizations.of(context)?.translate('selling_biz', 0) ?? "humk ",
   ];
 

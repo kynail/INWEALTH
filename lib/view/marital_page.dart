@@ -59,7 +59,11 @@ class _MaritalPageState extends State<MaritalPage> {
     'Male',
     'Female',
   ];
-
+  Color purp1 = Color(0xFF5E5B74);
+  Color purp2 = Color(0xFF272243);
+  Color gold1 = Color(0xFFD5C6AC);
+  Color gold2 = Color(0xFFBAAB90);
+  Color gold3 = Color(0xFF97876A);
   final _formKey = GlobalKey<FormState>();
   final profileController = Get.put(ProfilController());
   bool isChecked = false;
@@ -129,17 +133,15 @@ class _MaritalPageState extends State<MaritalPage> {
       body: Form(
         key: _formKey,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 80),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                                              Container(
+                Container(
                   height: 30,
                 ),
-                            Image(
-              image: AssetImage("assets/iNw_app.png")
-            ),
+                Image(image: AssetImage("assets/iNw_app.png")),
                 SizedBox(
                   height: 50,
                 ),
@@ -151,9 +153,9 @@ class _MaritalPageState extends State<MaritalPage> {
                     //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
                     isDense: true,
                     contentPadding: EdgeInsets.zero,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
                     //Add more decoration as you want here
                     //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
                   ),
@@ -166,11 +168,11 @@ class _MaritalPageState extends State<MaritalPage> {
                         ),
                   icon: const Icon(
                     Icons.arrow_drop_down,
-                    color: Colors.black45,
+                    // color: Colors.black45,
                   ),
                   iconSize: 30,
                   buttonHeight: 60,
-                  buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                  buttonPadding: const EdgeInsets.only(left: 0, right: 8),
                   dropdownDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                   ),
@@ -205,14 +207,14 @@ class _MaritalPageState extends State<MaritalPage> {
                 TextFormField(
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
+                      horizontal: 0,
+                      vertical: 0,
                     ),
                     hintText: 'Enter Your Full Name.',
                     hintStyle: const TextStyle(fontSize: 14),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -231,9 +233,9 @@ class _MaritalPageState extends State<MaritalPage> {
                     //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
                     isDense: true,
                     contentPadding: EdgeInsets.zero,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
                     //Add more decoration as you want here
                     //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
                   ),
@@ -246,11 +248,11 @@ class _MaritalPageState extends State<MaritalPage> {
                         ),
                   icon: const Icon(
                     Icons.arrow_drop_down,
-                    color: Colors.black45,
+                    // color: Colors.black45,
                   ),
                   iconSize: 30,
                   buttonHeight: 60,
-                  buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                  buttonPadding: const EdgeInsets.only(left: 0, right: 8),
                   dropdownDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                   ),
@@ -286,14 +288,14 @@ class _MaritalPageState extends State<MaritalPage> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
+                      horizontal: 0,
+                      vertical: 0,
                     ),
                     hintText: 'Select your Age.',
                     hintStyle: const TextStyle(fontSize: 14),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -312,9 +314,9 @@ class _MaritalPageState extends State<MaritalPage> {
                     //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
                     isDense: true,
                     contentPadding: EdgeInsets.zero,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
                     //Add more decoration as you want here
                     //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
                   ),
@@ -327,11 +329,11 @@ class _MaritalPageState extends State<MaritalPage> {
                         ),
                   icon: const Icon(
                     Icons.arrow_drop_down,
-                    color: Colors.black45,
+                    // color: Colors.black45,
                   ),
                   iconSize: 30,
                   buttonHeight: 60,
-                  buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                  buttonPadding: const EdgeInsets.only(left: 0, right: 8),
                   dropdownDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                   ),
@@ -373,14 +375,14 @@ class _MaritalPageState extends State<MaritalPage> {
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 20,
+                            horizontal: 0,
+                            vertical: 0,
                           ),
                           hintText: 'Enter Your Partner Age.',
                           hintStyle: const TextStyle(fontSize: 14),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                          // border: OutlineInputBorder(
+                          //   borderRadius: BorderRadius.circular(15),
+                          // ),
                         ),
                         onChanged: (value) {
                           setState(() {
@@ -405,9 +407,9 @@ class _MaritalPageState extends State<MaritalPage> {
                           //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
                           isDense: true,
                           contentPadding: EdgeInsets.zero,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                          // border: OutlineInputBorder(
+                          //   borderRadius: BorderRadius.circular(15),
+                          // ),
                           //Add more decoration as you want here
                           //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
                         ),
@@ -420,12 +422,11 @@ class _MaritalPageState extends State<MaritalPage> {
                               ),
                         icon: const Icon(
                           Icons.arrow_drop_down,
-                          color: Colors.black45,
+                          // color: Colors.black45,
                         ),
                         iconSize: 30,
                         buttonHeight: 60,
-                        buttonPadding:
-                            const EdgeInsets.only(left: 20, right: 10),
+                        buttonPadding: const EdgeInsets.only(left: 0, right: 8),
                         dropdownDecoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                         ),
@@ -470,25 +471,22 @@ class _MaritalPageState extends State<MaritalPage> {
                 // const SizedBox(height: 30),
                 profileController.maritalStatus == "marie"
                     ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: const Text(
-                              'Do you have children ?',
-                              style: TextStyle(fontSize: 14),
-                            ),
+                          const Text(
+                            'Do you have children ?',
+                            style: TextStyle(fontSize: 14),
                           ),
-                          Expanded(
-                            child: Checkbox(
-                                value: profileController.haveChild != false
-                                    ? profileController.haveChild
-                                    : isChecked,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    profileController.haveChild = value!;
-                                    isChecked = value;
-                                  });
-                                }),
-                          ),
+                          Checkbox(
+                              value: profileController.haveChild != false
+                                  ? profileController.haveChild
+                                  : isChecked,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  profileController.haveChild = value!;
+                                  isChecked = value;
+                                });
+                              }),
                         ],
                       )
                     : Container(),
@@ -503,14 +501,14 @@ class _MaritalPageState extends State<MaritalPage> {
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 20,
+                            horizontal: 0,
+                            vertical: 0,
                           ),
                           hintText: 'Minor children.',
                           hintStyle: const TextStyle(fontSize: 14),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                          // border: OutlineInputBorder(
+                          //   borderRadius: BorderRadius.circular(15),
+                          // ),
                         ),
                         onChanged: (value) {
                           setState(() {
@@ -534,14 +532,14 @@ class _MaritalPageState extends State<MaritalPage> {
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 20,
+                            horizontal: 0,
+                            vertical: 0,
                           ),
                           hintText: 'Adult children.',
                           hintStyle: const TextStyle(fontSize: 14),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                          // border: OutlineInputBorder(
+                          //   borderRadius: BorderRadius.circular(15),
+                          // ),
                         ),
                         onChanged: (value) {
                           setState(() {
@@ -567,9 +565,9 @@ class _MaritalPageState extends State<MaritalPage> {
                           //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
                           isDense: true,
                           contentPadding: EdgeInsets.zero,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                          // border: OutlineInputBorder(
+                          //   borderRadius: BorderRadius.circular(15),
+                          // ),
                           //Add more decoration as you want here
                           //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
                         ),
@@ -582,12 +580,11 @@ class _MaritalPageState extends State<MaritalPage> {
                               ),
                         icon: const Icon(
                           Icons.arrow_drop_down,
-                          color: Colors.black45,
+                          // color: Colors.black45,
                         ),
                         iconSize: 30,
                         buttonHeight: 60,
-                        buttonPadding:
-                            const EdgeInsets.only(left: 20, right: 10),
+                        buttonPadding: const EdgeInsets.only(left: 0, right: 8),
                         dropdownDecoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                         ),
@@ -626,23 +623,27 @@ class _MaritalPageState extends State<MaritalPage> {
                       )
                     : Container(),
                 const SizedBox(height: 30),
-                TextButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                    }
-                    // if (profileController.residenceFiscall == "France") {
-                    //   Get.to(InfoEntreprisePage());
-                    // }
-                    // else {
-                    if (profileController.residenceFiscall == "france")
-                      Get.to(RessourcesPage());
-                    else
-                      Get.to(financialWealth());
-
-                    // }
-                  },
-                  child: const Text('Next'),
+                Container(
+                                    decoration: BoxDecoration(color: purp1,
+                  borderRadius: BorderRadius.circular(15),),
+                  child: TextButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                      }
+                      // if (profileController.residenceFiscall == "France") {
+                      //   Get.to(InfoEntreprisePage());
+                      // }
+                      // else {
+                      if (profileController.residenceFiscall == "france")
+                        Get.to(RessourcesPage());
+                      else
+                        Get.to(financialWealth());
+                
+                      // }
+                    },
+                    child: const Text('Next'),
+                  ),
                 ),
               ],
             ),

@@ -86,7 +86,7 @@ class _ProjetPageState extends State<ProjetPage> {
       body: Form(
         key: _formKey,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 80),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -118,9 +118,9 @@ class _ProjetPageState extends State<ProjetPage> {
                   //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
                   isDense: true,
                   contentPadding: EdgeInsets.zero,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
+                  // border: OutlineInputBorder(
+                  //   borderRadius: BorderRadius.circular(15),
+                  // ),
                   //Add more decoration as you want here
                   //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
                 ),
@@ -133,7 +133,7 @@ class _ProjetPageState extends State<ProjetPage> {
                       ),
                 icon: const Icon(
                   Icons.arrow_drop_down,
-                  color: Colors.black45,
+                  // color: Colors.black45,
                 ),
                 iconSize: 30,
                 buttonHeight: 60,
@@ -175,9 +175,9 @@ class _ProjetPageState extends State<ProjetPage> {
                   //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
                   isDense: true,
                   contentPadding: EdgeInsets.zero,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
+                  // border: OutlineInputBorder(
+                  //   borderRadius: BorderRadius.circular(15),
+                  // ),
                   //Add more decoration as you want here
                   //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
                 ),
@@ -190,7 +190,7 @@ class _ProjetPageState extends State<ProjetPage> {
                       ),
                 icon: const Icon(
                   Icons.arrow_drop_down,
-                  color: Colors.black45,
+                  // color: Colors.black45,
                 ),
                 iconSize: 30,
                 buttonHeight: 60,
@@ -235,9 +235,9 @@ class _ProjetPageState extends State<ProjetPage> {
                   ),
                   hintText: 'Enter Your Market value.',
                   hintStyle: const TextStyle(fontSize: 14),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
+                  // border: OutlineInputBorder(
+                  //   borderRadius: BorderRadius.circular(15),
+                  // ),
                 ),
                 onChanged: (value) {
                   setState(() {

@@ -152,9 +152,9 @@ class _MeetingPageState extends State<MeetingPage> {
                   ),
                 ),
               ),
-              const SizedBox(
-                width: 40,
-              ),
+              // const SizedBox(
+              //   width: 40,
+              // ),
             ],
           ),
           centerTitle: true,
@@ -164,28 +164,40 @@ class _MeetingPageState extends State<MeetingPage> {
           child: Column(
             children: [
               SizedBox(height: 20,),
-              Text("calendrier !"),
+              Text("Calendrier",
+              style: TextStyle(fontSize: 30)),
               // Container(height: 50,
               // child: Text("expert"),),
-              SfCalendar(
-                view: CalendarView.week,
-                dataSource: MeetingDataSource(_getDataSource()),
-                timeSlotViewSettings:
-                    (TimeSlotViewSettings(startHour: 9, endHour: 18)),
-                monthViewSettings: MonthViewSettings(
-                    appointmentDisplayMode:
-                        MonthAppointmentDisplayMode.appointment),
-                // loadMoreWidgetBuilder: (BuildContext context, LoadMoreCallback loadMoreCallback) {
-                //   return FutureBuilder(
-                //     future: loadMoreCallback(),
-                //     builder: (context, snapshot) {
-                //       return Container(
-                //         alignment: Alignment.center,
-                //         child:
-                //       )
-                //     }
-                //     );
-                // },
+              Padding(
+                padding: EdgeInsets.only(left : 10, top: 15, right: 10),
+                child: Container(
+                  height: 500,
+                  decoration: BoxDecoration(
+                    borderRadius: 
+                    const BorderRadius.all(Radius.circular(5)),
+                    color: Color(0xff6a6a6a),
+                  ),
+                  child: SfCalendar(
+                    view: CalendarView.week,
+                    dataSource: MeetingDataSource(_getDataSource()),
+                    timeSlotViewSettings:
+                        (TimeSlotViewSettings(startHour: 9, endHour: 19)),
+                    monthViewSettings: MonthViewSettings(
+                        appointmentDisplayMode:
+                            MonthAppointmentDisplayMode.appointment),
+                    // loadMoreWidgetBuilder: (BuildContext context, LoadMoreCallback loadMoreCallback) {
+                    //   return FutureBuilder(
+                    //     future: loadMoreCallback(),
+                    //     builder: (context, snapshot) {
+                    //       return Container(
+                    //         alignment: Alignment.center,
+                    //         child:
+                    //       )
+                    //     }
+                    //     );
+                    // },
+                  ),
+                ),
               ),
 
               TextButton(
@@ -232,6 +244,14 @@ class _MeetingPageState extends State<MeetingPage> {
                                           Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: <Widget>[
+                                              Align(
+                                                alignment: Alignment.topRight, 
+                                                child: ElevatedButton.icon(
+                                                  onPressed: () => Get.back(), 
+                                                icon: Icon(Icons.cancel_outlined), 
+                                                label: Text("")
+                                                ),
+                                              ),
                                               Padding(
                                                   padding: EdgeInsets.all(8.0),
                                                   child: TextFormField(

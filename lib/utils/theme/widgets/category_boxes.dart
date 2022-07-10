@@ -43,7 +43,9 @@ class _CategoryBoxesState extends State<CategoryBoxes> {
             child: Center(
               child: Padding(
                 padding:  EdgeInsets.symmetric(horizontal: 16.w, vertical: 13.h),
-                child: Text(widget.text!, style: TextStyle(color: Colors.white, fontSize:  17.sp, fontWeight: FontWeight.normal),),
+                child: Text(widget.text!, style: TextStyle(
+                  color: Colors.white, 
+                  fontSize:  17.sp, fontWeight: FontWeight.normal),),
               ),
             ),
           ),
