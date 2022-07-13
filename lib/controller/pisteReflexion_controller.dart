@@ -2,6 +2,7 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:get/get.dart';
+import 'package:inwealth/controller/thinking_transfert.dart';
 import 'package:inwealth/utils/data/user_token_transfert.dart';
 
 class Thinking extends Equatable {
@@ -16,6 +17,11 @@ class Thinking extends Equatable {
     required this.url,
     required this.key,
   });
+
+  Thinking.fromTransfert(ThinkingTransfert transfert)
+      : id = transfert.id,
+        name = transfert.name,
+        url = transfert.url;
 
       @override
   List<Object?> get props => [id, name, url, key];

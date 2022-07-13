@@ -7,7 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Response;
+import 'package:inwealth/utils/data/data_provider.dart';
 import 'package:inwealth/view/meeting_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
 import 'package:inwealth/view/takeMeeting_page.dart';
@@ -15,6 +16,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:http/http.dart';
 
 import '../controller/expert_controller.dart';
 import 'dashboardBody_page.dart';
@@ -46,57 +48,40 @@ class _DocumentPageState extends State<DocumentPage> {
       _currentIndex2 = index;
     });
   }
-  // loadPdf() async {
-  //   PDFDocument doc = await PDFDocument.fromAsset('assets/PisteReflexion_UK.pdf');
-  //   print("test "+ doc.toString());
-  //       setState(() {
-  //     document = doc;
-  //   });
-  // print("test2 "+ document.toString());
-  // }
 
-//     static final int REQUEST_EXTERNAL_STORAGE = 1;
-//     // ignore: prefer_typing_uninitialized_variables
-//     static String[] PERMISSIONS_STORAGE = {
-//         Manifest.permission.READ_EXTERNAL_STORAGE,
-//         Manifest.permission.WRITE_EXTERNAL_STORAGE
-// };
+    Future<PDFDocument> fetchDocument(
+    String userGuid,
+  ) {
+    return PDFDocument.fromURL(
+        "${DataProvider.baseUri}/user/getReflexPatFile/$userGuid");
+  }
 
-  // static List<Widget> _widgetOptions = <Widget>[
-  //   dashboardBodyPage(),
-  //   DocumentPage(),
-  //   MeetingPage(),
-  //   Text(
-  //     'Index 3: Settings',
-  //     style: optionStyle,
-  //   ),
-  // ];
+
+  Future<File> saveDocument(
+    String userGuid,
+  ) async {
+    Directory directory = await getTemporaryDirectory();
+
+    File document = new File("${directory.path}/Réflexion_Patrimoniale_UK.pdf");
+
+    Response response =
+        await DataProvider.fetch("/user/getReflexPatFile/$userGuid");
+
+    document = await document.writeAsBytes(response.bodyBytes);
+
+    return document;
+  }
+
+  File? getDoc() {
+    saveDocument(profileController.userId).then((value) => profileController.doc = value);
+    return (profileController.doc);
+  }
 
   getPermission() async {
     Map<Permission, PermissionStatus> statuses = await [
       Permission.location,
       Permission.storage,
     ].request();
-  }
-
-  Future<void> _checkPermission() async {
-    final serviceStatus = await Permission.locationWhenInUse.serviceStatus;
-    final isGpsOn = serviceStatus == ServiceStatus.enabled;
-    if (!isGpsOn) {
-      print('Turn on location services before requesting permission.');
-      return;
-    }
-    final status = await Permission.manageExternalStorage.request();
-    // final status = await Permission.locationWhenInUse.request();
-    if (status == PermissionStatus.granted) {
-      print('Permission granted');
-    } else if (status == PermissionStatus.denied) {
-      print(
-          'Permission denied. Show a dialog and again ask for the permission');
-    } else if (status == PermissionStatus.permanentlyDenied) {
-      print('Take the user to the settings page.');
-      await openAppSettings();
-    }
   }
 
   final Completer<PDFViewController> _controller =
@@ -189,32 +174,11 @@ class _DocumentPageState extends State<DocumentPage> {
             ),
             SizedBox(
               height: 450,
-              child: SfPdfViewer.asset('assets/PisteReflexion_UK.pdf'),
-              // child: PDFView(
-              //   filePath: documentPath,
-              //   enableSwipe: true,
-              //   swipeHorizontal: true,
-              //   autoSpacing: false,
-              //   pageFling: false,
-              //   onRender: (_pages) {
-              //     setState(() {
-              //       int? pages = _pages;
-              //       bool? isReady = true;
-              //     });
-              //   },
-              //   onError: (error) {
-              //     print(error.toString());
-              //   },
-              //   onPageError: (page, error) {
-              //     print('$page: ${error.toString()}');
-              //   },
-              //   onViewCreated: (PDFViewController pdfViewController) {
-              //     _controller.complete(pdfViewController);
-              //   },
-              //   onPageChanged: (int? page, int? total) {
-              //     print('page change: $page/$total');
-              //   },
-              // ),
+              child: 
+              getDoc() == null ?
+              Text("No document load yet")
+              : 
+              SfPdfViewer.file(getDoc()!),
             ),
             Container(
               height: 20,
