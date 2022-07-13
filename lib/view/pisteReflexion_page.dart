@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:inwealth/controller/data_controller.dart';
 import 'package:inwealth/controller/expert_controller.dart';
 import 'package:inwealth/controller/store_controller.dart';
 import 'package:inwealth/view/dashboardProject_page.dart';
@@ -29,15 +30,10 @@ class pisteReflexion extends StatefulWidget {
 ThinkingController thinkingController = ThinkingController();
 List<String> lastlastTab = [];
 List<String> zzzTab = [];
+DataController test = DataController();
 
 getPistefromData() {
   int i = 0;
-  // for(int i = 0; i < thinkingController.thinkings.length; i++) {
-  //   for(int i = 0; i < thinkingController.pisteExperte.length; i++) {
-
-  //   List<String> pisterecu = thinkingController.pisteExperte.where((element) => element == )
-  //   // if ()
-  // }};
   print(thinking.pisteExperte);
   List<String> newtab = new List.from(thinking.pisteExperte)
     ..addAll(thinking.pistePrioritaire)
@@ -58,8 +54,8 @@ getPistefromData() {
       lastTab.add(element);
     }
   });
-  print("big tab :  " + newtab.toString());
-  print("last tab : " + lastTab.toString());
+  // print("big tab :  " + newtab.toString());
+  // print("last tab : " + lastTab.toString());
   // List<String> lastlastTab = [];
   if (thinking.already == false) {
     for (int w = 0; w < newtab.length; w++) {
@@ -78,10 +74,35 @@ getPistefromData() {
   //     zzzTab.add(element);
   //   }
   // });
-  print("big tab :  " + lastlastTab.toString());
+  // print("big tab :  " + lastlastTab.toString());
 }
 
+  getRetainedThink() {
+    int k = 0;
+
+
+    for(int i = 0; i < thinkingController.thinkings.length; i++) {
+      print("fuuuuuuu\n" + profileController.rtnThinking[k].toString());
+      if (thinkingController.thinkings[i].name == profileController.rtnThinking[k]) {
+        if (profileController.rtnThinking.length <= k) {
+          k++;
+        }
+        profileController.keythink.add(thinkingController.thinkings[i].key);
+      }
+    }
+    profileController.keythink = profileController.keythink.toSet().toList();
+    print("show new tab retained thinking \n" + profileController.keythink.toString() + "  fuu");
+  }
+
+
 class _pisteReflexionState extends State<pisteReflexion> {
+
+@override
+void initState() {
+  profileController.keythink == [];
+  super.initState(); 
+}
+
   @override
   Widget build(BuildContext context) {
     if (thinking.selectedPiste == []) {}
@@ -159,9 +180,12 @@ class _pisteReflexionState extends State<pisteReflexion> {
                 ],
               ),
             ),
-            TextButton(
-                
+            TextButton(     
                 onPressed: () {
+                        profileController.rtnThinking = thinking.selectedPiste;
+                        getRetainedThink();
+                        test.postRetainedThinking(profileController.userId);
+                        profileController.rtnThinking.clear();
                         profileController.currentIndex = 0;
                         Get.to(dashboardProjectPage());
                 },

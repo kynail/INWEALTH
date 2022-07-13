@@ -1,5 +1,9 @@
+import 'dart:ffi';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:inwealth/controller/pisteReflexion_controller.dart';
 import 'package:inwealth/model/profile.dart';
 import 'package:inwealth/view/dashboardBody_page.dart';
 import 'package:inwealth/view/document_page.dart';
@@ -73,6 +77,11 @@ class ProfilController extends GetxController {
   ];
 
   
+  List<String> rtnThinking = [];
+  List<String> keythink = [];
+
+
+  File? doc;
   UserTokenTransfert? userToken;
   bool finish = false;
   DateTime? date;
