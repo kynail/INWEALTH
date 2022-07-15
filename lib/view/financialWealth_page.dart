@@ -35,6 +35,7 @@ ahfu() {
   Color gold1 = Color(0xFFD5C6AC);
   Color gold2 = Color(0xFFBAAB90);
   Color gold3 = Color(0xFF97876A);
+
 saveEndProject() async {
   prefs = await SharedPreferences.getInstance();
 }
@@ -230,7 +231,10 @@ class _financialWealthState extends State<financialWealth> {
                           });
                           print("if project end on end form");
                           print(prefs!.getBool('endProject'));
+                         parameters.purposesfr[1].isend = true;
+                         print("testons testons : " + parameters.purposesfr[1].isend.toString()); 
                       profileController.endProject = true;
+                      profileController.listProjet.add(profileController.project);
                       Get.to(dashboardProjectPage());
                     },
                     child: const Text('Finish'),

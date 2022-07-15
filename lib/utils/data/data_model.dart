@@ -13,11 +13,13 @@ class ProjectModel {
   String key;
   String temps;
   String question;
+  bool isend;
   
   ProjectModel({
     required this.name,
     required this.key,
     required this.temps,
     required this.question,
+    required this.isend,
   });
 }

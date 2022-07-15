@@ -13,7 +13,9 @@ import 'package:inwealth/controller/storeBinding.dart';
 import 'package:inwealth/utils/translations.dart';
 import 'package:inwealth/utils/localization_delegate.dart';
 import 'package:inwealth/model/list.dart';
+import 'package:inwealth/view/dashboardBody_page.dart';
 import 'package:inwealth/view/dashboard_page.dart';
+import 'package:inwealth/view/dashboarddashboard.dart';
 import 'package:inwealth/view/onboard_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -161,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     bool checkValue = prefs!.containsKey('userID');
     if (checkValue == false) {
-      print("no data");
+      // print("no data");
     }
   }
 
@@ -193,8 +195,8 @@ class _MyHomePageState extends State<MyHomePage> {
       userID = prefs?.getString('userID');
       if (userID != null && profileController.userId == "") {
         profileController.userId = userID.toString();
-        print("test main");
-        print(profileController.userId);
+        // print("test main");
+        // print(profileController.userId);
       }
     });
 
@@ -203,7 +205,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // print("fuck : " + resiFisc.toString());
     // print("awesome fuck : " + profileController.residenceFiscall);
     if (profileController.residenceFiscall == "" && resiFisc != null) {
-      print("oh no ");
+      // print("oh no ");
       profileController.residenceFiscall = resiFisc.toString();
     }
   }
@@ -220,16 +222,16 @@ class _MyHomePageState extends State<MyHomePage> {
           return (FutureBuilder(
               future: getResiFisc(),
               builder: (context, snapshot) {
-                print('UserID = ' + userID.toString());
-                print('Residence Fiscale = ' + resiFisc.toString());
-                print('Residence Fiscale22 = ' +
-                    profileController.residenceFiscall.toString());
+                // print('UserID = ' + userID.toString());
+                // print('Residence Fiscale = ' + resiFisc.toString());
+                // print('Residence Fiscale22 = ' +
+                //     profileController.residenceFiscall.toString());
                 // FlutterNativeSplash.remove();
-
+ahtchoum();
                 return userID == null &&
                         profileController.residenceFiscall == ""
                     ? OnboardPage()
-                    : DashboardPage();
+                    : DashboardNavigation();
               }));
         },
         '/next': (BuildContext context) {

@@ -23,7 +23,7 @@ Color purp2 = Color(0xFF272243);
 Color gold1 = Color(0xFFD5C6AC);
 Color gold2 = Color(0xFFBAAB90);
 Color gold3 = Color(0xFF97876A);
-Parameters parameters = Parameters();
+// Parameters parameters = Parameters();
 
 class _JuridiquePageState extends State<JuridiquePage> {
   @override

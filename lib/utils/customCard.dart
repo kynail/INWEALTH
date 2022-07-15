@@ -62,18 +62,26 @@ class Cardhome extends StatelessWidget {
           child: GestureDetector(
             onTap: () {
               profileController.project = keys;
-              print(keys);
+              bool? endproject = prefs?.getBool('endProject');
+              if (endproject != null) {
+                profileController.endProject = endproject;
+              }
+              // print(keys);
               if (profileController.project == "Purchasing real estate") {
+                                print("test bool end project ");
+                // log("testteeeeeeeeeeeest");
+                print(profileController.endProject);
                 if (profileController.endProject == true) {
                   Get.to(dashboardProjectPage());
                 } else {
                   Get.to(ProjetPage());
                 }
               } else if (profileController.project == "cederEntreprise") {
-                print("if projet fini");
-                print("test print hum");
-                log("testteeeeeeeeeeeest");
+                // print("if projet fini");
+                print("test bool end project ");
+                // log("testteeeeeeeeeeeest");
                 print(profileController.endProject);
+                
                 if (profileController.endProject == true) {
                   Get.to(dashboardProjectPage());
                 } else {
@@ -312,7 +320,7 @@ class Cardhome extends StatelessWidget {
               color: Colors.amber,
             ),
             onRatingUpdate: (rating) {
-              print(rating);
+              // print(rating);
             },
           ),
         )
