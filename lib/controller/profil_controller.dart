@@ -16,6 +16,11 @@ class ProfilController extends GetxController {
   String residenceFiscall = "";
   String userId = "";
   bool endProject = false;
+  String phone = "";
+  String indic = "";
+  String mdp = "";
+  bool islog = false;
+  List<String> listProjet = [];
 
   //projet générale 
   String project = "";

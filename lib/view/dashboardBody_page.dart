@@ -43,19 +43,19 @@ ahtchoum() {
   test.getPistes().then((value) {
     if (thinking.think == null) {
       thinking.think = value;
-      print("think token : " + thinking.think.toString());
+      // print("think token : " + thinking.think.toString());
       thinking.pisteExperte = value.expertThinkings;
-      print("Piste experte : " + thinking.pisteExperte.toString());
+      // print("Piste experte : " + thinking.pisteExperte.toString());
       thinking.pistePrioritaire = value.priorityThinkings;
-      print("Piste prioritaire : " + thinking.pisteNonPrioritaire.toString());
+      // print("Piste prioritaire : " + thinking.pisteNonPrioritaire.toString());
       thinking.pisteNonPrioritaire = value.nonPriorityThinkings;
-      print(
-          "Piste non prioritaire : " + thinking.pisteNonPrioritaire.toString());
+      // print(
+      //     "Piste non prioritaire : " + thinking.pisteNonPrioritaire.toString());
     }
-    print("Piste experte : " + thinking.pisteExperte.toString());
+    // print("Piste experte : " + thinking.pisteExperte.toString());
 
     // thinking.piste = value.retainedThinkings[1];
-    print("test récupération pistes ok ");
+    // print("test récupération pistes ok ");
     // print(thinking.piste);
     // thinking.piste = va
     // profileController.userId = value.id;

@@ -10,7 +10,7 @@ import 'package:inwealth/view/onboard_page.dart';
 
 class DataController extends GetxController {
   Future<UserTokenTransfert> modifUser() async {
-    print("test" + profileController.userId);
+    print("test " + profileController.userId);
 
     String path = "/user/updateProfil/" + profileController.userId;
     // DataProvider.post(path, body: {"residenceFiscale":"France", "nationalite":"france"}).then((response)
@@ -49,7 +49,7 @@ class DataController extends GetxController {
   }
 
   Future<UserTokenTransfert> addParcours() async {
-    print("test" + profileController.userId);
+    print("test " + profileController.userId);
 
     String path = "/parcours/save/" + profileController.userId;
     // DataProvider.post(path, body: {"residenceFiscale":"France", "nationalite":"france"}).then((response)
@@ -65,7 +65,7 @@ class DataController extends GetxController {
   }
 
   Future<PisteTokenTransfert> getPistes() async {
-    print("test" + profileController.userId);
+    print("test " + profileController.userId);
 
     String path = "/user/listePiste/" + profileController.userId;
     // DataProvider.post(path, body: {"residenceFiscale":"France", "nationalite":"france"}).then((response)
@@ -101,7 +101,7 @@ class DataController extends GetxController {
     // RetainedThinkingTransfert body =
     //     RetainedThinkingTransformer.toRetainedThinkingTransfert(
     //         retainedThinkings);
-    print("save thinking");
+    // print("save thinking");
     List<Thinking>;
     String jsonTags = jsonEncode({"pisteReflexion": profileController.keythink});
     print("print save thinking : " + jsonTags);

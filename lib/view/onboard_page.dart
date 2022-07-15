@@ -6,6 +6,7 @@ import 'package:inwealth/controller/parameters.dart';
 import 'package:inwealth/utils/parameters.dart';
 import 'package:inwealth/utils/translations.dart';
 import 'package:inwealth/view/dashboard_page.dart';
+import 'package:inwealth/view/dashboarddashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../controller/store_controller.dart';
 import '../controller/profil_controller.dart';
@@ -78,18 +79,6 @@ class _OnboardPageState extends State<OnboardPage> {
   Widget build(BuildContext context) {
     saveUserToken();
 
-    List<String> country = [
-      AppLocalizations.of(context)?.translate('France', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Suisse', 0) ?? " ",
-      AppLocalizations.of(context)?.translate('Royaume-Uni', 0) ?? " ",
-      // AppLocalizations.of(context)?.translate('Belgique', 0) ?? " ",
-      // AppLocalizations.of(context)?.translate('Luxembourg', 0) ?? " ",
-      // AppLocalizations.of(context)?.translate('Monaco', 0) ?? " ",
-      // AppLocalizations.of(context)?.translate('Russie', 0) ?? " ",
-      // AppLocalizations.of(context)?.translate('Italie', 0) ?? " ",
-      // AppLocalizations.of(context)?.translate('Espagne', 0) ?? " ",
-      // AppLocalizations.of(context)?.translate('local_realEstate', 0) ?? " ",
-    ];
     String? selectedValue;
 
     return Scaffold(
@@ -187,9 +176,72 @@ class _OnboardPageState extends State<OnboardPage> {
             SizedBox(
               height: 20,
             ),
+            Padding(
+              padding: EdgeInsets.only(left: 1),
+              child: DropdownButtonFormField2(
+                decoration: InputDecoration(
+                  //Add isDense true and zero Padding.
+                  //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
+                  isDense: true,
+                  contentPadding: EdgeInsets.zero,
+                  // border: OutlineInputBorder(
+                  //   borderRadius: BorderRadius.circular(15),
+                  // ),
+                  //Add more decoration as you want here
+                  //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
+                ),
+                isExpanded: true,
+                hint: profileController.nationality != ""
+                    ? Text(profileController.nationality)
+                    : const Text(
+                        'Select your nationality',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                icon: const Icon(
+                  Icons.arrow_drop_down,
+                  // color: Colors.black45,
+                ),
+                iconSize: 30,
+                buttonHeight: 60,
+                buttonPadding: const EdgeInsets.only(left: 0, right: 8),
+                dropdownDecoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                items: parameters.nationality
+                    .map((item) => DropdownMenuItem<String>(
+                          value: item.key,
+                          child: Text(
+                            item.name,
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
+                    .toList(),
+                validator: (value) {
+                  if (profileController.nationality != "") {
+                  } else if (value == null) {
+                    return 'Please select your nationality.';
+                  }
+                },
+                onChanged: (value) {
+                  setState(() {
+                    selectedValue = value as String;
+                    profileController.nationality = selectedValue!;
+                  });
+                },
+                onSaved: (value) {
+                  selectedValue = value.toString();
+                },
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
             TextButton(
               // ignore: prefer_const_constructors
               onPressed: () {
+                print("residence " + profileController.residenceFiscall);
                 FutureBuilder(
                     future: ahfu(),
                     builder: (context, snapshot) {
@@ -217,7 +269,7 @@ class _OnboardPageState extends State<OnboardPage> {
                     'residenceFiscal', profileController.residenceFiscall);
                 print(prefs?.getString('residenceFiscal'));
                 print("fiiiiiin test");
-                Get.to(DashboardPage());
+                Get.to(DashboardNavigation());
               },
               child: Text("Next",
                   style: TextStyle(

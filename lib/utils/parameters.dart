@@ -46,9 +46,9 @@ class Parameters {
   ];
 
   List<ProjectModel> purposesfr = [
-    ProjectModel(name: "Ceder son entreprise", key: "cederEntreprise", temps: "8", question: "12"),
-    ProjectModel(name: "transmettre son entreprise à un tier", key: "france", temps: "8", question: "12"),
-    ProjectModel(name: "maitriser son impot sur la fortune", key: "france",  temps: "8", question: "12"),
+    ProjectModel(name: "Ceder son entreprise", key: "cederEntreprise", temps: "8", question: "12", isend: false),
+    ProjectModel(name: "transmettre son entreprise à un tier", key: "france", temps: "8", question: "12", isend: false),
+    ProjectModel(name: "maitriser son impot sur la fortune", key: "france",  temps: "8", question: "12", isend: false),
     // AppLocalizations.of(context)?.translate('selling_biz', 0) ?? "humk ",
   ];
 
@@ -56,14 +56,20 @@ class Parameters {
   List<DataModel> country = [
     DataModel(name: 'France'.tr, key: "france"),
     DataModel(name: 'Suisse'.tr, key: "suisse"),
-    DataModel(name: 'Belgique'.tr, key: "belgique"),
-    DataModel(name: 'Luxembourg'.tr, key: "luxembourg"),
-    DataModel(name: 'Monaco'.tr, key: "monaco"),
     DataModel(name: 'Royaume-Uni'.tr, key: "uk"),
-    DataModel(name: 'Russie'.tr, key: "russie"),
-    DataModel(name: 'Italie'.tr, key: "italie"),
-    DataModel(name: 'Espagne'.tr, key: "espagne"),
-    DataModel(name: 'Allemagne'.tr, key: "allemagne"),
+    // DataModel(name: 'Belgique'.tr, key: "belgique"),
+    // DataModel(name: 'Luxembourg'.tr, key: "luxembourg"),
+    // DataModel(name: 'Monaco'.tr, key: "monaco"),
+    // DataModel(name: 'Russie'.tr, key: "russie"),
+    // DataModel(name: 'Italie'.tr, key: "italie"),
+    // DataModel(name: 'Espagne'.tr, key: "espagne"),
+    // DataModel(name: 'Allemagne'.tr, key: "allemagne"),
+  ];
+
+  List<DataModel> indicatif = [
+    DataModel(name: '+33'.tr, key: "france"),
+    DataModel(name: '+262'.tr, key: "suisse"),
+    DataModel(name: '+123'.tr, key: "uk"),
   ];
 
   List<DataModel> nationality = [
@@ -197,6 +203,13 @@ class Parameters {
       key: "sup6",
     ),
   ];
+
+  List<DataModel> project = [
+    DataModel(name: "ceder son entreprise", key: "false"),
+    DataModel(name: "transmettre son entreprise", key: "false"),
+    DataModel(name: "maitriser son impot sur la fortune", key: "false"),
+  ];
+
 
   static List<ThinkingTransfert> thinkings = [
     ThinkingTransfert(
