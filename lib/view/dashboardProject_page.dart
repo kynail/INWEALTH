@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Response;
+
 import 'package:inwealth/controller/data_controller.dart';
+import 'package:inwealth/utils/data/data_provider.dart';
 import 'package:inwealth/view/document_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart';
 
 import '../controller/pisteReflexion_controller.dart';
 import 'dashboardBody_page.dart';
@@ -21,8 +27,30 @@ DataController test = DataController();
 
 ThinkingController thinking = ThinkingController();
 
+
+  Future<File> saveDocument(
+    String userGuid,
+  ) async {
+    Directory directory = await getTemporaryDirectory();
+
+    File document = new File("${directory.path}/Réflexion_Patrimoniale_UK.pdf");
+
+    Response response =
+        await DataProvider.fetch("/user/getReflexPatFile/$userGuid");
+
+    document = await document.writeAsBytes(response.bodyBytes);
+
+    return document;
+  }
+
+  File? getDoc() {
+    saveDocument(profileController.userId).then((value) => profileController.doc = value);
+    return (profileController.doc);
+  }
+  
 ahtchoum() {
   test.getPistes().then((value) {
+    print("list think think : " + thinking.think.toString());
     if (thinking.think == null) {
       thinking.think = value;
       print("think token : " + thinking.think.toString());
@@ -32,7 +60,10 @@ ahtchoum() {
       print("Piste prioritaire : " + thinking.pisteNonPrioritaire.toString());
       thinking.pisteNonPrioritaire = value.nonPriorityThinkings;
       print("Piste non prioritaire : " + thinking.pisteNonPrioritaire.toString());
-
+    }
+    else {
+      print("ok ok ok ok ok ok");
+      getDoc();
     }
     // thinking.piste = value.retainedThinkings[1];
     print("test récupération pistes ok ");
