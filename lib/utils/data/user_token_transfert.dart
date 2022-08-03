@@ -41,3 +41,31 @@ class PisteTokenTransfert {
     };
   }
 }
+
+class ProjetTokenTransfert {
+  final bool cederEntreprise;
+  final bool transmettreEntreprise;
+  final bool matriserImpot;
+
+  const ProjetTokenTransfert({
+    required this.cederEntreprise,
+    required this.transmettreEntreprise,
+    required this.matriserImpot,
+  });
+
+  factory ProjetTokenTransfert.fromJson(Map<String, dynamic> json) {
+    return ProjetTokenTransfert(
+      cederEntreprise: (json["cederEntreprise"]),
+      transmettreEntreprise: (json["transmettreEntreprise"]),
+      matriserImpot: (json["matriserImpot"]),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "cederEntreprise": cederEntreprise,
+      "transmettreEntreprise":  transmettreEntreprise,
+      "matriserImpot": matriserImpot,
+    };
+  }
+}

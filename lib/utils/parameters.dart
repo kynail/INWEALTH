@@ -47,8 +47,8 @@ class Parameters {
 
   List<ProjectModel> purposesfr = [
     ProjectModel(name: "Ceder son entreprise", key: "cederEntreprise", temps: "8", question: "12", isend: false),
-    ProjectModel(name: "transmettre son entreprise à un tier", key: "france", temps: "8", question: "12", isend: false),
-    ProjectModel(name: "maitriser son impot sur la fortune", key: "france",  temps: "8", question: "12", isend: false),
+    ProjectModel(name: "transmettre son entreprise à un tier", key: "transmettreEntreprise", temps: "8", question: "12", isend: false),
+    ProjectModel(name: "maitriser son impot sur la fortune", key: "matriserImpot",  temps: "8", question: "12", isend: false),
     // AppLocalizations.of(context)?.translate('selling_biz', 0) ?? "humk ",
   ];
 

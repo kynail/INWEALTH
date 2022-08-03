@@ -26,6 +26,7 @@ class _DashboardNavigationState extends State<DashboardNavigation> {
     Text(
       'Index 3: Settings',
     ),
+    Text("notification")
   ];
 
   void _onItemTapped(int index) {

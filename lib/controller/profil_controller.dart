@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:inwealth/controller/pisteReflexion_controller.dart';
 import 'package:inwealth/model/profile.dart';
+import 'package:inwealth/utils/data/data_model.dart';
 import 'package:inwealth/view/dashboardBody_page.dart';
 import 'package:inwealth/view/document_page.dart';
 import 'package:inwealth/view/meeting_page.dart';
@@ -21,6 +22,10 @@ class ProfilController extends GetxController {
   String mdp = "";
   bool islog = false;
   List<String> listProjet = [];
+
+  bool cederEntreprise = false;
+  bool transmettreEntreprise  = false;
+  bool matriserImpot = false;
 
   //projet générale 
   String project = "";
@@ -88,6 +93,7 @@ class ProfilController extends GetxController {
 
   File? doc;
   UserTokenTransfert? userToken;
+  ProjetTokenTransfert? listProjetEnd;
   bool finish = false;
   DateTime? date;
   SharedPreferences? prefs;

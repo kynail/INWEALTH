@@ -44,6 +44,9 @@ class DataController extends GetxController {
       "locality": profileController.locality,
       "type": profileController.type,
       "marketValue": profileController.marketValue,
+      "cederEntreprise": profileController.cederEntreprise,
+      "transmettreEntreprise": profileController.transmettreEntreprise,
+      "matriserImpot": profileController.matriserImpot
     }).then(
         (response) => UserTokenTransfert.fromJson(jsonDecode(response.body)));
   }
@@ -85,7 +88,7 @@ class DataController extends GetxController {
   // Future<PisteTokenTransfert> postRetainedThinking(String userGuid) async {
   //   String path = "/savePiste/$userGuid";
   //   return DataProvider.post(path, body: {
-  //     "pisteReflexion": 
+  //     "pisteReflexion":
   //       profileController.rtnThinking
   //       ,
 
@@ -103,11 +106,30 @@ class DataController extends GetxController {
     //         retainedThinkings);
     // print("save thinking");
     List<Thinking>;
-    String jsonTags = jsonEncode({"pisteReflexion": profileController.keythink});
+    String jsonTags =
+        jsonEncode({"pisteReflexion": profileController.keythink});
     print("print save thinking : " + jsonTags);
-    return DataProvider.post2(path, body: profileController.keythink).then((_) => true);
+    return DataProvider.post2(path, body: profileController.keythink)
+        .then((_) => true);
   }
 
+  Future<UserTokenTransfert> postFinishProject(
+    String userGuid,
+  ) {
+    String path = "/france/saveProject/$userGuid";
+    print("ceder entreprise TESTEST : " +
+        profileController.cederEntreprise.toString());
+    return DataProvider.post(path, body: {
+      "cederEntreprise": profileController.cederEntreprise,
+      "transmettreEntreprise": profileController.transmettreEntreprise,
+      "matriserImpot": profileController.matriserImpot
+    }).then(
+        (response) => UserTokenTransfert.fromJson(jsonDecode(response.body)));
+  }
 
-
+  Future<ProjetTokenTransfert> getListeProjet(String userGuid) async {
+    String path = "/france/getInfoProjet/$userGuid";
+    return DataProvider.fetch(path).then(
+        (response) => ProjetTokenTransfert.fromJson(jsonDecode(response.body)));
+  }
 }

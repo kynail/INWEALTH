@@ -6,6 +6,8 @@ import 'package:get/get.dart' hide Response;
 
 import 'package:inwealth/controller/data_controller.dart';
 import 'package:inwealth/utils/data/data_provider.dart';
+import 'package:inwealth/view/dashboard_page.dart';
+import 'package:inwealth/view/dashboarddashboard.dart';
 import 'package:inwealth/view/document_page.dart';
 import 'package:inwealth/view/onboard_page.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -27,27 +29,27 @@ DataController test = DataController();
 
 ThinkingController thinking = ThinkingController();
 
+Future<File> saveDocument(
+  String userGuid,
+) async {
+  Directory directory = await getTemporaryDirectory();
 
-  Future<File> saveDocument(
-    String userGuid,
-  ) async {
-    Directory directory = await getTemporaryDirectory();
+  File document = new File("${directory.path}/Réflexion_Patrimoniale_UK.pdf");
 
-    File document = new File("${directory.path}/Réflexion_Patrimoniale_UK.pdf");
+  Response response =
+      await DataProvider.fetch("/user/getReflexPatFile/$userGuid");
 
-    Response response =
-        await DataProvider.fetch("/user/getReflexPatFile/$userGuid");
+  document = await document.writeAsBytes(response.bodyBytes);
 
-    document = await document.writeAsBytes(response.bodyBytes);
+  return document;
+}
 
-    return document;
-  }
+File? getDoc() {
+  saveDocument(profileController.userId)
+      .then((value) => profileController.doc = value);
+  return (profileController.doc);
+}
 
-  File? getDoc() {
-    saveDocument(profileController.userId).then((value) => profileController.doc = value);
-    return (profileController.doc);
-  }
-  
 ahtchoum() {
   test.getPistes().then((value) {
     print("list think think : " + thinking.think.toString());
@@ -59,9 +61,9 @@ ahtchoum() {
       thinking.pistePrioritaire = value.priorityThinkings;
       print("Piste prioritaire : " + thinking.pisteNonPrioritaire.toString());
       thinking.pisteNonPrioritaire = value.nonPriorityThinkings;
-      print("Piste non prioritaire : " + thinking.pisteNonPrioritaire.toString());
-    }
-    else {
+      print(
+          "Piste non prioritaire : " + thinking.pisteNonPrioritaire.toString());
+    } else {
       print("ok ok ok ok ok ok");
       getDoc();
     }
@@ -75,8 +77,6 @@ ahtchoum() {
     // print("value 2 : " + profileController.userToken!.id);
   });
 }
-
-
 
 class _dashboardProjectPageState extends State<dashboardProjectPage> {
   String Project = "";
@@ -110,73 +110,76 @@ class _dashboardProjectPageState extends State<dashboardProjectPage> {
     });
   }
 
-@override
-void initState() {
-  print("humhumhumhum");
-  ahtchoum();
-  super.initState();
-  
-}
+  @override
+  void initState() {
+    print("humhumhumhum");
+    ahtchoum();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     print("fuuu");
     print("testhumomfg");
 
-  final thinkingController = Get.put(ThinkingController());
-    
-    
+    final thinkingController = Get.put(ThinkingController());
+
     expertController.docu = false;
     expertController.appbarCalendar = false;
 
     return Scaffold(
-      appBar: AppBar(
-        // backgroundColor: Color(0xFF665840),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Align(
-              alignment: Alignment.center,
-              child: Center(
-                child: Text(
-                  "iNwealth",
-                  style: TextStyle(
-                      fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                      fontSize: 34,
-                      fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () => Get.to(DashboardNavigation()),
+          ),
+          // backgroundColor: Color(0xFF665840),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Align(
+                alignment: Alignment.center,
+                child: Center(
+                  child: Text(
+                    "iNwealth",
+                    style: TextStyle(
+                        fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
+                        fontSize: 34,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
-            ),
-            FutureBuilder(
-                future: ahtchoum(),
-                builder: (context, snapshot) {
-                  return Image(
-                    image: AssetImage(
-                        profileController.residenceFiscall == "france"
-                            ? "assets/images/france.png"
-                            : profileController.residenceFiscall == "uk"
-                                ? "assets/royaume-uni.png"
-                                : "assets/images/switzerland.png"),
-                    height: 40,
-                    width: 40,
-                  );
-                }),
+              FutureBuilder(
+                  future: ahtchoum(),
+                  builder: (context, snapshot) {
+                    return Image(
+                      image: AssetImage(
+                          profileController.residenceFiscall == "france"
+                              ? "assets/images/france.png"
+                              : profileController.residenceFiscall == "uk"
+                                  ? "assets/royaume-uni.png"
+                                  : "assets/images/switzerland.png"),
+                      height: 40,
+                      width: 40,
+                    );
+                  }),
 
-            // SizedBox(width: 80,),
+              // SizedBox(width: 80,),
 
-            // const SizedBox(
-            //   width: 40,
-            // ),
-          ],
+              // const SizedBox(
+              //   width: 40,
+              // ),
+            ],
+          ),
+          centerTitle: true,
+          // backgroundColor: Color(0xff121421),
+
+          // backgroundColor: const Color(0xFFFFFFFF),
+          // backgroundColor: const Color(0xFFBAAB90),
         ),
-        centerTitle: true,
-        // backgroundColor: Color(0xff121421),
-
-        // backgroundColor: const Color(0xFFFFFFFF),
-        // backgroundColor: const Color(0xFFBAAB90),
-      ),
-        body: profileController.widgetOptions.elementAt(profileController.currentIndex),
+        body: profileController.widgetOptions
+            .elementAt(profileController.currentIndex),
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
