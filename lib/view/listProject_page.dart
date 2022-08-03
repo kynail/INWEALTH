@@ -31,7 +31,8 @@ class _ListProjectState extends State<ListProject> {
           height: 50,
           child: Center(child: TextButton(
             onPressed: () => Get.to(dashboardProjectPage()),
-            child: Text(profileController.listProjet[index])))
+            child:  
+            Text(profileController.listProjet[index])))
         );
       }
       , separatorBuilder: (BuildContext context, int index) => const Divider(),

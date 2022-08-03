@@ -10,7 +10,7 @@ import 'package:inwealth/view/onboard_page.dart';
 
 class DataController extends GetxController {
   Future<UserTokenTransfert> modifUser() async {
-    print("test " + profileController.userId);
+    print("test ID ID " + profileController.userId);
 
     String path = "/user/updateProfil/" + profileController.userId;
     // DataProvider.post(path, body: {"residenceFiscale":"France", "nationalite":"france"}).then((response)

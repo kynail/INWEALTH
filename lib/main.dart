@@ -24,7 +24,8 @@ import 'controller/profil_controller.dart';
 import 'controller/store_controller.dart';
 
 void main() {
-  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(MyApp());
 }
@@ -112,11 +113,11 @@ class MyApp extends StatelessWidget {
             locale: Get.deviceLocale,
             fallbackLocale: const Locale('en', 'US'),
             title: 'iNwealth',
-            initialBinding: StoreBinding(),
             theme: _lightTheme,
             darkTheme: _darkTheme,
             themeMode: ThemeMode.system,
             debugShowCheckedModeBanner: false,
+            initialBinding: StoreBinding(),
             home: const MyHomePage(title: 'Flutter Demo Home Page'),
             // routes: {
             //   'onboard': (context) => OnboardPage(),
@@ -196,7 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
       if (userID != null && profileController.userId == "") {
         profileController.userId = userID.toString();
         // print("test main");
-        // print(profileController.userId);
+        print("id id id id" + profileController.userId);
       }
     });
 
