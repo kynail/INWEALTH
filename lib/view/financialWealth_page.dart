@@ -25,16 +25,15 @@ ahfu() {
     // print("valuuuue : " + value.id.toString());
     // print("value 2 : " + profileController.userToken!.id);
   });
-  test.addParcours().then(((value) {
-
-  }));
-
+  test.addParcours().then(((value) {}));
+  test.postFinishProject(profileController.userId).then(((value) {}));
 }
-  Color purp1 = Color(0xFF5E5B74);
-  Color purp2 = Color(0xFF272243);
-  Color gold1 = Color(0xFFD5C6AC);
-  Color gold2 = Color(0xFFBAAB90);
-  Color gold3 = Color(0xFF97876A);
+
+Color purp1 = Color(0xFF5E5B74);
+Color purp2 = Color(0xFF272243);
+Color gold1 = Color(0xFFD5C6AC);
+Color gold2 = Color(0xFFBAAB90);
+Color gold3 = Color(0xFF97876A);
 
 saveEndProject() async {
   prefs = await SharedPreferences.getInstance();
@@ -119,12 +118,10 @@ class _financialWealthState extends State<financialWealth> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                                              Container(
+                Container(
                   height: 30,
                 ),
-                            Image(
-              image: AssetImage("assets/iNw_app.png")
-            ),
+                Image(image: AssetImage("assets/iNw_app.png")),
                 SizedBox(
                   height: 50,
                 ),
@@ -141,7 +138,7 @@ class _financialWealthState extends State<financialWealth> {
                     hintStyle: const TextStyle(fontSize: 14),
                     // border: OutlineInputBorder(
                     //   borderRadius: BorderRadius.circular(15),
-                    // ),
+                    // ),,
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -183,8 +180,10 @@ class _financialWealthState extends State<financialWealth> {
                 Text(netRessources.toString()),
                 const SizedBox(height: 30),
                 Container(
-                                                      decoration: BoxDecoration(color: purp1,
-                  borderRadius: BorderRadius.circular(15),),
+                  decoration: BoxDecoration(
+                    color: purp1,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                   child: TextButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -196,11 +195,11 @@ class _financialWealthState extends State<financialWealth> {
                             future: ahfu(),
                             builder: (context, snapshot) {
                               // return DashboardPage();
-                
+
                               if (snapshot.hasData) {
                                 prefs!.setString(
                                     'userID', profileController.userId);
-                
+
                                 print("ça marche ?");
                                 return DashboardPage();
                               } else if (snapshot.hasError) {
@@ -216,7 +215,7 @@ class _financialWealthState extends State<financialWealth> {
                           future: endproject(),
                           builder: (context, snapshot) {
                             // return DashboardPage();
-                
+
                             if (snapshot.hasData) {
                               prefs!.setBool('endProject', true);
                               // print("ça marche ?");
@@ -229,12 +228,15 @@ class _financialWealthState extends State<financialWealth> {
                               return DashboardPage();
                             }
                           });
-                          print("if project end on end form");
-                          print(prefs!.getBool('endProject'));
-                         parameters.purposesfr[1].isend = true;
-                         print("testons testons : " + parameters.purposesfr[1].isend.toString()); 
+                      print("if project end on end form");
+                      print(prefs!.getBool('endProject'));
+                      parameters.purposesfr[1].isend = true;
+                      print("testons testons : " +
+                          parameters.purposesfr[1].isend.toString());
                       profileController.endProject = true;
-                      profileController.listProjet.add(profileController.project);
+                      profileController.cederEntreprise = true;
+                      profileController.listProjet
+                          .add(profileController.project);
                       Get.to(dashboardProjectPage());
                     },
                     child: const Text('Finish'),

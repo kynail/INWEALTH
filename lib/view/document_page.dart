@@ -49,13 +49,12 @@ class _DocumentPageState extends State<DocumentPage> {
     });
   }
 
-    Future<PDFDocument> fetchDocument(
+  Future<PDFDocument> fetchDocument(
     String userGuid,
   ) {
     return PDFDocument.fromURL(
         "${DataProvider.baseUri}/user/getReflexPatFile/$userGuid");
   }
-
 
   Future<File> saveDocument(
     String userGuid,
@@ -73,7 +72,8 @@ class _DocumentPageState extends State<DocumentPage> {
   }
 
   File? getDoc() {
-    saveDocument(profileController.userId).then((value) => profileController.doc = value);
+    saveDocument(profileController.userId)
+        .then((value) => profileController.doc = value);
     return (profileController.doc);
   }
 
@@ -118,8 +118,7 @@ class _DocumentPageState extends State<DocumentPage> {
   Widget build(BuildContext context) {
     // _checkPermission();
     // loadPdf();
-    return 
-    Scaffold(
+    return Scaffold(
         appBar: expertController.docu != false
             ? AppBar(
                 // backgroundColor: Color(0xFF665840),
@@ -130,8 +129,7 @@ class _DocumentPageState extends State<DocumentPage> {
                       image: AssetImage(
                           profileController.residenceFiscall == "france"
                               ? "assets/images/france.png"
-                              : profileController.residenceFiscall ==
-                                      "uk"
+                              : profileController.residenceFiscall == "uk"
                                   ? "assets/royaume-uni.png"
                                   : "assets/images/switzerland.png"),
                       height: 40,
@@ -144,9 +142,9 @@ class _DocumentPageState extends State<DocumentPage> {
                         child: Text(
                           "INWEALTH",
                           style: TextStyle(
-                              fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
-                              // color: Color(0xFF524D69)
-                              ),
+                            fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
+                            // color: Color(0xFF524D69)
+                          ),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -174,11 +172,9 @@ class _DocumentPageState extends State<DocumentPage> {
             ),
             SizedBox(
               height: 450,
-              child: 
-              getDoc() == null ?
-              Text("No document load yet")
-              : 
-              SfPdfViewer.file(getDoc()!),
+              child: getDoc() == null
+                  ? Text("No document load yet")
+                  : SfPdfViewer.file(getDoc()!),
             ),
             Container(
               height: 20,
@@ -188,34 +184,34 @@ class _DocumentPageState extends State<DocumentPage> {
                 child: Text('Take appointment and download')),
           ],
         ),
-        bottomNavigationBar: expertController.docu != false ?
-        BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              backgroundColor: gold1,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.picture_as_pdf),
-              label: 'Business',
-              backgroundColor: purp1,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_month),
-              label: 'Meeting',
-              backgroundColor: gold3,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-              backgroundColor: purp2,
-            ),
-          ],
-          currentIndex: _currentIndex2,
-          selectedItemColor: Colors.amber[800],
-          onTap: _onItemTapped,
-        ) :null
-        );
+        bottomNavigationBar: expertController.docu != false
+            ? BottomNavigationBar(
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home),
+                    label: 'Home',
+                    backgroundColor: gold1,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.picture_as_pdf),
+                    label: 'Business',
+                    backgroundColor: purp1,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.calendar_month),
+                    label: 'Meeting',
+                    backgroundColor: gold3,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.settings),
+                    label: 'Settings',
+                    backgroundColor: purp2,
+                  ),
+                ],
+                currentIndex: _currentIndex2,
+                selectedItemColor: Colors.amber[800],
+                onTap: _onItemTapped,
+              )
+            : null);
   }
 }
