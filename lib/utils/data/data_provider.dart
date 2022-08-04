@@ -52,6 +52,18 @@ abstract class DataProvider {
     return response;
   }
 
+  static Future<http.Response> post3(String path, {Object? body}) async {
+    String stringifiedBody = jsonEncode(body);
+
+    Uri uri = Uri.parse(baseUri + path);
+    http.Response response = await http.post(uri,
+        headers: {"content-type": "application/json"}, body: body);
+
+    dataObserver.onPost(uri, response);
+
+    return response;
+  }
+
   static Future<http.Response> put(String path, {Object? body}) async {
     String stringifiedBody = jsonEncode(body);
 

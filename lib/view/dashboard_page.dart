@@ -288,7 +288,6 @@ class _DashboardPageState extends State<DashboardPage>
                   Container(
                     height: 50.h,
                     child: ListView(
-<<<<<<< HEAD
                       children: <Widget>[
                         Container(
                           height: 50.h,
@@ -307,6 +306,14 @@ class _DashboardPageState extends State<DashboardPage>
                                 text: "Patrimoine Professionnel",
                                 onPressed: (value) => print(value),
                               ),
+                                                      CategoryBoxes(
+                          text: "Privé",
+                          onPressed: (value) => print(value),
+                        ),
+                        CategoryBoxes(
+                          text: "Immobilier",
+                          onPressed: (value) => print(value),
+                        ),
                               // CategoryBoxes(
                               //   text: "Privé",
                               //   onPressed: (value) => print(value),
@@ -340,30 +347,8 @@ class _DashboardPageState extends State<DashboardPage>
                                   fontSize: 14.w),
                             ),
                           ),
-=======
-                      physics: BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        SizedBox(
-                          width: 28.w,
                         ),
-                        CategoryBoxes(
-                          text: "Dirigeant",
-                          onPressed: (value) => print(value),
-                        ),
-                        CategoryBoxes(
-                          text: "Entreprise",
-                          onPressed: (value) => print(value),
->>>>>>> 2e2346edadfa8528f3bc2216d92a934db9f7bbf8
-                        ),
-                        CategoryBoxes(
-                          text: "Privé",
-                          onPressed: (value) => print(value),
-                        ),
-                        CategoryBoxes(
-                          text: "Immobilier",
-                          onPressed: (value) => print(value),
-                        ),
+
                       ],
                     ),
                   ),

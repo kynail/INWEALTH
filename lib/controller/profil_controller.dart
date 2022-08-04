@@ -22,7 +22,7 @@ class ProfilController extends GetxController {
   String mdp = "";
   bool islog = false;
   List<String> listProjet = [];
-
+  DateTime? meeting;
   bool cederEntreprise = false;
   bool transmettreEntreprise  = false;
   bool matriserImpot = false;
