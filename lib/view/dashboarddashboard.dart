@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:inwealth/controller/data_controller.dart';
 import 'package:inwealth/view/dashboardBody_page.dart';
 import 'package:inwealth/view/dashboard_page.dart';
 import 'package:inwealth/view/document_page.dart';
@@ -19,6 +20,8 @@ class DashboardNavigation extends StatefulWidget {
 int _currentIndex2 = 0;
 
 class _DashboardNavigationState extends State<DashboardNavigation> {
+  DataController test = DataController();
+
   static List<Widget> _widgetOptions = <Widget>[
     DashboardPage(),
     ListProject(),
@@ -35,13 +38,46 @@ class _DashboardNavigationState extends State<DashboardNavigation> {
     });
   }
 
+  getMeeting() {
+    test.getMeeting(profileController.userId).then((value) {
+      print("VALUE VALUE : " + value.toString());
+      profileController.date = DateTime.parse(value.meeting);
+      print("VALUE DATE VALUE DATE : " + profileController.date.toString());
+      // profileController.date = DateTime.fromMillisecondsSinceEpoch(int.parse(value.meeting));
+    });
+    print("MEETING MEETING : " + profileController.date.toString());
+  }
+
+  getListProject() {
+    getMeeting();
+    test.getListeProjet(profileController.userId).then((value) {
+      profileController.listProjetEnd = value;
+      if (profileController.listProjetEnd?.cederEntreprise == true &&
+          profileController.listProjet.contains("Ceder Entreprise") == false) {
+        profileController.listProjet.add("Ceder Entreprise");
+      }
+      if (profileController.listProjetEnd?.transmettreEntreprise == true &&
+          profileController.listProjet.contains("Transmettre Entreprise") ==
+              false) {
+        profileController.listProjet.add("Transmettre Entreprise");
+      }
+      if (profileController.listProjetEnd?.matriserImpot == true &&
+          profileController.listProjet.contains("Maitriser Impot") == false) {
+        profileController.listProjet.add("Maitriser Impot");
+      }
+      // profileController.listProjet.add(profileController.listProjetEnd.cederEntreprise);
+      print("TESTESTEST liste de projet BOOL : " +
+          profileController.listProjetEnd!.cederEntreprise.toString());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     ahtchoum();
-                    print("test bool end project ");
-                // log("testteeeeeeeeeeeest");
-                print(profileController.endProject);
+    getListProject();
+    print("test bool end project ");
+    // log("testteeeeeeeeeeeest");
+    print(profileController.endProject);
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Color(0xFF665840),
@@ -56,7 +92,7 @@ class _DashboardNavigationState extends State<DashboardNavigation> {
                   style: TextStyle(
                       // fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
                       fontSize: 34,
-                      // color: Colors.black,
+                      color: Colors.black,
                       fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
@@ -94,8 +130,8 @@ class _DashboardNavigationState extends State<DashboardNavigation> {
       bottomNavigationBar: profileController.islog == false
           ? TextButton(
               onPressed: () => Get.to(LoginPage()),
-              child: const Text(
-                'INwealth ? Connectez-vous',
+              child: Text(
+                'Connect'.tr,
                 // style: TextStyle(color: Colors.white),
                 textAlign: TextAlign.center,
               ),

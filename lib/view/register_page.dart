@@ -70,9 +70,13 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           children: [
             SizedBox(
-              height: 120,
+              height: 20,
             ),
-            Text("Register"),
+            Image(image: AssetImage("assets/iNw_app.png")),
+            SizedBox(
+              height: 10,
+            ),
+            Text("register".tr),
             SizedBox(
               height: 30,
             ),
@@ -89,10 +93,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
               ),
               isExpanded: true,
-              hint: profileController.residenceFiscall != ""
-                  ? Text(profileController.residenceFiscall)
-                  : const Text(
-                      'Select your indicatif',
+              hint: profileController.indic != ""
+                  ? Text(profileController.indic)
+                  : Text(
+                      'indicatif'.tr,
                       style: TextStyle(fontSize: 14),
                     ),
               icon: const Icon(
@@ -101,11 +105,11 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               iconSize: 30,
               buttonHeight: 60,
-              buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+              // buttonPadding: const EdgeInsets.only(left: 20, right: 10),
               dropdownDecoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
               ),
-              items: parameters.country
+              items: parameters.indicatif
                   .map((item) => DropdownMenuItem<String>(
                         value: item.key,
                         child: Text(
@@ -146,7 +150,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   horizontal: 0,
                   vertical: 0,
                 ),
-                hintText: 'Enter Your phone number.',
+                hintText: 'phone'.tr,
                 hintStyle: const TextStyle(fontSize: 14),
                 // border: OutlineInputBorder(
                 //   borderRadius: BorderRadius.circular(15),
@@ -171,7 +175,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   horizontal: 0,
                   vertical: 0,
                 ),
-                hintText: 'Enter Your Password.',
+                hintText: 'password'.tr,
                 hintStyle: const TextStyle(fontSize: 14),
                 // border: OutlineInputBorder(
                 //   borderRadius: BorderRadius.circular(15),
@@ -192,9 +196,17 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             // Text("forget password ?"),
             // SizedBox(height: 30,),
-            TextButton(
-                onPressed: () => Get.to(LoginPage()),
-                child: Text("Register and return to login page"))
+            Container(
+              height: 60,
+              width: 250,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: Color(0xFF7F7A93)),
+              child: TextButton(
+                  onPressed: () => Get.to(LoginPage()),
+                  child: Text("return".tr,
+                  style: TextStyle(color: Colors.white) )),
+            )
           ],
         ),
       ),

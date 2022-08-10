@@ -90,6 +90,7 @@ class _OnboardPageState extends State<OnboardPage> {
             child: Text(
               "iNwealth",
               style: TextStyle(
+                color: Colors.black,
                 fontFamily: 'assets/fonts/SFPRODISPLAYBOLD.OTF',
                 // color: Color(0xFF524D69)
               ),
@@ -111,6 +112,9 @@ class _OnboardPageState extends State<OnboardPage> {
             SizedBox(
               height: 50,
             ),
+            SizedBox(height: 10,),
+            
+            SizedBox(height: 10,),
             DropdownButtonFormField2(
               decoration: InputDecoration(
                 //Add isDense true and zero Padding.
@@ -126,8 +130,8 @@ class _OnboardPageState extends State<OnboardPage> {
               isExpanded: true,
               hint: profileController.residenceFiscall != ""
                   ? Text(profileController.residenceFiscall)
-                  : const Text(
-                      'Select your country',
+                  : Text(
+                      'Country'.tr,
                       style: TextStyle(fontSize: 14),
                     ),
               icon: const Icon(
@@ -154,7 +158,7 @@ class _OnboardPageState extends State<OnboardPage> {
               validator: (value) {
                 if (profileController.residenceFiscall != "") {
                 } else if (value == null) {
-                  return 'Please select your country.';
+                  return 'PlzCountry'.tr;
                 }
               },
               onChanged: (value) {
@@ -193,8 +197,8 @@ class _OnboardPageState extends State<OnboardPage> {
                 isExpanded: true,
                 hint: profileController.nationality != ""
                     ? Text(profileController.nationality)
-                    : const Text(
-                        'Select your nationality',
+                    : Text(
+                        'Nationality'.tr,
                         style: TextStyle(fontSize: 14),
                       ),
                 icon: const Icon(
@@ -203,7 +207,7 @@ class _OnboardPageState extends State<OnboardPage> {
                 ),
                 iconSize: 30,
                 buttonHeight: 60,
-                buttonPadding: const EdgeInsets.only(left: 0, right: 8),
+              buttonPadding: const EdgeInsets.only(left: 20, right: 10),
                 dropdownDecoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -221,7 +225,7 @@ class _OnboardPageState extends State<OnboardPage> {
                 validator: (value) {
                   if (profileController.nationality != "") {
                   } else if (value == null) {
-                    return 'Please select your nationality.';
+                    return 'plzNationality'.tr;
                   }
                 },
                 onChanged: (value) {
@@ -236,45 +240,57 @@ class _OnboardPageState extends State<OnboardPage> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 50,
             ),
-            TextButton(
-              // ignore: prefer_const_constructors
-              onPressed: () {
-                print("residence " + profileController.residenceFiscall);
-                FutureBuilder(
-                    future: ahfu(),
-                    builder: (context, snapshot) {
-                      // return DashboardPage();
-
-                      if (snapshot.hasData) {
-                        prefs!.setString(
-                            'userID', profileController.userToken!.id);
-                        prefs!.setString('residenceFiscal',
-                            profileController.residenceFiscall);
-                        print("ça marche ?");
-                        return DashboardPage();
-                      } else if (snapshot.hasError) {
-                        print("fuuu error");
-                        return DashboardPage();
-                      } else {
-                        print("fuuu deuxieme error");
-                        return DashboardPage();
-                      }
-                    });
-
-                print("ben ben ben : " + profileController.residenceFiscall);
-                print("teeeeeeeest");
-                prefs!.setString(
-                    'residenceFiscal', profileController.residenceFiscall);
-                print(prefs?.getString('residenceFiscal'));
-                print("fiiiiiin test");
-                Get.to(DashboardNavigation());
-              },
-              child: Text("Next",
-                  style: TextStyle(
-                      // color: Color(0xFF524D69)
-                      )),
+            Container(
+              height: 40,
+              width: 140,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                color: Color(0xFF7F7A93)
+              ),
+              child: TextButton(
+                // ignore: prefer_const_constructors
+                onPressed: () {
+                  print("residence " + profileController.residenceFiscall);
+                  FutureBuilder(
+                      future: ahfu(),
+                      builder: (context, snapshot) {
+                        // return DashboardPage();
+            
+                        if (snapshot.hasData) {
+                          prefs!.setString(
+                              'userID', profileController.userToken!.id);
+                          prefs!.setString('residenceFiscal',
+                              profileController.residenceFiscall);
+                          print("ça marche ?");
+                          return DashboardPage();
+                        } else if (snapshot.hasError) {
+                          print("fuuu error");
+                          return DashboardPage();
+                        } else {
+                          print("fuuu deuxieme error");
+                          return DashboardPage();
+                        }
+                      });
+            
+                  print("ben ben ben : " + profileController.residenceFiscall);
+                  print("teeeeeeeest");
+                  prefs!.setString(
+                      'residenceFiscal', profileController.residenceFiscall);
+                  print(prefs?.getString('residenceFiscal'));
+                  print("fiiiiiin test");
+                  if (profileController.residenceFiscall != "" && profileController.nationality != "") {
+                    Get.to(DashboardNavigation());
+                  }
+                  else {
+                  }
+                },
+                child: Text("Next",
+                    style: TextStyle(
+                        color: Colors.white
+                        )),
+              ),
             ),
           ],
         ),

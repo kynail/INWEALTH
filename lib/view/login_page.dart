@@ -21,9 +21,6 @@ String mdp = "";
 bool isObscur = true;
 
 class _LoginPageState extends State<LoginPage> {
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,11 +77,15 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: [
               SizedBox(
-                height: 120,
+                height: 10,
               ),
-              Text("Se connecter"),
+            Image(image: AssetImage("assets/iNw_app.png")),
               SizedBox(
-                height: 30,
+                height: 10,
+              ),
+              Text("connexion".tr),
+              SizedBox(
+                height: 20,
               ),
               DropdownButtonFormField2(
                 decoration: InputDecoration(
@@ -99,10 +100,10 @@ class _LoginPageState extends State<LoginPage> {
                   //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
                 ),
                 isExpanded: true,
-                hint: profileController.residenceFiscall != ""
+                hint: profileController.indic != ""
                     ? Text(profileController.indic)
-                    : const Text(
-                        'Select your indicatif',
+                    : Text(
+                        'indicatif'.tr,
                         style: TextStyle(fontSize: 14),
                       ),
                 icon: const Icon(
@@ -111,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 iconSize: 30,
                 buttonHeight: 60,
-                buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                // buttonPadding: const EdgeInsets.only(left: 20, right: 10),
                 dropdownDecoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -148,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               TextFormField(
                 keyboardType: TextInputType.number,
@@ -157,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                     horizontal: 0,
                     vertical: 0,
                   ),
-                  hintText: 'Enter Your phone number.',
+                  hintText: 'phone'.tr,
                   hintStyle: const TextStyle(fontSize: 14),
                   // border: OutlineInputBorder(
                   //   borderRadius: BorderRadius.circular(15),
@@ -193,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                     horizontal: 0,
                     vertical: 0,
                   ),
-                  hintText: 'Enter Your Password.',
+                  hintText: 'password'.tr,
                   hintStyle: const TextStyle(fontSize: 14),
                   // border: OutlineInputBorder(
                   //   borderRadius: BorderRadius.circular(15),
@@ -212,27 +213,44 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 30,
               ),
-              TextButton(
-                  onPressed: () {
-                    if (mdp == profileController.mdp &&
-                        phone == profileController.phone) {
-                      profileController.islog = true;
-                      Get.to(DashboardNavigation());
-                    } else {
-                      SnackBar(content: Text("Password or number is wrong"));
-                    }
-                  },
-                  child: Text("Log in")),
-              SizedBox(
-                height: 30,
+              Container(
+                height: 40,
+                width: 140,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: Color(0xFF7F7A93)),
+                child: TextButton(
+                    onPressed: () {
+                      if (mdp == profileController.mdp &&
+                          phone == profileController.phone) {
+                        profileController.islog = true;
+                        Get.to(DashboardNavigation());
+                      } else {
+                        SnackBar(content: Text("wrong".tr));
+                      }
+                    },
+                    child: Text("login".tr,
+                    style: TextStyle(color: Colors.white))),
               ),
-              Text("forget password ?"),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
-              TextButton(
+              Container(
+                height: 40,
+                width: 140,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: Color(0xFF7F7A93)),
+                child: TextButton(
                   onPressed: () => Get.to(RegisterPage()),
-                  child: Text("Register"))
+                  child: Text("register".tr,
+                      style: TextStyle(color: Colors.white)),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Text("forget".tr),
             ],
           ),
         ),

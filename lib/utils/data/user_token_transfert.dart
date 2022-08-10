@@ -69,3 +69,19 @@ class ProjetTokenTransfert {
     };
   }
 }
+
+class MeetingTokenTransfert {
+  final String meeting;
+
+  MeetingTokenTransfert({required this.meeting});
+
+  factory MeetingTokenTransfert.fromJson(Map<String, dynamic> json) {
+    return MeetingTokenTransfert(meeting: json["meeting"]);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "meeting": meeting,
+    };
+  }
+}

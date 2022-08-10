@@ -46,9 +46,9 @@ class Parameters {
   ];
 
   List<ProjectModel> purposesfr = [
-    ProjectModel(name: "Ceder son entreprise", key: "cederEntreprise", temps: "8", question: "12", isend: false),
-    ProjectModel(name: "transmettre son entreprise à un tier", key: "transmettreEntreprise", temps: "8", question: "12", isend: false),
-    ProjectModel(name: "maitriser son impot sur la fortune", key: "matriserImpot",  temps: "8", question: "12", isend: false),
+    ProjectModel(name: "cederEntreprise".tr, key: "cederEntreprise", temps: "8", question: "12", isend: false),
+    ProjectModel(name: "transmettreEntreprise".tr, key: "transmettreEntreprise", temps: "8", question: "12", isend: false),
+    ProjectModel(name: "maitriserImpot".tr, key: "matriserImpot",  temps: "8", question: "12", isend: false),
     // AppLocalizations.of(context)?.translate('selling_biz', 0) ?? "humk ",
   ];
 
@@ -67,22 +67,23 @@ class Parameters {
   ];
 
   List<DataModel> indicatif = [
-    DataModel(name: '+33'.tr, key: "france"),
-    DataModel(name: '+262'.tr, key: "suisse"),
-    DataModel(name: '+123'.tr, key: "uk"),
+    DataModel(name: '+33', key: "france"),
+    DataModel(name: '+352', key: "luxembourg"),
+    DataModel(name: '+41', key: "suisse"),
+    DataModel(name: '+44', key: "uk"),
   ];
 
   List<DataModel> nationality = [
-    DataModel(name: 'French', key: "france"),
-    DataModel(name: 'Swiss', key: "suisse"),
-    DataModel(name: 'Belgian', key: "belgique"),
-    DataModel(name: 'Luxembourgish', key: "luxembourg"),
-    DataModel(name: 'Monegasque', key: "monaco"),
-    DataModel(name: 'British', key: "uk"),
-    DataModel(name: 'Russian', key: "russie"),
-    DataModel(name: 'Italian', key: "italie"),
-    DataModel(name: 'Spanish', key: "espagne"),
-    DataModel(name: 'German', key: "allemagne"),
+    DataModel(name: 'French'.tr, key: "france"),
+    DataModel(name: 'Swiss'.tr, key: "suisse"),
+    DataModel(name: 'Belgian'.tr, key: "belgique"),
+    DataModel(name: 'Luxembourgish'.tr, key: "luxembourg"),
+    DataModel(name: 'Monegasque'.tr, key: "monaco"),
+    DataModel(name: 'British'.tr, key: "uk"),
+    DataModel(name: 'Russian'.tr, key: "russie"),
+    DataModel(name: 'Italian'.tr, key: "italie"),
+    DataModel(name: 'Spanish'.tr, key: "espagne"),
+    DataModel(name: 'German'.tr, key: "allemagne"),
   ];
 
   List<DataModel> familySituations = [

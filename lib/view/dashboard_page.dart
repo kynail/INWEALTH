@@ -144,7 +144,7 @@ class _DashboardPageState extends State<DashboardPage>
     print(profileController.endProject.toString() + " 11");
     print(endproject);
     if (endproject != null) {
-  // profileController.endProject = prefs!.getBool('endProject')!;
+      // profileController.endProject = prefs!.getBool('endProject')!;
 
       // print("humhumhum : " + endproject.toString());
       profileController.endProject = endproject!;
@@ -165,7 +165,6 @@ class _DashboardPageState extends State<DashboardPage>
     print("test bool end project 11");
     // log("testteeeeeeeeeeeest");
     print(profileController.endProject);
-
 
     print("if project end on end form 22");
     // print(prefs!.getBool('endProject'));
@@ -299,21 +298,21 @@ class _DashboardPageState extends State<DashboardPage>
                                 width: 28.w,
                               ),
                               CategoryBoxes(
-                                text: "Patrimoine Privé",
+                                text: "Prive".tr,
                                 onPressed: (value) => print(value),
                               ),
                               CategoryBoxes(
-                                text: "Patrimoine Professionnel",
+                                text: "Professionnel".tr,
                                 onPressed: (value) => print(value),
                               ),
-                                                      CategoryBoxes(
-                          text: "Privé",
-                          onPressed: (value) => print(value),
-                        ),
-                        CategoryBoxes(
-                          text: "Immobilier",
-                          onPressed: (value) => print(value),
-                        ),
+                              //                               CategoryBoxes(
+                              //   text: "Privé",
+                              //   onPressed: (value) => print(value),
+                              // ),
+                              // CategoryBoxes(
+                              //   text: "Immobilier",
+                              //   onPressed: (value) => print(value),
+                              // ),
                               // CategoryBoxes(
                               //   text: "Privé",
                               //   onPressed: (value) => print(value),
@@ -348,7 +347,6 @@ class _DashboardPageState extends State<DashboardPage>
                             ),
                           ),
                         ),
-
                       ],
                     ),
                   ),
@@ -364,8 +362,7 @@ class _DashboardPageState extends State<DashboardPage>
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        AppLocalizations.of(context)?.translate('projet', 0) ??
-                            "Project.",
+                            "projet".tr,
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             color: Color(0xff515979),
@@ -412,9 +409,7 @@ class _DashboardPageState extends State<DashboardPage>
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        AppLocalizations.of(context)
-                                ?.translate('iSolution', 0) ??
-                            "International Solutions",
+                            "iSolution".tr,
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             color: Color(0xff515979),
