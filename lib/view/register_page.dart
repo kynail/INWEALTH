@@ -15,6 +15,11 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  postLogin() {
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

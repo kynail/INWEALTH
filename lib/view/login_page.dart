@@ -223,7 +223,7 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       if (mdp == profileController.mdp &&
                           phone == profileController.phone) {
-                        profileController.islog = true;
+                        profileController.iflog = true;
                         Get.to(DashboardNavigation());
                       } else {
                         SnackBar(content: Text("wrong".tr));

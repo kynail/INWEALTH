@@ -64,7 +64,7 @@ class ProjetTokenTransfert {
   Map<String, dynamic> toJson() {
     return {
       "cederEntreprise": cederEntreprise,
-      "transmettreEntreprise":  transmettreEntreprise,
+      "transmettreEntreprise": transmettreEntreprise,
       "matriserImpot": matriserImpot,
     };
   }
@@ -82,6 +82,37 @@ class MeetingTokenTransfert {
   Map<String, dynamic> toJson() {
     return {
       "meeting": meeting,
+    };
+  }
+}
+
+class LoginTokenTransfert {
+  final String phone;
+  final String indic;
+  final String mdp;
+  final String iflog;
+
+  LoginTokenTransfert({
+    required this.phone,
+    required this.indic,
+    required this.mdp,
+    required this.iflog,
+  });
+
+  factory LoginTokenTransfert.fromJson(Map<String, dynamic> json) {
+    return LoginTokenTransfert(
+        phone: json["phone"],
+        indic: json["indic"],
+        mdp: json['mdp'],
+        iflog: json['iflog']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "phone": phone,
+      "indic": indic,
+      "mdp": mdp,
+      "iflog": iflog,
     };
   }
 }

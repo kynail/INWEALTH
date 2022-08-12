@@ -65,8 +65,6 @@ class ProfilController extends GetxController {
   bool petitEnfant = false;
   String nbrpetitEnfant = "0";
 
-
-
   // wealth questions
   String wealth = "";
   String grossAnual = "0";
@@ -90,7 +88,7 @@ class ProfilController extends GetxController {
   List<String> rtnThinking = [];
   List<String> keythink = [];
 
-
+  bool iflog = false;
   File? doc;
   UserTokenTransfert? userToken;
   ProjetTokenTransfert? listProjetEnd;

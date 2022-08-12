@@ -127,7 +127,7 @@ class _DashboardNavigationState extends State<DashboardNavigation> {
         // backgroundColor: const Color(0xFFBAAB90),
       ),
       body: _widgetOptions.elementAt(_currentIndex2),
-      bottomNavigationBar: profileController.islog == false
+      bottomNavigationBar: profileController.iflog == false
           ? TextButton(
               onPressed: () => Get.to(LoginPage()),
               child: Text(

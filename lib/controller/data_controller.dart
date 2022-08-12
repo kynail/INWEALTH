@@ -150,20 +150,23 @@ class DataController extends GetxController {
         (response) => MeetingTokenTransfert.fromJson(jsonDecode(response.body)));
   }
 
-    Future<MeetingTokenTransfert> postLogin(
+    Future<LoginTokenTransfert> postLogin(
     String userGuid,
   ) {
-    String path = "/meeting/saveMeeting/$userGuid";
+    String path = "/login/saveLogin/$userGuid";
     print("ceder entreprise TESTEST : " + profileController.date.toString());
     return DataProvider.post(path, body: {
-      "meeting": profileController.date!.millisecondsSinceEpoch,
+      "phone": profileController.phone,
+      "indic": profileController.indic,
+      "mdp": profileController.mdp,
+      "iflog": profileController.iflog,
     }).then(
-        (response) => MeetingTokenTransfert.fromJson(jsonDecode(response.body)));
+        (response) => LoginTokenTransfert.fromJson(jsonDecode(response.body)));
   }
 
-  Future<MeetingTokenTransfert> getLogin(String userGuid) async {
-    String path = "/meeting/getMeeting/$userGuid";
+  Future<LoginTokenTransfert> getLogin(String userGuid) async {
+    String path = "/login/getLogin/$userGuid";
     return DataProvider.fetch(path).then(
-        (response) => MeetingTokenTransfert.fromJson(jsonDecode(response.body)));
+        (response) => LoginTokenTransfert.fromJson(jsonDecode(response.body)));
   }
 }

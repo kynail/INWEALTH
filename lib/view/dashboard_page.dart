@@ -449,7 +449,7 @@ class _DashboardPageState extends State<DashboardPage>
                     // decoration:
                     // const BoxDecoration(color: Color(0xFFFFFFF)),
                     child: Column(children: <Widget>[
-                      profileController.islog == false
+                      profileController.iflog == false
                           ? Container(
                               child: Row(children: <Widget>[
                                 const SizedBox(
