@@ -90,13 +90,13 @@ class LoginTokenTransfert {
   final String phone;
   final String indic;
   final String mdp;
-  final String iflog;
+  // final String iflog;
 
   LoginTokenTransfert({
     required this.phone,
     required this.indic,
     required this.mdp,
-    required this.iflog,
+    // required this.iflog,
   });
 
   factory LoginTokenTransfert.fromJson(Map<String, dynamic> json) {
@@ -104,7 +104,8 @@ class LoginTokenTransfert {
         phone: json["phone"],
         indic: json["indic"],
         mdp: json['mdp'],
-        iflog: json['iflog']);
+        // iflog: json['iflog']
+        );
   }
 
   Map<String, dynamic> toJson() {
@@ -112,7 +113,7 @@ class LoginTokenTransfert {
       "phone": phone,
       "indic": indic,
       "mdp": mdp,
-      "iflog": iflog,
+      // "iflog": iflog,
     };
   }
 }

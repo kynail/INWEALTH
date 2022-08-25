@@ -34,7 +34,7 @@ Future<File> saveDocument(
 ) async {
   Directory directory = await getTemporaryDirectory();
 
-  File document = new File("${directory.path}/Réflexion_Patrimoniale_UK.pdf");
+  File document = File("${directory.path}/Réflexion_Patrimoniale_UK.pdf");
 
   Response response =
       await DataProvider.fetch("/user/getReflexPatFile/$userGuid");

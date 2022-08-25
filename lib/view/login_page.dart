@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:inwealth/controller/data_controller.dart';
 import 'package:inwealth/view/dashboardProject_page.dart';
 import 'package:inwealth/view/dashboard_page.dart';
 import 'package:inwealth/view/dashboarddashboard.dart';
@@ -21,6 +22,23 @@ String mdp = "";
 bool isObscur = true;
 
 class _LoginPageState extends State<LoginPage> {
+
+DataController test = DataController();
+
+  getLogin() {
+    test.getLogin(profileController.userId).then((value) {
+      profileController.mdp = value.mdp;
+      profileController.phone = value.phone;
+      profileController.indic = value.indic;
+    });
+  }
+
+    postLogin() {
+    test.postLogin(profileController.userId).then((value) {
+      
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -221,6 +239,15 @@ class _LoginPageState extends State<LoginPage> {
                     color: Color(0xFF7F7A93)),
                 child: TextButton(
                     onPressed: () {
+                      FutureBuilder(
+                        future: getLogin(),
+                        builder: (context, snapshot) {
+                          getLogin();
+                        profileController.iflog = true;
+
+                          return DashboardNavigation();
+                        }
+                        );
                       if (mdp == profileController.mdp &&
                           phone == profileController.phone) {
                         profileController.iflog = true;
@@ -242,7 +269,10 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     color: Color(0xFF7F7A93)),
                 child: TextButton(
-                  onPressed: () => Get.to(RegisterPage()),
+                  onPressed: () {
+
+                    Get.to(RegisterPage());
+                  },
                   child: Text("register".tr,
                       style: TextStyle(color: Colors.white)),
                 ),

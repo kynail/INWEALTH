@@ -67,10 +67,10 @@ class Parameters {
   ];
 
   List<DataModel> indicatif = [
-    DataModel(name: '+33', key: "france"),
-    DataModel(name: '+352', key: "luxembourg"),
-    DataModel(name: '+41', key: "suisse"),
-    DataModel(name: '+44', key: "uk"),
+    DataModel(name: '+33', key: "+33"),
+    DataModel(name: '+352', key: "+352"),
+    DataModel(name: '+41', key: "+41"),
+    DataModel(name: '+44', key: "+44"),
   ];
 
   List<DataModel> nationality = [
